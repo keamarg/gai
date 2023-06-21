@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="medarbejderdag">
+    <h1>blog og billeder fra dagen</h1>
   </div>
 </template>
