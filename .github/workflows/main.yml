@@ -23,20 +23,6 @@ jobs:
     
       - name: Checkout code
         uses: actions/checkout@v2
-        
-        
-      - name: Set environment variables
-        run: |
-          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
-            echo "VUE_APP_PATH=/gai" >> $GITHUB_ENV
-          else
-            echo "VUE_APP_PATH=/" >> $GITHUB_ENV
-          fi
-
-      # Use the environment variable in subsequent steps
-      - name: Use environment variable
-        run: |
-          echo $VUE_APP_PATH
 
       - name: Install Node.js
         uses: actions/setup-node@v1
