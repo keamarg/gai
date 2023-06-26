@@ -1,25 +1,19 @@
-#test
 <template>
   <div class="chatbox-container">
     <div class="container">
       <h1>KEA Chat Bot</h1>
       <div class="messageBox mt-8">
         <template v-for="(message, index) in messages" :key="index">
-          <!-- <div
-            :class="
-              message.role == 'user' ? 'messageFromUser' : 'messageFromChatGpt'
-            "
-          > -->
           <div
             :class="
-              message.role == 'user'
+              message.role === 'user'
                 ? 'userMessageWrapper'
                 : 'chatGptMessageWrapper'
             "
           >
             <div
               :class="
-                message.role == 'user'
+                message.role === 'user'
                   ? 'userMessageContent'
                   : 'chatGptMessageContent'
               "
@@ -27,7 +21,6 @@
               {{ message.content }}
             </div>
           </div>
-          <!-- </div> -->
         </template>
         <ChatLottie v-if="loading" width="2rem" height="2rem" margin="1rem" />
       </div>
@@ -41,15 +34,17 @@
         />
         <button @click="sendMessage(userInput)" class="askButton">Send</button>
       </div>
+      <GptSelector @version-selected="handleVersionSelected" />
     </div>
   </div>
 </template>
 
 <script>
 import ChatLottie from "./ChatLottie.vue";
+import GptSelector from "./GptSelector.vue";
 export default {
   name: "ChatGpt",
-  components: { ChatLottie },
+  components: { ChatLottie, GptSelector },
   props: {
     selectedVersion: {
       type: String,
@@ -125,32 +120,29 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
-.chatbox-container,
-.container {
-  position: fixed;
-  right: 24px;
-  z-index: 1000;
-}
-
 .chatbox-container {
-  top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
 }
 
 .container {
-  top: 24px;
-  bottom: 24px;
-  width: 360px;
-  height: 600px;
+  width: 90vw;
+  max-width: 80%;
+  height: 80vh;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font-family: "Roboto", sans-serif;
 }
 
 h1 {
@@ -176,20 +168,14 @@ h1 {
   border-bottom: 1px solid #f0f0f0;
 }
 
-.messageFromUser,
-.messageFromChatGpt {
+.userMessageWrapper,
+.chatGptMessageWrapper {
   display: flex;
   margin-bottom: 8px;
 }
 
-.userMessageWrapper,
-.chatGptMessageWrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 .userMessageWrapper {
-  flex-direction: row-reverse; /*Det hjalp at vende om på rækkefølgen*/
+  flex-direction: row-reverse;
   align-self: flex-end;
 }
 
@@ -218,14 +204,6 @@ h1 {
   background-color: #ededed;
   color: #222;
   border-top-left-radius: 0;
-}
-
-.userMessageTimestamp,
-.chatGptMessageTimestamp {
-  font-size: 10px;
-  color: #999;
-  margin-top: 2px;
-  align-self: flex-end;
 }
 
 .inputContainer {
