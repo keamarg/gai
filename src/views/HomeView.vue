@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      selectedVersion: "gpt-3.5-turbo",
+      selectedVersion: "gpt-35-turbo",
     };
   },
   methods: {
