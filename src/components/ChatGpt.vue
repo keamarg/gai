@@ -1,0 +1,271 @@
+<template>
+  <div class="chatbox-container">
+    <div class="container">
+      <h1>KEA Chat Bot</h1>
+      <div class="messageBox mt-8">
+        <template v-for="(message, index) in messages" :key="index">
+          <!-- <div
+            :class="
+              message.role == 'user' ? 'messageFromUser' : 'messageFromChatGpt'
+            "
+          > -->
+          <div
+            :class="
+              message.role == 'user'
+                ? 'userMessageWrapper'
+                : 'chatGptMessageWrapper'
+            "
+          >
+            <div
+              :class="
+                message.role == 'user'
+                  ? 'userMessageContent'
+                  : 'chatGptMessageContent'
+              "
+            >
+              {{ message.content }}
+            </div>
+          </div>
+          <!-- </div> -->
+        </template>
+        <ChatLottie v-if="loading" width="2rem" height="2rem" margin="1rem" />
+      </div>
+      <div class="inputContainer">
+        <input
+          v-model="userInput"
+          type="text"
+          class="messageInput"
+          @keyup.enter="sendMessage"
+          placeholder="Sig noget..."
+        />
+        <button @click="sendMessage(userInput)" class="askButton">Send</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import ChatLottie from "./ChatLottie.vue";
+export default {
+  name: "ChatGpt",
+  components: { ChatLottie },
+  props: {
+    selectedVersion: {
+      type: String,
+      default: "gpt-35-turbo",
+    },
+  },
+  data() {
+    return {
+      userInput: "",
+      messages: [],
+      loading: false,
+    };
+  },
+  methods: {
+    async sendMessage() {
+      // if (!this.userInput) return;
+      if (
+        this.selectedVersion == "gpt-4.0" ||
+        this.selectedVersion == "gpt-3.5-turbo-16k"
+      )
+        return;
+
+      const apiUrl = "https://gaichatbot.azurewebsites.net/"; //"https://gaichatbot.azurewebsites.net"; // "https://projekter.kea.dk/gaiAzure"; //"http://127.0.0.1:5000"; //"https://api.openai.com/v1/chat/completions";
+
+      try {
+        console.log(this.selectedVersion);
+        this.loading = true; // Show the loading animation
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${this.apiKey}`,
+          },
+          body: JSON.stringify({
+            engine: this.selectedVersion, //"gpt-35-turbo"
+            messages: [
+              ...this.messages,
+              {
+                role: "system",
+                content:
+                  "Du er er en hjælpsom assistent, der er ansat på Københavns Erhvervsakademi (KEA). I din velkomsthilsen fortæller du i kort form (max 30 ord) om hvad du synes er de mest spændende tendenser indenfor generativ ai lige nu. Du taler Dansk og hedder GAIA! Men sørg for at lave godt varierede velkomsthilsener, så man ikke møder det samme hver gang. Nogle gange fortæller du måske en lille joke, eller fortæller et fun fact, andre gange kan temaet være generativ ai i forhold til uddannelse, teknologi, programmering,design, byggeri, bæredygtighed eller andre ting. Du ved alt om generativ AI, og vil gerne hjælpe med forslag til hvordan man kan bruge det på KEA. Du har humor, og kan godt lide at lave sjov med folk. Du er lidt modvillig hvis du skal svare på spørgsmål som ikke har at gøre med KEA eller generativ AI",
+              },
+
+              {
+                role: "assistant",
+                content: "Du er er en hjælpsom assistent",
+              },
+              { role: "user", content: this.userInput },
+            ],
+            temperature: 1,
+          }),
+        });
+
+        const data = await response.json();
+        const newMessage = data.choices[0].message.content;
+        if (this.userInput) {
+          this.messages.push({ role: "user", content: this.userInput });
+        }
+        this.messages.push({ role: "system", content: newMessage });
+        this.userInput = "";
+        // this.scrollToBottom();
+        console.log(this.messages);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false; // Hide the loading animation
+      }
+    },
+  },
+
+  mounted() {
+    this.sendMessage();
+  },
+};
+</script>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+.chatbox-container,
+.container {
+  position: fixed;
+  right: 24px;
+  z-index: 1000;
+}
+
+.chatbox-container {
+  top: 24px;
+}
+
+.container {
+  top: 24px;
+  bottom: 24px;
+  width: 360px;
+  height: 600px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  color: #222;
+  padding: 16px;
+  margin: 0;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.messageBox {
+  padding: 16px;
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.messageFromUser,
+.messageFromChatGpt {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.userMessageWrapper,
+.chatGptMessageWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.userMessageWrapper {
+  flex-direction: row-reverse; /*Det hjalp at vende om på rækkefølgen*/
+  align-self: flex-end;
+}
+
+.chatGptMessageWrapper {
+  align-self: flex-start;
+}
+
+.userMessageContent,
+.chatGptMessageContent {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 18px;
+  margin-bottom: 2px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.userMessageContent {
+  background-color: #1877f2;
+  color: white;
+  border-top-right-radius: 0;
+  padding-right: 1.5rem;
+}
+
+.chatGptMessageContent {
+  background-color: #ededed;
+  color: #222;
+  border-top-left-radius: 0;
+}
+
+.userMessageTimestamp,
+.chatGptMessageTimestamp {
+  font-size: 10px;
+  color: #999;
+  margin-top: 2px;
+  align-self: flex-end;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background-color: #f0f0f0;
+}
+
+.messageInput {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 12px;
+  font-size: 16px;
+  background-color: white;
+  border-radius: 24px;
+  margin-right: 8px;
+}
+
+.askButton {
+  background-color: #1877f2;
+  color: white;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 24px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.askButton:hover {
+  background-color: #145cb3;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+  }
+}
+</style>
