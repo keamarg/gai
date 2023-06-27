@@ -34,7 +34,9 @@
       />
       <button @click="sendMessage(userInput)" class="askButton">Send</button>
     </div>
-    <GptSelector @version-selected="handleVersionSelected" />
+    <div class="dropDownSelect">
+      <GptSelector @version-selected="handleVersionSelected" />
+    </div>
   </div>
   <!-- </div> -->
 </template>
@@ -141,7 +143,9 @@ export default {
   height: 100vh;
   font-family: "Roboto", sans-serif;
 } */
-
+.dropDownSelect {
+  padding: 1rem;
+}
 .container {
   width: 90vw;
   height: 90vh;
@@ -247,6 +251,9 @@ h1 {
 
 .askButton:hover {
   background-color: #145cb3;
+}
+GptSelector {
+  padding: 10rem;
 }
 
 /* @media (max-width: 480px) {

@@ -41,7 +41,7 @@ export default {
   flex-direction: column;
   /* align-items: center; */
   justify-content: center;
-  height: 80vh;
+  height: 70vh;
 }
 
 @media (min-width: 600px) {
