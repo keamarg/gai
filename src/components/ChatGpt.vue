@@ -1,42 +1,42 @@
 <template>
-  <div class="chatbox-container">
-    <div class="container">
-      <h1>KEA Chat Bot</h1>
-      <div class="messageBox mt-8">
-        <template v-for="(message, index) in messages" :key="index">
+  <!-- <div class="chatbox-container"> -->
+  <div class="container">
+    <h1>KEA Chat Bot</h1>
+    <div class="messageBox mt-8" ref="messageBox">
+      <template v-for="(message, index) in messages" :key="index">
+        <div
+          :class="
+            message.role === 'user'
+              ? 'userMessageWrapper'
+              : 'chatGptMessageWrapper'
+          "
+        >
           <div
             :class="
               message.role === 'user'
-                ? 'userMessageWrapper'
-                : 'chatGptMessageWrapper'
+                ? 'userMessageContent'
+                : 'chatGptMessageContent'
             "
           >
-            <div
-              :class="
-                message.role === 'user'
-                  ? 'userMessageContent'
-                  : 'chatGptMessageContent'
-              "
-            >
-              {{ message.content }}
-            </div>
+            {{ message.content }}
           </div>
-        </template>
-        <ChatLottie v-if="loading" width="2rem" height="2rem" margin="1rem" />
-      </div>
-      <div class="inputContainer">
-        <input
-          v-model="userInput"
-          type="text"
-          class="messageInput"
-          @keyup.enter="sendMessage"
-          placeholder="Sig noget..."
-        />
-        <button @click="sendMessage(userInput)" class="askButton">Send</button>
-      </div>
-      <GptSelector @version-selected="handleVersionSelected" />
+        </div>
+      </template>
+      <ChatLottie v-if="loading" width="2rem" height="2rem" margin="1rem" />
     </div>
+    <div class="inputContainer">
+      <input
+        v-model="userInput"
+        type="text"
+        class="messageInput"
+        @keyup.enter="sendMessage"
+        placeholder="Sig noget..."
+      />
+      <button @click="sendMessage(userInput)" class="askButton">Send</button>
+    </div>
+    <GptSelector @version-selected="handleVersionSelected" />
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -99,6 +99,7 @@ export default {
         });
 
         const data = await response.json();
+        // console.log(data);
         const newMessage = data.choices[0].message.content;
         if (this.userInput) {
           this.messages.push({ role: "user", content: this.userInput });
@@ -113,10 +114,17 @@ export default {
         this.loading = false; // Hide the loading animation
       }
     },
+    scrollToBottom() {
+      const messageBox = this.$refs.messageBox;
+      messageBox.scrollTop = messageBox.scrollHeight;
+    },
   },
 
   mounted() {
     this.sendMessage();
+  },
+  updated() {
+    this.scrollToBottom();
   },
 };
 </script>
@@ -124,45 +132,46 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
-.chatbox-container {
+/* .chatbox-container {
+  max-width: 90vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   font-family: "Roboto", sans-serif;
-}
+} */
 
 .container {
   width: 90vw;
-  max-width: 80%;
-  height: 80vh;
+  height: 90vh;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  font-family: "Roboto", sans-serif;
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 500;
   text-align: center;
   color: #222;
-  padding: 16px;
+  padding: 1rem;
   margin: 0;
   background-color: #f7f7f7;
   border-bottom: 1px solid #e7e7e7;
 }
 
 .messageBox {
-  padding: 16px;
+  padding: 1rem;
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.75rem;
   max-height: 400px;
   border-top: 1px solid #f0f0f0;
   border-bottom: 1px solid #f0f0f0;
@@ -171,7 +180,7 @@ h1 {
 .userMessageWrapper,
 .chatGptMessageWrapper {
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .userMessageWrapper {
@@ -186,10 +195,10 @@ h1 {
 .userMessageContent,
 .chatGptMessageContent {
   max-width: 80%;
-  padding: 8px 12px;
-  border-radius: 18px;
-  margin-bottom: 2px;
-  font-size: 14px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  margin-bottom: 0.125rem;
+  font-size: 0.875rem;
   line-height: 1.4;
 }
 
@@ -197,7 +206,7 @@ h1 {
   background-color: #1877f2;
   color: white;
   border-top-right-radius: 0;
-  padding-right: 1.5rem;
+  padding-right: 1rem;
 }
 
 .chatGptMessageContent {
@@ -209,7 +218,7 @@ h1 {
 .inputContainer {
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 0.5rem;
   background-color: #f0f0f0;
 }
 
@@ -217,22 +226,22 @@ h1 {
   flex-grow: 1;
   border: none;
   outline: none;
-  padding: 12px;
-  font-size: 16px;
+  padding: 0.75rem;
+  font-size: 1rem;
   background-color: white;
-  border-radius: 24px;
-  margin-right: 8px;
+  border-radius: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .askButton {
   background-color: #1877f2;
   color: white;
-  font-size: 16px;
-  padding: 8px 16px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
   border: none;
   outline: none;
   cursor: pointer;
-  border-radius: 24px;
+  border-radius: 1.5rem;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -240,11 +249,11 @@ h1 {
   background-color: #145cb3;
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .container {
     width: 100%;
     max-width: none;
     border-radius: 0;
   }
-}
+} */
 </style>

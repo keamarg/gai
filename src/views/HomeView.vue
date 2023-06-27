@@ -39,18 +39,18 @@ export default {
 .home {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   height: 80vh;
 }
 
 @media (min-width: 600px) {
-  .home {
+  /* .home {
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
     height: auto;
-  }
+  } */
   ChatLottie {
     width: 20rem;
     height: 20rem;
