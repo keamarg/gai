@@ -2,14 +2,10 @@
 
 <template>
   <div>
-    <label for="version">Select ChatGPT Version:</label>
-    <select v-model="selectedVersion" @change="handleChange">
-      <option v-for="version in versions" :value="version" :key="version">
-        {{
-          version === "gpt-4.0" || version === "gpt-3.5-turbo-16k"
-            ? version + " (not available)"
-            : version
-        }}
+    <label for="option">{{ label }}</label>
+    <select v-model="selectedOption" @change="handleChange">
+      <option v-for="option in options" :value="option" :key="option">
+        {{ option }}
       </option>
     </select>
   </div>
@@ -17,16 +13,29 @@
 
 <script>
 export default {
+  props: {
+    options: {
+      type: Array,
+      required: true,
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+    selected: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      selectedVersion: "gpt-35-turbo",
-      versions: ["gpt-35-turbo", "gpt-3.5-turbo-16k", "gpt-4.0"], // Array of available ChatGPT versions
+      selectedOption: this.selected,
     };
   },
   methods: {
     handleChange() {
-      // Emit an event with the selected version
-      this.$emit("version-selected", this.selectedVersion);
+      // Emit an event with the selected option
+      this.$emit("option-selected", this.selectedOption);
     },
   },
 };

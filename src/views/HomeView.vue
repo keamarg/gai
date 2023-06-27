@@ -1,9 +1,14 @@
 <template>
   <div class="home">
     <!-- <ChatLottie width="90vw" height="90vw" /> -->
-    <ChatGpt :selectedVersion="selectedVersion" />
+    <ChatGpt :model="selected" />
     <!-- <h1>Velkommen til G-AI på KEA</h1> -->
-    <!-- <GptSelector @version-selected="handleVersionSelected" /> -->
+    <!-- <GptSelector
+      @option-selected="handleOptionSelected"
+      :selected="selected"
+      :options="options"
+      :label="'Select ChatGPT Version: '"
+    /> -->
   </div>
 </template>
 
@@ -22,15 +27,17 @@ export default {
   },
   data() {
     return {
-      selectedVersion: "gpt-35-turbo",
+      options: ["gpt-35-turbo", "gpt-3.5-turbo-16k", "gpt-4.0"],
+      selected: null, // Initialize with null
     };
   },
   methods: {
-    handleVersionSelected(version) {
-      // Do something with the selected version
-      this.selectedVersion = version;
-      // console.log("Selected version:", version);
+    handleOptionSelected(selected) {
+      this.selected = selected;
     },
+  },
+  created() {
+    this.selected = this.options[0]; // Set selected option after options are available
   },
 };
 </script>
@@ -51,10 +58,10 @@ export default {
     justify-content: center;
     height: auto;
   } */
-  ChatLottie {
+  /* ChatLottie {
     width: 20rem;
     height: 20rem;
-  }
+  } */
   /* chatGpt {
     padding: 2rem;
   } */

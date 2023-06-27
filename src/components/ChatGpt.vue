@@ -35,7 +35,12 @@
       <button @click="sendMessage(userInput)" class="askButton">Send</button>
     </div>
     <div class="dropDownSelect">
-      <GptSelector @version-selected="handleVersionSelected" />
+      <GptSelector
+        @option-selected="handleOptionSelected"
+        :options="options"
+        :selected="selected"
+        :label="'Skift chatbot: '"
+      />
     </div>
   </div>
   <!-- </div> -->
@@ -48,9 +53,9 @@ export default {
   name: "ChatGpt",
   components: { ChatLottie, GptSelector },
   props: {
-    selectedVersion: {
+    model: {
       type: String,
-      default: "gpt-35-turbo",
+      default: "gpt-3.5-turbo",
     },
   },
   data() {
@@ -58,6 +63,8 @@ export default {
       userInput: "",
       messages: [],
       loading: false,
+      options: ["KEAs historie", "Spørgeskema", "Generativ AI"],
+      selected: null, // Initialize with null
     };
   },
   methods: {
@@ -72,7 +79,6 @@ export default {
       const apiUrl = "https://gaichatbot.azurewebsites.net/"; //"https://gaichatbot.azurewebsites.net"; // "https://projekter.kea.dk/gaiAzure"; //"http://127.0.0.1:5000"; //"https://api.openai.com/v1/chat/completions";
 
       try {
-        console.log(this.selectedVersion);
         this.loading = true; // Show the loading animation
         const response = await fetch(apiUrl, {
           method: "POST",
@@ -80,24 +86,100 @@ export default {
             "Content-Type": "application/json",
             // Authorization: `Bearer ${this.apiKey}`,
           },
-          body: JSON.stringify({
-            engine: this.selectedVersion, //"gpt-35-turbo"
-            messages: [
-              ...this.messages,
-              {
-                role: "system",
-                content:
-                  "Du er er en hjælpsom assistent, der er ansat på Københavns Erhvervsakademi (KEA). I din velkomsthilsen fortæller du i kort form (max 30 ord) om hvad du synes er de mest spændende tendenser indenfor generativ ai lige nu. Du taler Dansk og hedder GAIA! Men sørg for at lave godt varierede velkomsthilsener, så man ikke møder det samme hver gang. Nogle gange fortæller du måske en lille joke, eller fortæller et fun fact, andre gange kan temaet være generativ ai i forhold til uddannelse, teknologi, programmering,design, byggeri, bæredygtighed eller andre ting. Du ved alt om generativ AI, og vil gerne hjælpe med forslag til hvordan man kan bruge det på KEA. Du har humor, og kan godt lide at lave sjov med folk. Du er lidt modvillig hvis du skal svare på spørgsmål som ikke har at gøre med KEA eller generativ AI",
-              },
-
-              {
-                role: "assistant",
-                content: "Du er er en hjælpsom assistent",
-              },
-              { role: "user", content: this.userInput },
-            ],
-            temperature: 1,
-          }),
+          body: JSON.stringify(
+            this.selected == this.options[0]
+              ? {
+                  engine: this.model, //"gpt-35-turbo",
+                  messages: [
+                    ...this.messages,
+                    {
+                      role: "system",
+                      content:
+                        "Du er er en hjælpsom assistent, der er ansat på Københavns Erhvervsakademi (KEA). I din velkomsthilsen fortæller du i kort form (max 30 ord) om hvad du synes er de mest spændende tendenser indenfor generativ ai lige nu. Du taler Dansk og hedder GAIA! Men sørg for at lave godt varierede velkomsthilsener, så man ikke møder det samme hver gang. Nogle gange fortæller du måske en lille joke, eller fortæller et fun fact, andre gange kan temaet være generativ ai i forhold til uddannelse, teknologi, programmering,design, byggeri, bæredygtighed eller andre ting. Du ved alt om generativ AI, og vil gerne hjælpe med forslag til hvordan man kan bruge det på KEA. Du har humor, og kan godt lide at lave sjov med folk. Du er lidt modvillig hvis du skal svare på spørgsmål som ikke har at gøre med KEA eller generativ AI",
+                    },
+                    {
+                      role: "user",
+                      content:
+                        "Hvad foregår der på KEA omkring Generativ AI lige nu?",
+                    }, //Example question goes here
+                    {
+                      role: "assistant",
+                      content:
+                        "Alle taler om generativ AI for tiden, og KEA er ingen undtagelse. På KEAs medarbejderdag i 2023, er temaet generativ AI, og der foregår mange aktiviteter og workshops med omdrejningspunkt i emnet", //Example answer goes here
+                    },
+                    this.userInput !== undefined && this.userInput !== ""
+                      ? { role: "user", content: this.userInput }
+                      : {
+                          role: "user",
+                          content:
+                            "Giv en introduktion, hvor du fortæller lidt om dig selv. Gør det som om samtalen lige er startet",
+                        }, //First question/message for the model to actually respond to
+                  ],
+                  temperature: 0.23,
+                  max_tokens: 800,
+                  top_p: 0.95,
+                  frequency_penalty: 0,
+                  presence_penalty: 0,
+                  stop: null,
+                }
+              : this.selected == this.options[1]
+              ? {
+                  engine: this.model,
+                  messages: [
+                    ...this.messages,
+                    {
+                      role: "system",
+                      content:
+                        "Du er er en hjælpsom assistent der hedder GAIA, hvis opgave det er, at få en medarbejder til at svare på spørgsmålene nedenfor. Tanken er, at medarbejderen i stedet for at udfylde et konventionelt spørgeskema, tager en snak med dig om emnerne, det er derfor vigtigt at komme igennem så meget som muligt, men også at komme videre til næste spørgsmål hvis medarbejderen ikke har noget at sige. Stil altid kun et spørgsmål ad gangen, og aldrig det samme spørgsmål to gange! Hvis du allerede har fået information om et spørgsmål i løbet af samtalen, så drop spørgsmålet. Dit formål er at stille nogle spørgsmål om medarbejderens oplevelse af dagen, så vi kan samle feedback og forbedre fremtidige arrangementer. Accepter også korte svar som nej, og ja, og når du har fået data på alle emner så sig tak for hjælpen og afslut samtalen, men stil ALTID et spørgsmål hvis samtalen ikke er færdig. Spørgsmål: 1: Hvordan vil du beskrive din oplevelse af medarbejderdagen generelt? 2: Hvordan vurderer du arrangementets organisering og logistik? 3: Hvad var det mest interessante eller værdifulde, du fik ud af medarbejderdagen? 4: Hvordan var kvaliteten af de præsentationer eller workshops, du deltog i? 5: Hvordan var variationen af emner og aktiviteter under medarbejderdagen? 6: Hvordan var mulighederne for netværk og samarbejde under medarbejderdagen?7: Hvordan var forplejningen og arrangementets faciliteter? 8: Hvordan var tidsplanen og balancen mellem aktiviteterne? 9: Hvordan var kommunikationen og informationen om medarbejderdagen før arrangementet?10: Hvordan vil du beskrive den samlede værdi af medarbejderdagen for dig personligt og/eller for organisationen?",
+                    },
+                    {
+                      role: "user",
+                      content: "Maden var lækker",
+                    }, //Example question goes here
+                    {
+                      role: "assistant",
+                      content:
+                        "Godt at høre, og hvad med tidsplanen, var der pauser nok?", //Example answer goes here
+                    },
+                    this.userInput !== undefined && this.userInput !== ""
+                      ? { role: "user", content: this.userInput }
+                      : {
+                          role: "user",
+                          content:
+                            "Giv en introduktion af dig selv som om samtalen lige er startet, og fortæl hvad dit formål er, stil derefter det første spørgsmål",
+                        }, //First question/message for the model to actually respond to
+                  ],
+                  temperature: 1,
+                }
+              : {
+                  engine: this.model,
+                  messages: [
+                    ...this.messages,
+                    {
+                      role: "system",
+                      content:
+                        "Du er er en hjælpsom assistent, der er ansat på Københavns Erhvervsakademi (KEA). I din velkomsthilsen fortæller du i kort form (max 30 ord) om hvad du synes er de mest spændende tendenser indenfor generativ ai lige nu. Du taler Dansk og hedder GAIA! Men sørg for at lave godt varierede velkomsthilsener, så man ikke møder det samme hver gang. Nogle gange fortæller du måske en lille joke, eller fortæller et fun fact, andre gange kan temaet være generativ ai i forhold til uddannelse, teknologi, programmering,design, byggeri, bæredygtighed eller andre ting. Du ved alt om generativ AI, og vil gerne hjælpe med forslag til hvordan man kan bruge det på KEA. Du har humor, og kan godt lide at lave sjov med folk. Du er lidt modvillig hvis du skal svare på spørgsmål som ikke har at gøre med KEA eller generativ AI",
+                    },
+                    {
+                      role: "user",
+                      content:
+                        "Hvad foregår der på KEA omkring Generativ AI lige nu?",
+                    }, //Example question goes here
+                    {
+                      role: "assistant",
+                      content:
+                        "Alle taler om generativ AI for tiden, og KEA er ingen undtagelse. På KEAs medarbejderdag i 2023, er temaet generativ AI, og der foregår mange aktiviteter og workshops med omdrejningspunkt i emnet", //Example answer goes here
+                    },
+                    this.userInput !== undefined && this.userInput !== ""
+                      ? { role: "user", content: this.userInput }
+                      : {
+                          role: "user",
+                          content: "kan du introducere dig selv?",
+                        }, //First question/message for the model to actually respond to
+                  ],
+                  temperature: 1,
+                }
+          ),
         });
 
         const data = await response.json();
@@ -120,6 +202,12 @@ export default {
       const messageBox = this.$refs.messageBox;
       messageBox.scrollTop = messageBox.scrollHeight;
     },
+    handleOptionSelected(selected) {
+      console.log(selected);
+      this.selected = selected;
+      this.messages = [];
+      this.sendMessage();
+    },
   },
 
   mounted() {
@@ -127,6 +215,9 @@ export default {
   },
   updated() {
     this.scrollToBottom();
+  },
+  created() {
+    this.selected = this.options[0]; // Set selected option after options are available
   },
 };
 </script>
