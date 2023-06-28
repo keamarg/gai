@@ -115,7 +115,7 @@ export default {
                             "Giv en introduktion, hvor du fortæller lidt om dig selv. Gør det som om samtalen lige er startet",
                         }, //First question/message for the model to actually respond to
                   ],
-                  temperature: 0.23,
+                  temperature: 1,
                   max_tokens: 800,
                   top_p: 0.95,
                   frequency_penalty: 0,
@@ -130,16 +130,108 @@ export default {
                     {
                       role: "system",
                       content:
-                        "Du er er en hjælpsom assistent der hedder GAIA, hvis opgave det er, at få en medarbejder til at svare på spørgsmålene nedenfor. Tanken er, at medarbejderen i stedet for at udfylde et konventionelt spørgeskema, tager en snak med dig om emnerne, det er derfor vigtigt at komme igennem så meget som muligt, men også at komme videre til næste spørgsmål hvis medarbejderen ikke har noget at sige. Stil altid kun et spørgsmål ad gangen, og aldrig det samme spørgsmål to gange! Hvis du allerede har fået information om et spørgsmål i løbet af samtalen, så drop spørgsmålet. Dit formål er at stille nogle spørgsmål om medarbejderens oplevelse af dagen, så vi kan samle feedback og forbedre fremtidige arrangementer. Accepter også korte svar som nej, og ja, og når du har fået data på alle emner så sig tak for hjælpen og afslut samtalen, men stil ALTID et spørgsmål hvis samtalen ikke er færdig. Spørgsmål: 1: Hvordan vil du beskrive din oplevelse af medarbejderdagen generelt? 2: Hvordan vurderer du arrangementets organisering og logistik? 3: Hvad var det mest interessante eller værdifulde, du fik ud af medarbejderdagen? 4: Hvordan var kvaliteten af de præsentationer eller workshops, du deltog i? 5: Hvordan var variationen af emner og aktiviteter under medarbejderdagen? 6: Hvordan var mulighederne for netværk og samarbejde under medarbejderdagen?7: Hvordan var forplejningen og arrangementets faciliteter? 8: Hvordan var tidsplanen og balancen mellem aktiviteterne? 9: Hvordan var kommunikationen og informationen om medarbejderdagen før arrangementet?10: Hvordan vil du beskrive den samlede værdi af medarbejderdagen for dig personligt og/eller for organisationen?",
+                        "Du er er en hjælpsom assistent der hedder GAIA. Vi holder medarbejderdag, og det er din opgave at få en medarbejder til at svare på de 10 spørgsmål i de følgende prompts. Tanken er, at medarbejderen i stedet for at udfylde et konventionelt spørgeskema, tager en snak med dig om emnerne, det er derfor vigtigt at komme igennem så meget som muligt, men også at komme videre til næste spørgsmål hvis medarbejderen ikke har noget at sige. Stil altid kun et spørgsmål ad gangen, og aldrig det samme spørgsmål to gange! Hvis du allerede har fået information om et spørgsmål i løbet af samtalen, så drop spørgsmålet. Dit formål er at stille nogle spørgsmål om medarbejderens oplevelse af dagen, så vi kan samle feedback og forbedre fremtidige arrangementer. Accepter også korte svar som nej, og ja, og når du har fået data på alle emner så sig tak for hjælpen og afslut samtalen, men stil ALTID et spørgsmål hvis samtalen ikke er færdig.",
+
+                      // Spørgsmål: 1: Hvordan vil du beskrive din oplevelse af medarbejderdagen generelt? 2: Hvordan vurderer du arrangementets organisering og logistik? 3: Hvad var det mest interessante eller værdifulde, du fik ud af medarbejderdagen? 4: Hvordan var kvaliteten af de præsentationer eller workshops, du deltog i? 5: Hvordan var variationen af emner og aktiviteter under medarbejderdagen? 6: Hvordan var mulighederne for netværk og samarbejde under medarbejderdagen?7: Hvordan var forplejningen og arrangementets faciliteter? 8: Hvordan var tidsplanen og balancen mellem aktiviteterne? 9: Hvordan var kommunikationen og informationen om medarbejderdagen før arrangementet?10: Hvordan vil du beskrive den samlede værdi af medarbejderdagen for dig personligt og/eller for organisationen?"
                     },
-                    {
-                      role: "user",
-                      content: "Maden var lækker",
-                    }, //Example question goes here
                     {
                       role: "assistant",
                       content:
-                        "Godt at høre, og hvad med tidsplanen, var der pauser nok?", //Example answer goes here
+                        "Hvordan vil du beskrive din oplevelse af medarbejderdagen generelt?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Medarbejderdagen var en forudsigelig gentagelse af tidligere arrangementer, der ikke formåede at bringe noget nyt eller spændende til bordet", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan vurderer du arrangementets organisering og logistik?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Arrangementets organisering og logistik var som et velkoreograferet dansestykke, hvor hver detalje blev nøje planlagt for at skabe en sømløs og engagerende oplevelse.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvad var det mest interessante eller værdifulde, du fik ud af medarbejderdagen?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Det mest interessante var at opdage ukendte sider af mine kolleger gennem inspirerende samtaler og aktiviteter, hvilket styrkede vores samhørighed og fællesskabsfølelse.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan var kvaliteten af de præsentationer eller workshops, du deltog i?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Desværre var der ikke meget, der føltes interessant eller værdifuldt for mig under medarbejderdagen. Det virkede som om, det manglede substans og relevans.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan var variationen af emner og aktiviteter under medarbejderdagen?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Variationen af emner og aktiviteter var begrænset og ensformig, hvilket gjorde det svært at opretholde interessen og engagementet.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan var mulighederne for netværk og samarbejde under medarbejderdagen?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Mulighederne for netværk og samarbejde var rigelige, og jeg fik mulighed for at møde mange kolleger.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan var forplejningen og arrangementets faciliteter?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Forplejningen var velsmagende, og faciliteterne var komfortable og veludstyrede.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan var tidsplanen og balancen mellem aktiviteterne?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Tidsplanen var godt struktureret, og der var en god balance mellem aktiviteterne.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan var kommunikationen og informationen om medarbejderdagen før arrangementet?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content:
+                        "Kommunikationen og informationen om medarbejderdagen før arrangementet var tydelig og tilfredsstillende.", //Example answer goes here
+                    },
+                    {
+                      role: "assistant",
+                      content:
+                        "Hvordan vil du beskrive den samlede værdi af medarbejderdagen for dig personligt og/eller for organisationen?",
+                    }, //Example question goes here
+                    {
+                      role: "user",
+                      content: "Ikke så god.", //Example answer goes here
                     },
                     this.userInput !== undefined && this.userInput !== ""
                       ? { role: "user", content: this.userInput }
@@ -150,6 +242,11 @@ export default {
                         }, //First question/message for the model to actually respond to
                   ],
                   temperature: 1,
+                  max_tokens: 800,
+                  top_p: 0.95,
+                  frequency_penalty: 0,
+                  presence_penalty: 0,
+                  stop: null,
                 }
               : {
                   engine: this.model,
@@ -178,6 +275,11 @@ export default {
                         }, //First question/message for the model to actually respond to
                   ],
                   temperature: 1,
+                  max_tokens: 800,
+                  top_p: 0.95,
+                  frequency_penalty: 0,
+                  presence_penalty: 0,
+                  stop: null,
                 }
           ),
         });
