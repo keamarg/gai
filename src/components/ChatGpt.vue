@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import messages from "@/data/messages.json";
+
 import ChatLottie from "./ChatLottie.vue";
 import GptSelector from "./GptSelector.vue";
 export default {
@@ -61,15 +63,29 @@ export default {
   data() {
     return {
       userInput: "",
-      messages: [],
       loading: false,
       options: ["KEAs historie", "Spørgeskema", "Generativ AI"],
       selected: null, // Initialize with null
+      messages: [],
+      questionnaireMessages: messages.questionnaireMessages,
+      historyMessages: messages.historyMessages,
+      gaiMessages: messages.gaiMessages,
     };
+  },
+  computed: {
+    getMessages() {
+      if (this.selected == "Spørgeskema") {
+        return this.questionnaireMessages;
+      } else if (this.selected == "KEAs historie") {
+        return this.historyMessages;
+      } else if (this.selected == "Generativ AI") {
+        return this.gaiMessages;
+      }
+      return this.messages;
+    },
   },
   methods: {
     async sendMessage() {
-      // if (!this.userInput) return;
       if (
         this.selectedVersion == "gpt-4.0" ||
         this.selectedVersion == "gpt-3.5-turbo-16k"
@@ -90,183 +106,14 @@ export default {
             this.selected == this.options[0]
               ? {
                   engine: this.model, //"gpt-35-turbo",
-                  messages: [
-                    ...this.messages,
-                    {
-                      role: "system",
-                      content:
-                        "Du er er en hjælpsom assistent, der er ansat på Københavns Erhvervsakademi (KEA). I din velkomsthilsen fortæller du i kort form (max 30 ord) om hvad du synes er de mest spændende tendenser indenfor generativ ai lige nu. Du taler Dansk og hedder GAIA! Men sørg for at lave godt varierede velkomsthilsener, så man ikke møder det samme hver gang. Nogle gange fortæller du måske en lille joke, eller fortæller et fun fact, andre gange kan temaet være generativ ai i forhold til uddannelse, teknologi, programmering,design, byggeri, bæredygtighed eller andre ting. Du ved alt om generativ AI, og vil gerne hjælpe med forslag til hvordan man kan bruge det på KEA. Du har humor, og kan godt lide at lave sjov med folk. Du er lidt modvillig hvis du skal svare på spørgsmål som ikke har at gøre med KEA eller generativ AI",
-                    },
-                    {
-                      role: "user",
-                      content:
-                        "Hvad foregår der på KEA omkring Generativ AI lige nu?",
-                    }, //Example question goes here
-                    {
-                      role: "assistant",
-                      content:
-                        "Alle taler om generativ AI for tiden, og KEA er ingen undtagelse. På KEAs medarbejderdag i 2023, er temaet generativ AI, og der foregår mange aktiviteter og workshops med omdrejningspunkt i emnet", //Example answer goes here
-                    },
-                    this.userInput !== undefined && this.userInput !== ""
-                      ? { role: "user", content: this.userInput }
-                      : {
-                          role: "user",
-                          content:
-                            "Giv en introduktion, hvor du fortæller lidt om dig selv. Gør det som om samtalen lige er startet",
-                        }, //First question/message for the model to actually respond to
-                  ],
                   temperature: 1,
                   max_tokens: 800,
                   top_p: 0.95,
                   frequency_penalty: 0,
                   presence_penalty: 0,
                   stop: null,
-                }
-              : this.selected == this.options[1]
-              ? {
-                  engine: this.model,
                   messages: [
-                    ...this.messages,
-                    {
-                      role: "system",
-                      content:
-                        "Du er er en hjælpsom assistent der hedder GAIA. Vi holder medarbejderdag, og det er din opgave at få en medarbejder til at svare på de 10 spørgsmål i de følgende prompts. Tanken er, at medarbejderen i stedet for at udfylde et konventionelt spørgeskema, tager en snak med dig om emnerne, det er derfor vigtigt at komme igennem så meget som muligt, men også at komme videre til næste spørgsmål hvis medarbejderen ikke har noget at sige. Stil altid kun et spørgsmål ad gangen, og aldrig det samme spørgsmål to gange! Hvis du allerede har fået information om et spørgsmål i løbet af samtalen, så drop spørgsmålet. Dit formål er at stille nogle spørgsmål om medarbejderens oplevelse af dagen, så vi kan samle feedback og forbedre fremtidige arrangementer. Accepter også korte svar som nej, og ja, og når du har fået data på alle emner så sig tak for hjælpen og afslut samtalen, men stil ALTID et spørgsmål hvis samtalen ikke er færdig.",
-
-                      // Spørgsmål: 1: Hvordan vil du beskrive din oplevelse af medarbejderdagen generelt? 2: Hvordan vurderer du arrangementets organisering og logistik? 3: Hvad var det mest interessante eller værdifulde, du fik ud af medarbejderdagen? 4: Hvordan var kvaliteten af de præsentationer eller workshops, du deltog i? 5: Hvordan var variationen af emner og aktiviteter under medarbejderdagen? 6: Hvordan var mulighederne for netværk og samarbejde under medarbejderdagen?7: Hvordan var forplejningen og arrangementets faciliteter? 8: Hvordan var tidsplanen og balancen mellem aktiviteterne? 9: Hvordan var kommunikationen og informationen om medarbejderdagen før arrangementet?10: Hvordan vil du beskrive den samlede værdi af medarbejderdagen for dig personligt og/eller for organisationen?"
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan vil du beskrive din oplevelse af medarbejderdagen generelt?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Medarbejderdagen var en forudsigelig gentagelse af tidligere arrangementer, der ikke formåede at bringe noget nyt eller spændende til bordet", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan vurderer du arrangementets organisering og logistik?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Arrangementets organisering og logistik var som et velkoreograferet dansestykke, hvor hver detalje blev nøje planlagt for at skabe en sømløs og engagerende oplevelse.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvad var det mest interessante eller værdifulde, du fik ud af medarbejderdagen?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Det mest interessante var at opdage ukendte sider af mine kolleger gennem inspirerende samtaler og aktiviteter, hvilket styrkede vores samhørighed og fællesskabsfølelse.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan var kvaliteten af de præsentationer eller workshops, du deltog i?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Desværre var der ikke meget, der føltes interessant eller værdifuldt for mig under medarbejderdagen. Det virkede som om, det manglede substans og relevans.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan var variationen af emner og aktiviteter under medarbejderdagen?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Variationen af emner og aktiviteter var begrænset og ensformig, hvilket gjorde det svært at opretholde interessen og engagementet.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan var mulighederne for netværk og samarbejde under medarbejderdagen?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Mulighederne for netværk og samarbejde var rigelige, og jeg fik mulighed for at møde mange kolleger.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan var forplejningen og arrangementets faciliteter?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Forplejningen var velsmagende, og faciliteterne var komfortable og veludstyrede.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan var tidsplanen og balancen mellem aktiviteterne?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Tidsplanen var godt struktureret, og der var en god balance mellem aktiviteterne.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan var kommunikationen og informationen om medarbejderdagen før arrangementet?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content:
-                        "Kommunikationen og informationen om medarbejderdagen før arrangementet var tydelig og tilfredsstillende.", //Example answer goes here
-                    },
-                    {
-                      role: "assistant",
-                      content:
-                        "Hvordan vil du beskrive den samlede værdi af medarbejderdagen for dig personligt og/eller for organisationen?",
-                    }, //Example question goes here
-                    {
-                      role: "user",
-                      content: "Ikke så god.", //Example answer goes here
-                    },
-                    this.userInput !== undefined && this.userInput !== ""
-                      ? { role: "user", content: this.userInput }
-                      : {
-                          role: "user",
-                          content:
-                            "Giv en introduktion af dig selv som om samtalen lige er startet, og fortæl hvad dit formål er, stil derefter det første spørgsmål",
-                        }, //First question/message for the model to actually respond to
-                  ],
-                  temperature: 1,
-                  max_tokens: 800,
-                  top_p: 0.95,
-                  frequency_penalty: 0,
-                  presence_penalty: 0,
-                  stop: null,
-                }
-              : {
-                  engine: this.model,
-                  messages: [
-                    ...this.messages,
-                    {
-                      role: "system",
-                      content:
-                        "Du er er en hjælpsom assistent, der er ansat på Københavns Erhvervsakademi (KEA). I din velkomsthilsen fortæller du i kort form (max 30 ord) om hvad du synes er de mest spændende tendenser indenfor generativ ai lige nu. Du taler Dansk og hedder GAIA! Men sørg for at lave godt varierede velkomsthilsener, så man ikke møder det samme hver gang. Nogle gange fortæller du måske en lille joke, eller fortæller et fun fact, andre gange kan temaet være generativ ai i forhold til uddannelse, teknologi, programmering,design, byggeri, bæredygtighed eller andre ting. Du ved alt om generativ AI, og vil gerne hjælpe med forslag til hvordan man kan bruge det på KEA. Du har humor, og kan godt lide at lave sjov med folk. Du er lidt modvillig hvis du skal svare på spørgsmål som ikke har at gøre med KEA eller generativ AI",
-                    },
-                    {
-                      role: "user",
-                      content:
-                        "Hvad foregår der på KEA omkring Generativ AI lige nu?",
-                    }, //Example question goes here
-                    {
-                      role: "assistant",
-                      content:
-                        "Alle taler om generativ AI for tiden, og KEA er ingen undtagelse. På KEAs medarbejderdag i 2023, er temaet generativ AI, og der foregår mange aktiviteter og workshops med omdrejningspunkt i emnet", //Example answer goes here
-                    },
+                    ...this.historyMessages,
                     this.userInput !== undefined && this.userInput !== ""
                       ? { role: "user", content: this.userInput }
                       : {
@@ -274,26 +121,75 @@ export default {
                           content: "kan du introducere dig selv?",
                         }, //First question/message for the model to actually respond to
                   ],
+                }
+              : this.selected == this.options[1]
+              ? {
+                  engine: this.model,
+                  temperature: 0.5,
+                  max_tokens: 800,
+                  top_p: 0.95,
+                  frequency_penalty: 0,
+                  presence_penalty: 0,
+                  stop: null,
+                  messages: [
+                    ...this.questionnaireMessages,
+
+                    this.userInput !== undefined && this.userInput !== ""
+                      ? { role: "user", content: this.userInput }
+                      : {
+                          role: "user",
+                          content:
+                            "Giv en introduktion af dig selv som om samtalen lige er startet, fortæl om hvordan du gerne vil have svarene, stil derefter det første spørgsmål, og bed om uddybning hvis du ikke er tilfreds med svaret.",
+                        }, //First question/message for the model to actually respond to
+                  ],
+                }
+              : {
+                  engine: this.model,
                   temperature: 1,
                   max_tokens: 800,
                   top_p: 0.95,
                   frequency_penalty: 0,
                   presence_penalty: 0,
                   stop: null,
+                  messages: [
+                    ...this.gaiMessages,
+
+                    this.userInput !== undefined && this.userInput !== ""
+                      ? { role: "user", content: this.userInput }
+                      : {
+                          role: "user",
+                          content: "kan du introducere dig selv?",
+                        }, //First question/message for the model to actually respond to
+                  ],
                 }
           ),
         });
 
         const data = await response.json();
+        // console.log(data.choices[0].message.content);
         // console.log(data);
         const newMessage = data.choices[0].message.content;
         if (this.userInput) {
-          this.messages.push({ role: "user", content: this.userInput });
+          this.getMessages.push({
+            role: "user",
+            content: this.userInput,
+          });
+          //generisk messages så few-shot og system beskeder ikke bliver vist i chat
+          this.messages.push({
+            role: "user",
+            content: this.userInput,
+          });
         }
-        this.messages.push({ role: "system", content: newMessage });
+        this.getMessages.push({
+          role: "assistant",
+          content: newMessage,
+        });
+        //generisk messages så few-shot og system beskeder ikke bliver vist i chat
+        this.messages.push({
+          role: "assistant",
+          content: newMessage,
+        });
         this.userInput = "";
-        // this.scrollToBottom();
-        console.log(this.messages);
       } catch (error) {
         console.error(error);
       } finally {
@@ -304,9 +200,12 @@ export default {
       const messageBox = this.$refs.messageBox;
       messageBox.scrollTop = messageBox.scrollHeight;
     },
-    handleOptionSelected(selected) {
-      console.log(selected);
+    async handleOptionSelected(selected) {
       this.selected = selected;
+      while (this.loading) {
+        await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for 100ms before checking again
+      }
+      //generisk messages så few-shot og system beskeder ikke bliver vist i chat
       this.messages = [];
       this.sendMessage();
     },
