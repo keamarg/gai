@@ -48,7 +48,6 @@
 
 <script>
 import messages from "@/data/messages.json";
-
 import ChatLottie from "./ChatLottie.vue";
 import GptSelector from "./GptSelector.vue";
 export default {
@@ -85,6 +84,22 @@ export default {
     },
   },
   methods: {
+    async getData() {
+      const apiUrl = "https://gaichatbot.azurewebsites.net/database"; //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
+      try {
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${this.apiKey}`,
+          },
+        });
+        const data = await response.text();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async sendMessage() {
       if (
         this.selectedVersion == "gpt-4.0" ||
@@ -92,7 +107,7 @@ export default {
       )
         return;
 
-      const apiUrl = "https://gaichatbot.azurewebsites.net/"; //"https://gaichatbot.azurewebsites.net"; // "https://projekter.kea.dk/gaiAzure"; //"http://127.0.0.1:5000"; //"https://api.openai.com/v1/chat/completions";
+      const apiUrl = "https://gaichatbot.azurewebsites.net"; //"https://gaichatbot.azurewebsites.net"; // "https://projekter.kea.dk/gaiAzure"; //"http://127.0.0.1:5000"; //"https://api.openai.com/v1/chat/completions";
 
       try {
         this.loading = true; // Show the loading animation
@@ -213,6 +228,7 @@ export default {
 
   mounted() {
     this.sendMessage();
+    this.getData();
   },
   updated() {
     this.scrollToBottom();
