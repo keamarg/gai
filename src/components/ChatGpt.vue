@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     async getData() {
-      const apiUrl = "http://127.0.0.1:5000/database"; //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
+      const apiUrl = "https://gaichatbot.azurewebsites.net/database"; //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
