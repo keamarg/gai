@@ -1,4 +1,3 @@
-//test
 <template>
   <!-- <div class="chatbox-container"> -->
   <div class="container">
@@ -30,10 +29,10 @@
         v-model="userInput"
         type="text"
         class="messageInput"
-        @keyup.enter="sendMessage"
+        @keyup.enter="userMessage(userInput)"
         placeholder="Sig noget..."
       />
-      <button @click="sendMessage(userInput)" class="askButton">Send</button>
+      <button @click="userMessage(userInput)" class="askButton">Send</button>
     </div>
     <div class="dropDownSelect">
       <GptSelector
@@ -45,9 +44,15 @@
     </div>
   </div>
   <!-- </div> -->
+  <div class="buttonContainer">
+    <button @click="getData('json')" class="askButton">Hent data (json)</button>
+    <button @click="getData('xlsx')" class="askButton">Hent data (xlsx)</button>
+    <button @click="newConversation()" class="askButton">Ny samtale</button>
+  </div>
 </template>
 
 <script>
+import * as XLSX from "xlsx";
 import messages from "@/data/messages.json";
 import ChatLottie from "./ChatLottie.vue";
 import GptSelector from "./GptSelector.vue";
@@ -70,6 +75,8 @@ export default {
       questionnaireMessages: messages.questionnaireMessages,
       historyMessages: messages.historyMessages,
       gaiMessages: messages.gaiMessages,
+      uniqueID: "",
+      apiUrl: "https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
     };
   },
   computed: {
@@ -85,8 +92,106 @@ export default {
     },
   },
   methods: {
-    async getData() {
-      const apiUrl = "https://gaichatbot.azurewebsites.net/database"; //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
+    newConversation() {
+      this.messages = [];
+      localStorage.removeItem("uniqueID");
+      this.generateUniqueID();
+      this.sendMessage();
+    },
+    generateUniqueID() {
+      const existingID = localStorage.getItem("uniqueID");
+      if (existingID) {
+        this.uniqueID = existingID;
+      } else {
+        const randomID =
+          Date.now().toString(36) + Math.random().toString(36).slice(2, 11);
+        this.uniqueID = randomID;
+        localStorage.setItem("uniqueID", randomID);
+      }
+    },
+    async getData(format) {
+      try {
+        const response = await fetch(this.apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${this.apiKey}`,
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+
+        if (format === "json") {
+          // Convert the data to a nicely formatted JSON string
+          const dataAsString = JSON.stringify(data, null, 2);
+
+          // Create a Blob with the data as a JSON file
+          const blob = new Blob([dataAsString], { type: "application/json" });
+
+          // Create a temporary object URL for the Blob
+          const url = URL.createObjectURL(blob);
+
+          // Create a temporary link element to trigger the download
+          const downloadLink = document.createElement("a");
+          downloadLink.href = url;
+          downloadLink.download = "chatdata.json";
+
+          // Append the link to the body and click it to initiate the download
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+
+          // Clean up by revoking the object URL and removing the link element
+          URL.revokeObjectURL(url);
+          document.body.removeChild(downloadLink);
+        } else if (format === "xlsx") {
+          const wb = XLSX.utils.book_new();
+          const ws = XLSX.utils.aoa_to_sheet([
+            ["Session ID", "Message Type", "Message"],
+          ]);
+
+          let row = 1;
+          let prevSessionId = null;
+
+          for (const sessionId in data) {
+            const chatData = data[sessionId];
+
+            for (const [index, message] of chatData.entries()) {
+              if (prevSessionId !== sessionId || index === 0) {
+                XLSX.utils.sheet_add_aoa(ws, [[sessionId, "", ""]], {
+                  origin: row,
+                });
+                row++;
+                prevSessionId = sessionId;
+              }
+
+              if (message.user) {
+                XLSX.utils.sheet_add_aoa(ws, [["", "User", message.user]], {
+                  origin: row,
+                });
+                row++;
+              }
+              if (message.chatbot) {
+                XLSX.utils.sheet_add_aoa(
+                  ws,
+                  [["", "Chatbot", message.chatbot]],
+                  {
+                    origin: row,
+                  }
+                );
+                row++;
+              }
+            }
+          }
+
+          XLSX.utils.book_append_sheet(wb, ws, "Chat Data");
+          XLSX.writeFile(wb, "chatdata.xlsx");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async postData(role, content) {
+      const apiUrl = this.apiUrl;
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
@@ -95,13 +200,34 @@ export default {
             // Authorization: `Bearer ${this.apiKey}`,
           },
           body: JSON.stringify({
-            content: "this content comes from the frontend",
+            session_id: this.uniqueID,
+            content: content,
+            role: role,
           }),
         });
         const data = await response.text();
         console.log(data);
       } catch (error) {
         console.error(error);
+      }
+    },
+    userMessage(userInput) {
+      if (this.userInput && this.messages.length > 0) {
+        this.getMessages.push({
+          role: "user",
+          content: userInput,
+        });
+        //generisk messages så few-shot og system beskeder ikke bliver vist i chat
+        this.messages.push({
+          role: "user",
+          content: userInput,
+        });
+        // console.log(this.userInput);
+        if (this.selected == this.options[1]) {
+          this.postData("user", this.userInput);
+        }
+        this.sendMessage();
+        this.userInput = "";
       }
     },
     async sendMessage() {
@@ -185,20 +311,8 @@ export default {
         });
 
         const data = await response.json();
-        // console.log(data.choices[0].message.content);
-        // console.log(data);
+
         const newMessage = data.choices[0].message.content;
-        if (this.userInput) {
-          this.getMessages.push({
-            role: "user",
-            content: this.userInput,
-          });
-          //generisk messages så few-shot og system beskeder ikke bliver vist i chat
-          this.messages.push({
-            role: "user",
-            content: this.userInput,
-          });
-        }
         this.getMessages.push({
           role: "assistant",
           content: newMessage,
@@ -208,7 +322,9 @@ export default {
           role: "assistant",
           content: newMessage,
         });
-        this.userInput = "";
+        if (this.selected == this.options[1]) {
+          this.postData("chatbot", newMessage);
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -231,8 +347,8 @@ export default {
   },
 
   mounted() {
+    this.generateUniqueID();
     this.sendMessage();
-    this.getData();
   },
   updated() {
     this.scrollToBottom();
@@ -366,6 +482,12 @@ h1 {
 }
 GptSelector {
   padding: 10rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px; /* Adjust the margin as needed */
 }
 
 /* @media (max-width: 480px) {
