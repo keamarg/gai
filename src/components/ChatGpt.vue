@@ -76,7 +76,8 @@ export default {
       historyMessages: messages.historyMessages,
       gaiMessages: messages.gaiMessages,
       uniqueID: "",
-      apiUrl: "https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
+      apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
+      apiUrl_DB: process.env.VUE_APP_APIURL_DB,
     };
   },
   computed: {
@@ -110,8 +111,9 @@ export default {
       }
     },
     async getData(format) {
+      // const apiUrl = process.env.VUE_APP_APIURL;
       try {
-        const response = await fetch(this.apiUrl, {
+        const response = await fetch(this.apiUrl_DB, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -119,7 +121,7 @@ export default {
           },
         });
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         if (format === "json") {
           // Convert the data to a nicely formatted JSON string
@@ -191,9 +193,9 @@ export default {
       }
     },
     async postData(role, content) {
-      const apiUrl = this.apiUrl;
+      // const apiUrl = process.env.VUE_APP_APIURL;
       try {
-        const response = await fetch(apiUrl, {
+        await fetch(this.apiUrl_DB, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -205,8 +207,6 @@ export default {
             role: role,
           }),
         });
-        const data = await response.text();
-        console.log(data);
       } catch (error) {
         console.error(error);
       }
@@ -231,17 +231,18 @@ export default {
       }
     },
     async sendMessage() {
+      // console.log(this.apiUrl);
+
       if (
         this.selectedVersion == "gpt-4.0" ||
         this.selectedVersion == "gpt-3.5-turbo-16k"
       )
         return;
 
-      const apiUrl = "https://gaichatbot.azurewebsites.net"; //"https://gaichatbot.azurewebsites.net"; // "https://projekter.kea.dk/gaiAzure"; //"http://127.0.0.1:5000"; //"https://api.openai.com/v1/chat/completions";
-
+      // const apiUrl = process.env.VUE_APP_APIURL;
       try {
         this.loading = true; // Show the loading animation
-        const response = await fetch(apiUrl, {
+        const response = await fetch(this.apiUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -311,6 +312,7 @@ export default {
         });
 
         const data = await response.json();
+        // console.log(data);
 
         const newMessage = data.choices[0].message.content;
         this.getMessages.push({
