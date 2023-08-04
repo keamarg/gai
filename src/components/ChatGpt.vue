@@ -85,7 +85,7 @@ export default {
       gaiMessages: messages.gaiMessages,
       uniqueID: "",
       apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
-      apiUrl_DB: process.env.VUE_APP_APIURL_DB,
+      apiUrl_CHATDB: process.env.VUE_APP_APIURL_CHATDB,
     };
   },
   computed: {
@@ -121,7 +121,7 @@ export default {
     async getData(format) {
       // const apiUrl = process.env.VUE_APP_APIURL;
       try {
-        const response = await fetch(this.apiUrl_DB, {
+        const response = await fetch(this.apiUrl_CHATDB, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -203,7 +203,7 @@ export default {
     async postData(role, content) {
       // const apiUrl = process.env.VUE_APP_APIURL;
       try {
-        await fetch(this.apiUrl_DB, {
+        await fetch(this.apiUrl_CHATDB, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -219,28 +219,27 @@ export default {
         console.error(error);
       }
     },
-    async userMessage(userInput) {
-      if (this.userInput && !this.loading) {
+    async userMessage(message) {
+      this.userInput = "";
+      if (!this.loading && message) {
         this.getMessages.push({
           role: "user",
-          content: userInput,
+          content: message,
         });
         // generisk messages så few-shot og system beskeder ikke bliver vist i chat
         this.messages.push({
           role: "user",
-          content: userInput,
+          content: message,
         });
         // console.log(this.userInput);
         if (this.selected == this.options[1]) {
-          this.postData("user", this.userInput);
+          this.postData("user", message);
         }
 
-        await this.sendMessage(); // No retries here
-
-        this.userInput = "";
+        await this.sendMessage(message, 3); // No retries here
       }
     },
-    async sendMessage(maxRetries = 3) {
+    async sendMessage(message, maxRetries) {
       // console.log(this.apiUrl);
 
       if (
@@ -271,8 +270,8 @@ export default {
                     stop: null,
                     messages: [
                       ...this.historyMessages,
-                      this.userInput !== undefined && this.userInput !== ""
-                        ? { role: "user", content: this.userInput }
+                      message !== undefined && message !== ""
+                        ? { role: "user", content: message }
                         : {
                             role: "user",
                             content: "kan du introducere dig selv?",
@@ -291,8 +290,8 @@ export default {
                     messages: [
                       ...this.questionnaireMessages,
 
-                      this.userInput !== undefined && this.userInput !== ""
-                        ? { role: "user", content: this.userInput }
+                      message !== undefined && message !== ""
+                        ? { role: "user", content: message }
                         : {
                             role: "user",
                             content:
@@ -311,8 +310,8 @@ export default {
                     messages: [
                       ...this.gaiMessages,
 
-                      this.userInput !== undefined && this.userInput !== ""
-                        ? { role: "user", content: this.userInput }
+                      message !== undefined && message !== ""
+                        ? { role: "user", content: message }
                         : {
                             role: "user",
                             content: "kan du introducere dig selv?",
@@ -343,7 +342,7 @@ export default {
           console.error(error);
           if (maxRetries > 0) {
             console.log(`Retrying... ${maxRetries} retries left.`);
-            // await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying
           } else {
             console.error(
               "Max retries reached. Unable to process the request."
@@ -369,13 +368,13 @@ export default {
       }
       //generisk messages så few-shot og system beskeder ikke bliver vist i chat
       this.messages = [];
-      this.sendMessage();
+      this.sendMessage("", 3);
     },
   },
 
   mounted() {
     this.generateUniqueID();
-    this.sendMessage();
+    this.sendMessage("", 3);
   },
   updated() {
     this.scrollToBottom();
