@@ -32,7 +32,15 @@
         @keyup.enter="userMessage(userInput)"
         placeholder="Sig noget..."
       />
-      <button @click="userMessage(userInput)" class="askButton">Send</button>
+      <button
+        @click="userMessage(userInput)"
+        :class="{
+          askButton: !loading && userInput,
+          loadingButton: loading || !userInput,
+        }"
+      >
+        Send
+      </button>
     </div>
     <div class="dropDownSelect">
       <GptSelector
@@ -211,13 +219,13 @@ export default {
         console.error(error);
       }
     },
-    userMessage(userInput) {
-      if (this.userInput && this.messages.length > 0) {
+    async userMessage(userInput) {
+      if (this.userInput && !this.loading) {
         this.getMessages.push({
           role: "user",
           content: userInput,
         });
-        //generisk messages så few-shot og system beskeder ikke bliver vist i chat
+        // generisk messages så few-shot og system beskeder ikke bliver vist i chat
         this.messages.push({
           role: "user",
           content: userInput,
@@ -226,11 +234,13 @@ export default {
         if (this.selected == this.options[1]) {
           this.postData("user", this.userInput);
         }
-        this.sendMessage();
+
+        await this.sendMessage(); // No retries here
+
         this.userInput = "";
       }
     },
-    async sendMessage() {
+    async sendMessage(maxRetries = 3) {
       // console.log(this.apiUrl);
 
       if (
@@ -240,97 +250,112 @@ export default {
         return;
 
       // const apiUrl = process.env.VUE_APP_APIURL;
-      try {
-        this.loading = true; // Show the loading animation
-        const response = await fetch(this.apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer ${this.apiKey}`,
-          },
-          body: JSON.stringify(
-            this.selected == this.options[0]
-              ? {
-                  engine: this.model, //"gpt-35-turbo",
-                  temperature: 1,
-                  max_tokens: 800,
-                  top_p: 0.95,
-                  frequency_penalty: 0,
-                  presence_penalty: 0,
-                  stop: null,
-                  messages: [
-                    ...this.historyMessages,
-                    this.userInput !== undefined && this.userInput !== ""
-                      ? { role: "user", content: this.userInput }
-                      : {
-                          role: "user",
-                          content: "kan du introducere dig selv?",
-                        }, //First question/message for the model to actually respond to
-                  ],
-                }
-              : this.selected == this.options[1]
-              ? {
-                  engine: this.model,
-                  temperature: 0.5,
-                  max_tokens: 800,
-                  top_p: 0.95,
-                  frequency_penalty: 0,
-                  presence_penalty: 0,
-                  stop: null,
-                  messages: [
-                    ...this.questionnaireMessages,
+      while (maxRetries >= 0) {
+        try {
+          this.loading = true; // Show the loading animation
+          const response = await fetch(this.apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              // Authorization: `Bearer ${this.apiKey}`,
+            },
+            body: JSON.stringify(
+              this.selected == this.options[0]
+                ? {
+                    engine: this.model, //"gpt-35-turbo",
+                    temperature: 1,
+                    max_tokens: 800,
+                    top_p: 0.95,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                    stop: null,
+                    messages: [
+                      ...this.historyMessages,
+                      this.userInput !== undefined && this.userInput !== ""
+                        ? { role: "user", content: this.userInput }
+                        : {
+                            role: "user",
+                            content: "kan du introducere dig selv?",
+                          }, //First question/message for the model to actually respond to
+                    ],
+                  }
+                : this.selected == this.options[1]
+                ? {
+                    engine: this.model,
+                    temperature: 0.5,
+                    max_tokens: 800,
+                    top_p: 0.95,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                    stop: null,
+                    messages: [
+                      ...this.questionnaireMessages,
 
-                    this.userInput !== undefined && this.userInput !== ""
-                      ? { role: "user", content: this.userInput }
-                      : {
-                          role: "user",
-                          content:
-                            "Giv en introduktion af dig selv som om samtalen lige er startet, fortæl om hvordan du gerne vil have svarene, stil derefter det første spørgsmål, og bed om uddybning hvis du ikke er tilfreds med svaret.",
-                        }, //First question/message for the model to actually respond to
-                  ],
-                }
-              : {
-                  engine: this.model,
-                  temperature: 1,
-                  max_tokens: 800,
-                  top_p: 0.95,
-                  frequency_penalty: 0,
-                  presence_penalty: 0,
-                  stop: null,
-                  messages: [
-                    ...this.gaiMessages,
+                      this.userInput !== undefined && this.userInput !== ""
+                        ? { role: "user", content: this.userInput }
+                        : {
+                            role: "user",
+                            content:
+                              "Giv en introduktion af dig selv som om samtalen lige er startet, fortæl om hvordan du gerne vil have svarene, stil derefter det første spørgsmål, og bed om uddybning hvis du ikke er tilfreds med svaret.",
+                          }, //First question/message for the model to actually respond to
+                    ],
+                  }
+                : {
+                    engine: this.model,
+                    temperature: 1,
+                    max_tokens: 800,
+                    top_p: 0.95,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                    stop: null,
+                    messages: [
+                      ...this.gaiMessages,
 
-                    this.userInput !== undefined && this.userInput !== ""
-                      ? { role: "user", content: this.userInput }
-                      : {
-                          role: "user",
-                          content: "kan du introducere dig selv?",
-                        }, //First question/message for the model to actually respond to
-                  ],
-                }
-          ),
-        });
+                      this.userInput !== undefined && this.userInput !== ""
+                        ? { role: "user", content: this.userInput }
+                        : {
+                            role: "user",
+                            content: "kan du introducere dig selv?",
+                          }, //First question/message for the model to actually respond to
+                    ],
+                  }
+            ),
+          });
 
-        const data = await response.json();
-        // console.log(data);
+          const data = await response.json();
+          console.log(data);
 
-        const newMessage = data.choices[0].message.content;
-        this.getMessages.push({
-          role: "assistant",
-          content: newMessage,
-        });
-        //generisk messages så few-shot og system beskeder ikke bliver vist i chat
-        this.messages.push({
-          role: "assistant",
-          content: newMessage,
-        });
-        if (this.selected == this.options[1]) {
-          this.postData("chatbot", newMessage);
+          const newMessage = data.choices[0].message.content;
+          this.getMessages.push({
+            role: "assistant",
+            content: newMessage,
+          });
+          //generisk messages så few-shot og system beskeder ikke bliver vist i chat
+          this.messages.push({
+            role: "assistant",
+            content: newMessage,
+          });
+          if (this.selected == this.options[1]) {
+            this.postData("chatbot", newMessage);
+          }
+          return; // Success, exit the loop
+        } catch (error) {
+          console.error(error);
+          if (maxRetries > 0) {
+            console.log(`Retrying... ${maxRetries} retries left.`);
+            // await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second before retrying
+          } else {
+            console.error(
+              "Max retries reached. Unable to process the request."
+            );
+            // Handle the error in a way suitable for your application
+            // For example, you can display a user-friendly error message to the user
+          }
+        } finally {
+          this.loading = false; // Hide the loading animation
         }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.loading = false; // Hide the loading animation
+
+        maxRetries--;
       }
     },
     scrollToBottom() {
@@ -467,7 +492,8 @@ h1 {
   margin-right: 0.5rem;
 }
 
-.askButton {
+.askButton,
+.loadingButton {
   background-color: #1877f2;
   color: white;
   font-size: 1rem;
@@ -479,6 +505,16 @@ h1 {
   transition: background-color 0.3s ease-in-out;
 }
 
+/* Specific styles for the loadingButton class */
+.loadingButton {
+  color: #cdcdcd;
+  background-color: #a6a6a6;
+  cursor: auto;
+
+  /* visibility: hidden; */
+}
+
+/* Hover styles for both classes */
 .askButton:hover {
   background-color: #145cb3;
 }
