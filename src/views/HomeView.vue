@@ -10,12 +10,20 @@
       :label="'Select ChatGPT Version: '"
     /> -->
   </div>
+  <div>
+    <!-- <button @click="showModal = true">Open Modal</button> -->
+    <LoginModal :show="showModal" @update:show="showModal = $event">
+      <h2>Modal Content</h2>
+      <p>This is a simple modal component.</p>
+    </LoginModal>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import ChatLottie from "@/components/ChatLottie.vue";
 import ChatGpt from "@/components/ChatGpt.vue";
+import LoginModal from "@/components/LoginModal.vue";
 // import GptSelector from "@/components/GptSelector.vue";
 
 export default {
@@ -23,12 +31,14 @@ export default {
   components: {
     // ChatLottie,
     ChatGpt,
+    LoginModal,
     // GptSelector,
   },
   data() {
     return {
       options: ["gpt-35-turbo", "gpt-3.5-turbo-16k", "gpt-4.0"],
       selected: null, // Initialize with null
+      showModal: false,
     };
   },
   methods: {

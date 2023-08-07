@@ -14,17 +14,17 @@
 
     <!-- Add new comment form -->
     <form @submit.prevent="submitComment">
-      <input
+      <!-- <input
         v-model="newComment.username"
         type="text"
         placeholder="Your name"
-      />
+      /> -->
       <input
         v-model="newComment.content"
         type="text"
         placeholder="Your comment"
       />
-      <button type="submit">Add Comment</button>
+      <button type="submit" class="askButton">Add Comment</button>
     </form>
   </div>
 </template>
@@ -45,7 +45,6 @@ export default {
   data() {
     return {
       newComment: {
-        username: "",
         content: "",
       },
       apiUrl_POSTSDB: process.env.VUE_APP_APIURL_POSTSDB,
@@ -74,7 +73,6 @@ export default {
         }
 
         this.newComment = {
-          username: "",
           content: "",
         };
 
@@ -84,6 +82,11 @@ export default {
         console.error("Error submitting comment:", error);
       }
     },
+  },
+  created() {
+    if (this.newComment.username != "") {
+      this.newComment.username = localStorage.getItem("name");
+    }
   },
 };
 </script>
@@ -99,5 +102,21 @@ export default {
 }
 .username {
   font-weight: bold;
+}
+.askButton {
+  background-color: #1877f2;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover styles for both classes */
+.askButton:hover {
+  background-color: #145cb3;
 }
 </style>

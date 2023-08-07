@@ -1,4 +1,5 @@
 <template>
+  <button @click="resetUser()" class="askButton">Reset user</button>
   <div v-if="loading">Henter liveblog...</div>
   <div v-else>
     <!-- Display posts -->
@@ -14,7 +15,7 @@
         type="text"
         placeholder="Din kommentar"
       />
-      <button type="submit">Send</button>
+      <button type="submit" class="askButton">Send</button>
     </form>
   </div>
 </template>
@@ -42,6 +43,11 @@ export default {
     this.fetchposts();
   },
   methods: {
+    resetUser() {
+      localStorage.removeItem("name");
+      localStorage.removeItem("keaId");
+      location.reload();
+    },
     submitpost() {
       // console.log(this.newpost);
       // Send new post to your server
@@ -57,7 +63,7 @@ export default {
             throw new Error("Network response was not ok");
           }
           this.newpost = {
-            username: "",
+            // username: "",
             content: "",
           };
           // Fetch updated posts after successful submission
@@ -90,4 +96,20 @@ export default {
 
 <style>
 /* Add your custom styles for the post page here */
+.askButton {
+  background-color: #1877f2;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover styles for both classes */
+.askButton:hover {
+  background-color: #145cb3;
+}
 </style>
