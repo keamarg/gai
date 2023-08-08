@@ -2,25 +2,12 @@
   <div class="comment">
     <div class="username">{{ comment.username }}</div>
     <div class="content">{{ comment.content }}</div>
-
-    <!-- Display replies -->
-    <!-- <div v-if="comment.replies && comment.replies.length > 0">
-      <ReplyComponent
-        v-for="reply in comment.replies"
-        :key="reply.id"
-        :reply="reply"
-      />
-    </div> -->
   </div>
 </template>
 
 <script>
-// import ReplyComponent from "./ReplyComponent.vue";
-
 export default {
-  components: {
-    // ReplyComponent,
-  },
+  components: {},
   props: {
     comment: {
       type: Object,

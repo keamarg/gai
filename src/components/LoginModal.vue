@@ -1,13 +1,20 @@
 <template>
   <div class="modal" v-if="show">
-    <div class="modal-overlay" @click="closeModal"></div>
+    <!-- <div class="modal-overlay" @click="closeModal"></div> -->
     <div class="modal-content">
       <h2>Skriv dit fornavn og dit KEA ID for at deltage i live bloggen</h2>
       <form @submit.prevent="saveAndClose">
         <div class="form-group">
-          <label for="name" class="label">Navn</label>
-          <input type="text" id="name" v-model="name" class="input-field" />
-          <p v-if="!name && showNameError" class="error-message">Udfyld navn</p>
+          <label for="username" class="label">Navn</label>
+          <input
+            type="text"
+            id="username"
+            v-model="username"
+            class="input-field"
+          />
+          <p v-if="!username && showNameError" class="error-message">
+            Udfyld navn
+          </p>
         </div>
         <div class="form-group">
           <label for="keaId" class="label">KEA-ID</label>
@@ -25,13 +32,14 @@
 </template>
 
 <script>
+import { useUserStore } from "@/store";
 export default {
   props: {
     show: Boolean,
   },
   data() {
     return {
-      name: "",
+      username: "",
       keaId: "",
       showNameError: false,
       showKeaIdError: false,
@@ -39,7 +47,7 @@ export default {
   },
   computed: {
     validationFulfilled() {
-      return this.name && this.keaId;
+      return this.username && this.keaId;
     },
   },
   methods: {
@@ -50,12 +58,12 @@ export default {
       console.log("save and close");
       if (this.validationFulfilled) {
         console.log("validation fulfilled");
-        localStorage.setItem("name", this.name);
-        localStorage.setItem("keaId", this.keaId);
+        useUserStore().setUsername(this.username);
+        useUserStore().setKeaId(this.keaId);
         this.closeModal();
       } else {
         console.log("validation failed");
-        this.showNameError = this.name === "";
+        this.showNameError = this.username === "";
         this.showKeaIdError = this.keaId === "";
       }
     },

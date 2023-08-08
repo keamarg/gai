@@ -1,19 +1,9 @@
 <template>
   <div class="medarbejderdag">
     <h1>Live blog fra medarbejderdagen</h1>
-    <!-- <button @click="getData('json')" class="askButton pt-2">
-      Hent data (json)
-    </button>
-    <button @click="getData('json')" class="askButton pt-2">
-      Hent data (xlsx)
-    </button>
-    <button @click="newConversation()" class="askButton pt-2">
-      Ny samtale
-    </button> -->
-    <Livepost />
+    <Livepost @update:show="showModal = $event" />
   </div>
   <div>
-    <!-- <button @click="showModal = true">Open Modal</button> -->
     <LoginModal :show="showModal" @update:show="showModal = $event">
     </LoginModal>
   </div>
@@ -37,6 +27,7 @@ export default {
       showModal: false,
     };
   },
+  computed: {},
   methods: {
     handleOptionSelected(selected) {
       this.selected = selected;
@@ -44,8 +35,8 @@ export default {
   },
   created() {
     this.selected = this.options[0]; // Set selected option after options are available
-    localStorage.getItem("name")
-      ? localStorage.getItem("name")
+    localStorage.getItem("username") || localStorage.getItem("keaId")
+      ? true
       : (this.showModal = true);
   },
 };

@@ -23,6 +23,7 @@
         v-model="newComment.content"
         type="text"
         placeholder="Your comment"
+        class="inputContainer"
       />
       <button type="submit" class="askButton">Add Comment</button>
     </form>
@@ -31,6 +32,7 @@
 
 <script>
 import CommentComponent from "./CommentComponent.vue";
+import { useUserStore } from "@/store";
 
 export default {
   components: {
@@ -55,7 +57,8 @@ export default {
       // Send new comment to the server
       try {
         const postData = {
-          username: this.newComment.username,
+          username: useUserStore().username,
+          kea_id: useUserStore().keaId,
           content: this.newComment.content,
           post_id: this.post.id,
         };
@@ -72,9 +75,7 @@ export default {
           throw new Error("Network response was not ok");
         }
 
-        this.newComment = {
-          content: "",
-        };
+        this.newComment.content = "";
 
         // Fetch updated posts after successful comment submission
         this.$emit("comment-submitted"); // Emit event to notify parent that a comment has been submitted
@@ -84,14 +85,16 @@ export default {
     },
   },
   created() {
-    if (this.newComment.username != "") {
-      this.newComment.username = localStorage.getItem("name");
-    }
+    // Initialize newpost.username using the computed property
+    // this.newComment.username = useUserStore().setUsername(this.username);
+    // if (this.newComment.username != "") {
+    // this.newComment.username = localStorage.getItem("name");
+    // }
   },
 };
 </script>
 
-<style>
+<style scoped>
 /* Add your custom styles for posts here */
 .post {
   margin-bottom: 10px;
@@ -118,5 +121,18 @@ export default {
 /* Hover styles for both classes */
 .askButton:hover {
   background-color: #145cb3;
+}
+.inputContainer {
+  /* display: flex; */
+  /* align-items: top; */
+  text-align: start;
+  padding: 0.5rem;
+  background-color: #f0f0f0;
+  border-radius: 1.5rem;
+  border-style: 1px solid #ccc;
+  margin-right: 1rem;
+  margin-left: 1.5rem;
+  height: 2.5rem;
+  width: 20rem;
 }
 </style>
