@@ -42,28 +42,33 @@
         Send
       </button>
     </div>
-    <div class="dropDownSelect">
-      <GptSelector
-        @option-selected="handleOptionSelected"
-        :options="options"
-        :selected="selected"
-        :label="'Skift chatbot: '"
-      />
+    <div class="buttonContainer">
+      <div class="dropDownSelect">
+        <GptSelector
+          @option-selected="handleOptionSelected"
+          :options="options"
+          :selected="selected"
+          :label="'Skift chatbot: '"
+        />
+      </div>
+      <button
+        @click="newConversation()"
+        :class="{
+          askButton: !loading,
+          loadingButton: loading,
+        }"
+      >
+        Ny samtale
+      </button>
     </div>
   </div>
   <!-- </div> -->
-  <div class="buttonContainer">
+  <div
+    v-if="getUser.username == 'ping' && getUser.keaid == 'pong'"
+    class="hiddenButtonContainer"
+  >
     <button @click="getData('json')" class="askButton">Hent data (json)</button>
     <button @click="getData('xlsx')" class="askButton">Hent data (xlsx)</button>
-    <button
-      @click="newConversation()"
-      :class="{
-        askButton: !loading,
-        loadingButton: loading,
-      }"
-    >
-      Ny samtale
-    </button>
   </div>
 </template>
 
@@ -72,6 +77,8 @@ import * as XLSX from "xlsx";
 import messages from "@/data/messages.json";
 import ChatLottie from "./ChatLottie.vue";
 import GptSelector from "./GptSelector.vue";
+import { useUserStore } from "@/store";
+
 export default {
   name: "ChatGpt",
   components: { ChatLottie, GptSelector },
@@ -97,6 +104,9 @@ export default {
     };
   },
   computed: {
+    getUser() {
+      return { username: useUserStore().username, keaid: useUserStore().keaId };
+    },
     getMessages() {
       if (this.selected == "Spørgeskema") {
         return this.questionnaireMessages;
@@ -406,7 +416,7 @@ export default {
   font-family: "Roboto", sans-serif;
 } */
 .dropDownSelect {
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 .container {
   width: 90vw;
@@ -532,9 +542,18 @@ GptSelector {
 .buttonContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px; /* Adjust the margin as needed */
+  padding: 8px; /* Adjust the margin as needed */
+  align-items: center;
 }
-
+.hiddenButtonContainer {
+  display: flex;
+  /* justify-content: space-between; */
+  padding-top: 1rem; /* Adjust the margin as needed */
+  align-items: center;
+}
+.hiddenButtonContainer button {
+  margin-right: 1rem;
+}
 /* @media (max-width: 480px) {
   .container {
     width: 100%;

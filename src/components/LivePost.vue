@@ -3,8 +3,14 @@
   <div v-else>
     <!-- Add new post form -->
     <form @submit.prevent="submitpost">
+      <button @click="resetUser()" class="askButton newUserButton">
+        Ny bruger
+      </button>
+      <div class="blogHeader">
+        <h2>Live blog...</h2>
+      </div>
       <!-- <input v-model="newpost.username" type="text" placeholder="Dit navn" /> -->
-      <div class="commentB ar">
+      <div class="commentBar">
         <input
           v-model="newPost.content"
           type="text"
@@ -14,12 +20,6 @@
         <button type="submit" class="askButton">Send</button>
       </div>
     </form>
-    <div class="blogHeader">
-      <h2>Live blog...</h2>
-      <button @click="resetUser()" class="askButton newUserButton">
-        Ny bruger
-      </button>
-    </div>
     <!-- Display posts -->
     <div v-for="post in posts" :key="post.id">
       <PostComponent :post="post" @comment-submitted="fetchposts" />
@@ -153,7 +153,7 @@ export default {
   margin-bottom: 1rem;
   margin-top: 1rem;
   /* height: 2.5rem; */
-  width: 22.5rem;
+  min-width: 12.5rem;
 }
 .blogHeader {
   display: flex;

@@ -144,7 +144,7 @@ export default {
   margin-right: 1rem;
   margin-left: 1.5rem;
   height: 2.5rem;
-  width: 20rem;
+  /* width: 20rem; */
 }
 .commentBar {
   display: flex;
