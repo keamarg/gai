@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <nav>
       <div id="nav">
         <router-link to="/">Chatbot</router-link>
@@ -10,12 +10,18 @@
     <div class="wave"></div>
     <div class="wave"></div>
     <div class="wave"></div>
-    <div class="container">
+    <div>
       <router-view></router-view>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 /* Add your styles here */
+.container {
+  width: 90vw;
+  /* height: 90vh; */
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 5rem;
+}
 </style>

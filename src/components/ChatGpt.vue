@@ -55,7 +55,15 @@
   <div class="buttonContainer">
     <button @click="getData('json')" class="askButton">Hent data (json)</button>
     <button @click="getData('xlsx')" class="askButton">Hent data (xlsx)</button>
-    <button @click="newConversation()" class="askButton">Ny samtale</button>
+    <button
+      @click="newConversation()"
+      :class="{
+        askButton: !loading,
+        loadingButton: loading,
+      }"
+    >
+      Ny samtale
+    </button>
   </div>
 </template>
 
@@ -105,7 +113,7 @@ export default {
       this.messages = [];
       localStorage.removeItem("uniqueID");
       this.generateUniqueID();
-      this.sendMessage();
+      this.sendMessage(this.message, 3);
     },
     generateUniqueID() {
       const existingID = localStorage.getItem("uniqueID");
@@ -322,7 +330,7 @@ export default {
           });
 
           const data = await response.json();
-          console.log(data);
+          // console.log(data);
 
           const newMessage = data.choices[0].message.content;
           this.getMessages.push({

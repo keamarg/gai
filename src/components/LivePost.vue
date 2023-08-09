@@ -1,18 +1,25 @@
 <template>
-  <button @click="resetUser()" class="askButton">Reset user</button>
   <div v-if="loading">Henter liveblog...</div>
   <div v-else>
     <!-- Add new post form -->
     <form @submit.prevent="submitpost">
       <!-- <input v-model="newpost.username" type="text" placeholder="Dit navn" /> -->
-      <input
-        v-model="newPost.content"
-        type="text"
-        placeholder="Skriv ny post her..."
-        class="inputContainer"
-      />
-      <button type="submit" class="askButton">Send</button>
+      <div class="commentB ar">
+        <input
+          v-model="newPost.content"
+          type="text"
+          placeholder="Skriv nyt indlæg her..."
+          class="inputContainer"
+        />
+        <button type="submit" class="askButton">Send</button>
+      </div>
     </form>
+    <div class="blogHeader">
+      <h2>Live blog...</h2>
+      <button @click="resetUser()" class="askButton newUserButton">
+        Ny bruger
+      </button>
+    </div>
     <!-- Display posts -->
     <div v-for="post in posts" :key="post.id">
       <PostComponent :post="post" @comment-submitted="fetchposts" />
@@ -66,7 +73,7 @@ export default {
           },
           body: JSON.stringify(postData),
         });
-
+        // console.log(postData);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -79,6 +86,7 @@ export default {
       }
     },
     // Fetch existing posts, comments, and replies from your server
+    // Fetch existing posts, comments, and replies from your server
     async fetchposts() {
       try {
         const response = await fetch(this.apiUrl_POSTSDB);
@@ -88,8 +96,12 @@ export default {
         }
 
         const data = await response.json();
-        this.posts = data;
-        console.log(this.posts);
+
+        // Sort the fetched posts by the created_at timestamp in descending order
+        this.posts = data.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        // console.log(data);
         this.loading = false;
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -99,7 +111,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* Add your custom styles for the post page here */
 .askButton {
   background-color: #1877f2;
@@ -117,6 +129,18 @@ export default {
 .askButton:hover {
   background-color: #145cb3;
 }
+.newUserButton {
+  color: #f9f5f5;
+  background-color: #a6a6a6;
+
+  /* visibility: hidden; */
+}
+.newUserButton:hover {
+  color: #cdcdcd;
+  background-color: #474747;
+
+  /* visibility: hidden; */
+}
 .inputContainer {
   /* display: flex; */
   /* align-items: top; */
@@ -128,7 +152,17 @@ export default {
   margin-right: 1rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
-  height: 2.5rem;
-  width: 20rem;
+  /* height: 2.5rem; */
+  width: 22.5rem;
+}
+.blogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.commentBar {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
 }
 </style>

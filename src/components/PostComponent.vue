@@ -1,6 +1,9 @@
 <template>
   <div class="post">
-    <div class="username">{{ post.username }}</div>
+    <div class="gptBar">
+      <div class="username">{{ post.username }} ({{ post.kea_id }})</div>
+      <button type="submit" class="askButton gptButton">Spørg ChatGPT</button>
+    </div>
     <div class="content">{{ post.content }}</div>
 
     <!-- Display comments -->
@@ -19,13 +22,15 @@
         type="text"
         placeholder="Your name"
       /> -->
-      <input
-        v-model="newComment.content"
-        type="text"
-        placeholder="Your comment"
-        class="inputContainer"
-      />
-      <button type="submit" class="askButton">Add Comment</button>
+      <div class="commentBar">
+        <input
+          v-model="newComment.content"
+          type="text"
+          placeholder="Skriv kommentar her..."
+          class="inputContainer"
+        />
+        <button type="submit" class="askButton">Send</button>
+      </div>
     </form>
   </div>
 </template>
@@ -62,7 +67,7 @@ export default {
           content: this.newComment.content,
           post_id: this.post.id,
         };
-
+        // console.log(postData);
         const response = await fetch(this.apiUrl_POSTSDB, {
           method: "POST",
           headers: {
@@ -97,14 +102,20 @@ export default {
 <style scoped>
 /* Add your custom styles for posts here */
 .post {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
   border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.8);
 }
 .username {
+  font-size: 1.2rem;
   font-weight: bold;
+}
+.content {
+  margin-bottom: 1rem;
+  white-space: normal;
+  word-wrap: break-word;
 }
 .askButton {
   background-color: #1877f2;
@@ -134,5 +145,27 @@ export default {
   margin-left: 1.5rem;
   height: 2.5rem;
   width: 20rem;
+}
+.commentBar {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+.gptBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gptButton {
+  color: #f9f5f5;
+  background-color: #e03030bc;
+
+  /* visibility: hidden; */
+}
+.gptButton:hover {
+  color: #cdcdcd;
+  background-color: #474747;
+
+  /* visibility: hidden; */
 }
 </style>

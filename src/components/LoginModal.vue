@@ -55,7 +55,6 @@ export default {
       this.$emit("update:show", false);
     },
     saveAndClose() {
-      console.log("save and close");
       if (this.validationFulfilled) {
         console.log("validation fulfilled");
         useUserStore().setUsername(this.username);

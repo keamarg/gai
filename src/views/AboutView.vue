@@ -1,6 +1,6 @@
 <template>
   <div class="medarbejderdag">
-    <h1>Live blog fra medarbejderdagen</h1>
+    <!-- <h1>Live blog fra medarbejderdagen</h1> -->
     <Livepost @update:show="showModal = $event" />
   </div>
   <div>
