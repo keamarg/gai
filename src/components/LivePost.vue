@@ -2,10 +2,10 @@
   <div v-if="loading">Henter liveblog...</div>
   <div v-else>
     <!-- Add new post form -->
+    <button @click="resetUser()" class="askButton newUserButton">
+      Ny bruger
+    </button>
     <form @submit.prevent="submitpost">
-      <button @click="resetUser()" class="askButton newUserButton">
-        Ny bruger
-      </button>
       <div class="blogHeader">
         <h2>Live blog...</h2>
       </div>
@@ -52,6 +52,11 @@ export default {
     this.newPost.username = useUserStore().username;
     // Fetch existing posts from your server
     this.fetchposts();
+    // Call fetchposts every 5 seconds (adjust the interval as needed)
+    this.autoUpdateInterval = setInterval(this.fetchposts, 2000);
+  },
+  beforeUnmount() {
+    clearInterval(this.autoUpdateInterval); // Clear the interval when the component is destroyed
   },
   methods: {
     resetUser() {
