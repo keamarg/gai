@@ -40,3 +40,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+select {
+  border: none;
+  border-radius: 1rem;
+  background-color: #1877f2;
+  color: white;
+  display: flex;
+  padding: 8px; /* Adjust the margin as needed */
+}
+</style>

@@ -1,7 +1,10 @@
 <template>
   <!-- <div class="chatbox-container"> -->
   <div class="container">
-    <h1>KEA Chat Bot</h1>
+    <div class="kealogo">
+      <img src="../assets/img/KEA_logo_DK_Web_gai.jpg" />
+      <!-- <h1>KEA Chat Bot</h1> -->
+    </div>
     <div class="messageBox mt-8" ref="messageBox">
       <template v-for="(message, index) in messages" :key="index">
         <div
@@ -43,12 +46,11 @@
       </button>
     </div>
     <div class="buttonContainer">
-      <div class="dropDownSelect">
+      <div>
         <GptSelector
           @option-selected="handleOptionSelected"
           :options="options"
           :selected="selected"
-          :label="'Skift chatbot: '"
         />
       </div>
       <button
@@ -416,7 +418,15 @@ export default {
   font-family: "Roboto", sans-serif;
 } */
 .dropDownSelect {
-  /* padding: 1rem; */
+  background-color: #1877f2;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  transition: background-color 0.3s ease-in-out;
 }
 .container {
   width: 90vw;
@@ -561,4 +571,13 @@ GptSelector {
     border-radius: 0;
   }
 } */
+.kealogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.kealogo img {
+  height: 5rem;
+}
 </style>
