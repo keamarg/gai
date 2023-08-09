@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ProjectView from "../views/ProjectView.vue";
 
@@ -25,8 +25,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  mode: "hash", // Enable hash mode
+  history: createWebHashHistory(process.env.BASE_URL),
   routes,
 });
 
