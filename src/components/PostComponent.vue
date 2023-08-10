@@ -22,7 +22,10 @@
         type="text"
         placeholder="Your name"
       /> -->
-      <div class="commentBar">
+      <div v-if="sendingComment">
+        <ChatLottie width="2rem" height="2rem" margin="1rem" />
+      </div>
+      <div v-else class="commentBar">
         <input
           v-model="newComment.content"
           type="text"
@@ -38,16 +41,19 @@
 <script>
 import CommentComponent from "./CommentComponent.vue";
 import { useUserStore } from "@/store";
+import ChatLottie from "@/components/ChatLottie.vue";
 
 export default {
   components: {
     CommentComponent,
+    ChatLottie,
   },
   props: {
     post: {
       type: Object,
       required: true,
     },
+    fetchposts: Function,
   },
   data() {
     return {
@@ -55,11 +61,13 @@ export default {
         content: "",
       },
       apiUrl_POSTSDB: process.env.VUE_APP_APIURL_POSTSDB,
+      sendingComment: false,
     };
   },
   methods: {
     async submitComment() {
       // Send new comment to the server
+      this.sendingComment = true;
       try {
         const postData = {
           username: useUserStore().username,
@@ -82,8 +90,8 @@ export default {
 
         this.newComment.content = "";
 
-        // Fetch updated posts after successful comment submission
-        this.$emit("comment-submitted"); // Emit event to notify parent that a comment has been submitted
+        await this.fetchposts();
+        this.sendingComment = false;
       } catch (error) {
         console.error("Error submitting comment:", error);
       }

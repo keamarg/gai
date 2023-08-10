@@ -10,7 +10,10 @@
         <h2>Live blog...</h2>
       </div>
       <!-- <input v-model="newpost.username" type="text" placeholder="Dit navn" /> -->
-      <div class="commentBar">
+      <div v-if="sendingPost">
+        <ChatLottieWhite width="2rem" height="2rem" margin="1rem" />
+      </div>
+      <div v-else class="commentBar">
         <input
           v-model="newPost.content"
           type="text"
@@ -22,18 +25,24 @@
     </form>
     <!-- Display posts -->
     <div v-for="post in posts" :key="post.id">
-      <PostComponent :post="post" @comment-submitted="fetchposts" />
+      <PostComponent
+        :post="post"
+        @comment-submitted="fetchposts"
+        :fetchposts="fetchposts"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import PostComponent from "./PostComponent.vue";
+import ChatLottieWhite from "@/components/ChatLottieWhite.vue";
 import { useUserStore } from "@/store"; // Import the store
 
 export default {
   components: {
     PostComponent,
+    ChatLottieWhite,
   },
   props: {},
   data() {
@@ -46,6 +55,7 @@ export default {
       apiUrl_POSTSDB: process.env.VUE_APP_APIURL_POSTSDB,
       autoUpdateInterval: null,
       isPageVisible: true,
+      sendingPost: false,
     };
   },
 
@@ -85,6 +95,7 @@ export default {
       this.$emit("update:show", true);
     },
     async submitpost() {
+      this.sendingPost = true;
       try {
         const postData = {
           username: useUserStore().username,
@@ -128,6 +139,7 @@ export default {
           );
           // console.log(data);
           this.loading = false;
+          this.sendingPost = false;
         } catch (error) {
           console.error("Error fetching posts:", error);
         }
