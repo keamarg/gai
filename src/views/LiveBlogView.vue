@@ -15,7 +15,7 @@ import Livepost from "@/components/LivePost.vue";
 import LoginModal from "@/components/LoginModal.vue";
 
 export default {
-  name: "AboutView",
+  name: "LiveBlogView",
   components: {
     Livepost,
     LoginModal,

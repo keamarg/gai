@@ -46,14 +46,14 @@
       </button>
     </div>
     <div class="buttonContainer">
-      <div>
+      <!-- <div>
         <GptSelector
           @option-selected="handleOptionSelected"
           :options="options"
           :selected="selected"
           :label="label"
         />
-      </div>
+      </div> -->
       <button
         @click="newConversation()"
         :class="{
@@ -66,16 +66,25 @@
     </div>
   </div>
   <!-- </div> -->
+  <div
+    v-if="getUser.username == 'ping' && getUser.keaid == 'pong'"
+    class="hiddenButtonContainer"
+  >
+    <button @click="getData('json')" class="askButton">Hent data (json)</button>
+    <button @click="getData('xlsx')" class="askButton">Hent data (xlsx)</button>
+  </div>
 </template>
 
 <script>
+import * as XLSX from "xlsx";
 import messages from "@/data/messages.json";
 import ChatLottie from "./ChatLottie.vue";
-import GptSelector from "./GptSelector.vue";
+// import GptSelector from "./GptSelector.vue";
+import { useUserStore } from "@/store";
 
 export default {
   name: "ChatGpt",
-  components: { ChatLottie, GptSelector },
+  components: { ChatLottie },
   props: {
     model: {
       type: String,
@@ -86,22 +95,32 @@ export default {
     return {
       userInput: "",
       loading: false,
-      options: ["Standard", "Generativ AI"],
+      options: ["KEAs historie", "Spørgeskema", "Generativ AI", "Netværk"],
       selected: null, // Initialize with null
       label: "",
       messages: [],
-      standardMessages: messages.standardMessages,
+      questionnaireMessages: messages.questionnaireMessages,
+      historyMessages: messages.historyMessages,
       gaiMessages: messages.gaiMessages,
+      networkMessages: messages.networkMessages,
+      uniqueID: "",
       apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
       apiUrl_CHATDB: process.env.VUE_APP_APIURL_CHATDB,
     };
   },
   computed: {
+    getUser() {
+      return { username: useUserStore().username, keaid: useUserStore().keaId };
+    },
     getMessages() {
-      if (this.selected == "Standard") {
-        return this.standardMessages;
+      if (this.selected == "Spørgeskema") {
+        return this.questionnaireMessages;
+      } else if (this.selected == "KEAs historie") {
+        return this.historyMessages;
       } else if (this.selected == "Generativ AI") {
         return this.gaiMessages;
+      } else if (this.selected == "Netværk") {
+        return this.networkMessages;
       }
       return this.messages;
     },
@@ -110,7 +129,121 @@ export default {
     newConversation() {
       if (!this.loading) {
         this.messages = [];
+        localStorage.removeItem("uniqueID");
+        this.generateUniqueID();
         this.sendMessage(this.message, 3);
+      }
+    },
+    generateUniqueID() {
+      const existingID = localStorage.getItem("uniqueID");
+      if (existingID) {
+        this.uniqueID = existingID;
+      } else {
+        const randomID =
+          Date.now().toString(36) + Math.random().toString(36).slice(2, 11);
+        this.uniqueID = randomID;
+        localStorage.setItem("uniqueID", randomID);
+      }
+    },
+    async getData(format) {
+      // const apiUrl = process.env.VUE_APP_APIURL;
+      try {
+        const response = await fetch(this.apiUrl_CHATDB, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${this.apiKey}`,
+          },
+        });
+        const data = await response.json();
+        // console.log(data);
+
+        if (format === "json") {
+          // Convert the data to a nicely formatted JSON string
+          const dataAsString = JSON.stringify(data, null, 2);
+
+          // Create a Blob with the data as a JSON file
+          const blob = new Blob([dataAsString], { type: "application/json" });
+
+          // Create a temporary object URL for the Blob
+          const url = URL.createObjectURL(blob);
+
+          // Create a temporary link element to trigger the download
+          const downloadLink = document.createElement("a");
+          downloadLink.href = url;
+          downloadLink.download = "chatdata.json";
+
+          // Append the link to the body and click it to initiate the download
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+
+          // Clean up by revoking the object URL and removing the link element
+          URL.revokeObjectURL(url);
+          document.body.removeChild(downloadLink);
+        } else if (format === "xlsx") {
+          const wb = XLSX.utils.book_new();
+          const ws = XLSX.utils.aoa_to_sheet([
+            ["Session ID", "Message Type", "Message"],
+          ]);
+
+          let row = 1;
+          let prevSessionId = null;
+
+          for (const sessionId in data) {
+            const chatData = data[sessionId];
+
+            for (const [index, message] of chatData.entries()) {
+              if (prevSessionId !== sessionId || index === 0) {
+                XLSX.utils.sheet_add_aoa(ws, [[sessionId, "", ""]], {
+                  origin: row,
+                });
+                row++;
+                prevSessionId = sessionId;
+              }
+
+              if (message.user) {
+                XLSX.utils.sheet_add_aoa(ws, [["", "User", message.user]], {
+                  origin: row,
+                });
+                row++;
+              }
+              if (message.chatbot) {
+                XLSX.utils.sheet_add_aoa(
+                  ws,
+                  [["", "Chatbot", message.chatbot]],
+                  {
+                    origin: row,
+                  }
+                );
+                row++;
+              }
+            }
+          }
+
+          XLSX.utils.book_append_sheet(wb, ws, "Chat Data");
+          XLSX.writeFile(wb, "chatdata.xlsx");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async postData(role, content) {
+      // const apiUrl = process.env.VUE_APP_APIURL;
+      try {
+        await fetch(this.apiUrl_CHATDB, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${this.apiKey}`,
+          },
+          body: JSON.stringify({
+            session_id: this.uniqueID,
+            content: content,
+            role: role,
+          }),
+        });
+      } catch (error) {
+        console.error(error);
       }
     },
     async userMessage(message) {
@@ -126,9 +259,9 @@ export default {
           content: message,
         });
         // console.log(this.userInput);
-        // if (this.selected == this.options[1]) {
-        //   this.postData("user", message);
-        // }
+        if (this.selected == this.options[3]) {
+          this.postData("user", message);
+        }
 
         await this.sendMessage(message, 3); // No retries here
       }
@@ -163,13 +296,54 @@ export default {
                     presence_penalty: 0,
                     stop: null,
                     messages: [
-                      ...this.standardMessages,
+                      ...this.historyMessages,
+                      message !== undefined && message !== ""
+                        ? { role: "user", content: message }
+                        : {
+                            role: "user",
+                            content: "kan du introducere dig selv?",
+                          }, //First question/message for the model to actually respond to
+                    ],
+                  }
+                : this.selected == this.options[1]
+                ? {
+                    engine: this.model,
+                    temperature: 0.5,
+                    max_tokens: 800,
+                    top_p: 0.95,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                    stop: null,
+                    messages: [
+                      ...this.questionnaireMessages,
+
                       message !== undefined && message !== ""
                         ? { role: "user", content: message }
                         : {
                             role: "user",
                             content:
-                              "Giv en velkomst som om samtalen lige er startet",
+                              "Giv en introduktion af dig selv som om samtalen lige er startet, fortæl om hvordan du gerne vil have svarene, stil derefter det første spørgsmål, og bed om uddybning hvis du ikke er tilfreds med svaret.",
+                          }, //First question/message for the model to actually respond to
+                    ],
+                  }
+                : this.selected == this.options[2]
+                ? {
+                    engine: this.model,
+                    temperature: 0.5,
+                    max_tokens: 800,
+                    top_p: 0.95,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                    stop: null,
+                    messages: [
+                      ...this.questionnaireMessages,
+
+                      message !== undefined && message !== ""
+                        ? { role: "user", content: message }
+                        : {
+                            role: "user",
+                            content:
+                              "Giv en introduktion af dig selv som om samtalen lige er startet, fortæl om hvordan du gerne vil have svarene, stil derefter det første spørgsmål, og bed om uddybning hvis du ikke er tilfreds med svaret.",
                           }, //First question/message for the model to actually respond to
                     ],
                   }
@@ -182,7 +356,7 @@ export default {
                     presence_penalty: 0,
                     stop: null,
                     messages: [
-                      ...this.gaiMessages,
+                      ...this.networkMessages,
 
                       message !== undefined && message !== ""
                         ? { role: "user", content: message }
@@ -209,9 +383,9 @@ export default {
             role: "assistant",
             content: newMessage,
           });
-          // if (this.selected == this.options[1]) {
-          //   this.postData("chatbot", newMessage);
-          // }
+          if (this.selected == this.options[3]) {
+            this.postData("chatbot", newMessage);
+          }
           return; // Success, exit the loop
         } catch (error) {
           console.error(error);
@@ -248,13 +422,14 @@ export default {
   },
 
   mounted() {
+    this.generateUniqueID();
     this.sendMessage("", 3);
   },
   updated() {
     this.scrollToBottom();
   },
   created() {
-    this.selected = this.options[0]; // Set selected option after options are available
+    this.selected = this.options[3]; // Set selected option after options are available
   },
 };
 </script>
@@ -409,6 +584,22 @@ GptSelector {
   padding: 8px; /* Adjust the margin as needed */
   align-items: center;
 }
+.hiddenButtonContainer {
+  display: flex;
+  /* justify-content: space-between; */
+  padding-top: 1rem; /* Adjust the margin as needed */
+  align-items: center;
+}
+.hiddenButtonContainer button {
+  margin-right: 1rem;
+}
+/* @media (max-width: 480px) {
+  .container {
+    width: 100%;
+    max-width: none;
+    border-radius: 0;
+  }
+} */
 .kealogo {
   display: flex;
   justify-content: center;

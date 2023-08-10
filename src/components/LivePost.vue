@@ -1,5 +1,8 @@
 <template>
-  <div v-if="loading">Henter liveblog...</div>
+  <div v-if="loading" class="text">
+    Henter liveblog...
+    <ChatLottieWhite width="2rem" height="2rem" margin="1rem" />
+  </div>
   <div v-else>
     <button @click="resetUser()" class="askButton newUserButton">
       Ny bruger
@@ -7,13 +10,13 @@
     <!-- Add new post form -->
     <form @submit.prevent="submitpost">
       <div class="blogHeader">
-        <h2>Live blog...</h2>
+        <h2 class="text">Live blog...</h2>
       </div>
       <!-- <input v-model="newpost.username" type="text" placeholder="Dit navn" /> -->
       <div v-if="sendingPost">
         <ChatLottieWhite width="2rem" height="2rem" margin="1rem" />
       </div>
-      <div v-else class="commentBar">
+      <div v-else class="commentBar newPost">
         <input
           v-model="newPost.content"
           type="text"
@@ -151,6 +154,13 @@ export default {
 
 <style scoped>
 /* Add your custom styles for the post page here */
+.newPost {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  /* border: 1px solid #ccc; */
+  background-color: #1876f21e;
+}
 .askButton {
   background-color: #1877f2;
   color: white;
@@ -168,13 +178,13 @@ export default {
   background-color: #145cb3;
 }
 .newUserButton {
-  color: #f9f5f5;
+  color: #2e2e2e;
   background-color: #a6a6a6;
 
   /* visibility: hidden; */
 }
 .newUserButton:hover {
-  color: #cdcdcd;
+  color: #f9f5f5;
   background-color: #474747;
 
   /* visibility: hidden; */
@@ -191,7 +201,8 @@ export default {
   margin-bottom: 1rem;
   margin-top: 1rem;
   /* height: 2.5rem; */
-  min-width: 12.5rem;
+  /* min-width: 12.5rem; */
+  width: 100%;
 }
 .blogHeader {
   display: flex;
@@ -202,5 +213,8 @@ export default {
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+}
+.text {
+  color: white;
 }
 </style>

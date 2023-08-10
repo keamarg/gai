@@ -110,11 +110,11 @@ export default {
 <style scoped>
 /* Add your custom styles for posts here */
 .post {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 1rem;
-  border: 1px solid #ccc;
-  background-color: rgba(255, 255, 255, 0.8);
+  /* border: 1px solid #ccc; */
+  background-color: white;
 }
 .username {
   font-size: 1.2rem;

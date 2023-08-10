@@ -2,33 +2,53 @@
   <div class="modal" v-if="show">
     <!-- <div class="modal-overlay" @click="closeModal"></div> -->
     <div class="modal-content">
-      <h2>Deltag i live bloggen</h2>
+      <h2>Generativ AI på KEA</h2>
+      <p>
+        Vi er i "forskning karriere og relationer" i gang med at indsamle viden
+        om hvilke resurser vi har på KEA indenfor Generativ AI. Desuden vil vi
+        meget gerne skabe et netværk af interesserede, så hvis du enten lægger
+        inde med viden og kompetencer indenfor feltet, eller blot kunne tænke
+        dig at vide mere, så udfyld venligst nedenstående formular.
+        Efterfølgende er der mulighed for en kort snak med en chatbot, der vil
+        spørge uddybende ind til dine svar.
+      </p>
       <form @submit.prevent="saveAndClose">
         <div class="form-group">
-          <!-- <label for="username" class="label">Navn</label> -->
+          <!-- <label for="username" class="label">KEA mail</label> -->
           <input
             type="text"
-            id="username"
-            v-model="username"
+            id="email"
+            v-model="email"
             class="input-field"
-            placeholder="Fornavn"
+            pattern="[a-z0-9._%+-]+@kea\.dk"
+            placeholder="Indtast din KEA mail"
           />
-          <p v-if="!username && showNameError" class="error-message">
-            Udfyld navn
+          <p v-if="email && !isValidEmail(email)" class="error-message">
+            Indtast en gyldig KEA mail
           </p>
         </div>
-        <div class="form-group">
-          <!-- <label for="keaId" class="label">KEA-ID</label> -->
+        <div class="radiobuttons">
+          <p><b>Hvordan vurderer du din egen viden om generativ AI?:</b></p>
+          <input type="radio" id="Ekspert" name="viden" value="Ekspert" />
+          <label for="html">Ekspert</label><br />
+          <input type="radio" id="Bruger" name="viden" value="Bruger" />
+          <label for="Bruger">Bruger</label><br />
+          <input type="radio" id="Nybegynder" name="viden" value="Nybegynder" />
+          <label for="Nybegynder">Nybegynder</label>
+        </div>
+        <div class="radiobuttons">
+          <p><b>Er du interesseret i et netværk om AI på KEA?:</b></p>
+          <input type="radio" id="deltage" name="deltagelse" value="deltage" />
+          <label for="html">Vil gerne deltage</label><br />
           <input
-            type="text"
-            id="keaId"
-            v-model="keaId"
-            class="input-field"
-            placeholder="KEA-ID"
+            type="radio"
+            id="informeres"
+            name="deltagelse"
+            value="informeres"
           />
-          <p v-if="!keaId && showKeaIdError" class="error-message">
-            Udfyld KEA-ID
-          </p>
+          <label for="informeres">Vil gerne informeres</label><br />
+          <input type="radio" id="nej" name="deltagelse" value="nej" />
+          <label for="nej">ikke interesseret</label>
         </div>
         <div class="form-group">
           <button type="submit" class="askButton">Save and Close</button>
@@ -48,29 +68,26 @@ export default {
     return {
       username: "",
       keaId: "",
-      showNameError: false,
-      showKeaIdError: false,
+      email: "",
     };
   },
-  computed: {
-    validationFulfilled() {
-      return this.username && this.keaId;
-    },
-  },
+  computed: {},
   methods: {
+    isValidEmail(email) {
+      const emailPattern = /[a-z0-9._%+-]+@kea\.dk/;
+      console.log(emailPattern.test(email));
+      return emailPattern.test(email);
+    },
     closeModal() {
       this.$emit("update:show", false);
     },
     saveAndClose() {
-      if (this.validationFulfilled) {
+      if (this.isValidEmail(this.email)) {
         console.log("validation fulfilled");
-        useUserStore().setUsername(this.username);
-        useUserStore().setKeaId(this.keaId);
+        useUserStore().setKeamail(this.email);
         this.closeModal();
       } else {
         console.log("validation failed");
-        this.showNameError = this.username === "";
-        this.showKeaIdError = this.keaId === "";
       }
     },
   },
@@ -78,6 +95,9 @@ export default {
 </script>
 
 <style scoped>
+.radiobuttons {
+  margin-bottom: 1rem;
+}
 .modal {
   position: fixed;
   top: 2%; /* Adjust the top value to move the modal further from the top */

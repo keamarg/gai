@@ -15,5 +15,9 @@ export const useUserStore = defineStore("user", {
       this.keaId = newKeaId;
       localStorage.setItem("keaId", newKeaId);
     },
+    setKeamail(newKeamail) {
+      this.keamail = newKeamail;
+      localStorage.setItem("keamail", newKeamail);
+    },
   },
 });

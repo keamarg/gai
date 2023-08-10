@@ -2,14 +2,17 @@
   <div class="container">
     <nav>
       <div id="nav">
-        <router-link to="/">Chatbot</router-link>
-        <router-link to="/projekter">Projekter</router-link>
-        <router-link to="/about">Medarbejderdag</router-link>
+        <router-link to="/">
+          <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" width="60" />
+        </router-link>
+        <router-link to="/network">Netværk</router-link>
+        <router-link to="/chatgpt">ChatGPT</router-link>
+        <router-link to="/liveblog">Liveblog</router-link>
       </div>
     </nav>
+    <!-- <div class="wave"></div>
     <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
+    <div class="wave"></div> -->
     <div>
       <router-view></router-view>
     </div>
