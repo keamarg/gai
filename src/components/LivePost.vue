@@ -54,7 +54,7 @@ export default {
     this.newPost.username = useUserStore().username;
     // Fetch existing posts from your server
     this.fetchposts();
-    this.autoUpdateInterval = setInterval(this.fetchposts, 3000);
+    this.autoUpdateInterval = setInterval(this.fetchposts, 10000);
     // Listen for visibility change events
     document.addEventListener("visibilitychange", this.handleVisibilityChange);
   },
