@@ -203,6 +203,7 @@ export default {
   /* height: 2.5rem; */
   /* min-width: 12.5rem; */
   width: 100%;
+  font-size: 1rem;
 }
 .blogHeader {
   display: flex;
