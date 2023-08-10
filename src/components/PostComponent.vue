@@ -2,7 +2,7 @@
   <div class="post">
     <div class="gptBar">
       <div class="username">{{ post.username }} ({{ post.kea_id }})</div>
-      <button type="submit" class="askButton gptButton">Spørg ChatGPT</button>
+      <!-- <button type="submit" class="askButton gptButton">Spørg ChatGPT</button> -->
     </div>
     <div class="content">{{ post.content }}</div>
 

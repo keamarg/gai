@@ -1,10 +1,10 @@
 <template>
   <div v-if="loading">Henter liveblog...</div>
   <div v-else>
-    <!-- Add new post form -->
     <button @click="resetUser()" class="askButton newUserButton">
       Ny bruger
     </button>
+    <!-- Add new post form -->
     <form @submit.prevent="submitpost">
       <div class="blogHeader">
         <h2>Live blog...</h2>
@@ -44,6 +44,8 @@ export default {
       },
       loading: true,
       apiUrl_POSTSDB: process.env.VUE_APP_APIURL_POSTSDB,
+      autoUpdateInterval: null,
+      isPageVisible: true,
     };
   },
 
@@ -52,13 +54,31 @@ export default {
     this.newPost.username = useUserStore().username;
     // Fetch existing posts from your server
     this.fetchposts();
-    // Call fetchposts every 5 seconds (adjust the interval as needed)
-    this.autoUpdateInterval = setInterval(this.fetchposts, 2000);
+    this.autoUpdateInterval = setInterval(this.fetchposts, 3000);
+    // Listen for visibility change events
+    document.addEventListener("visibilitychange", this.handleVisibilityChange);
   },
   beforeUnmount() {
     clearInterval(this.autoUpdateInterval); // Clear the interval when the component is destroyed
+
+    document.removeEventListener(
+      "visibilitychange",
+      this.handleVisibilityChange
+    );
   },
+
   methods: {
+    updatePosts() {
+      if (this.isPageVisible) {
+        this.fetchposts();
+      }
+    },
+    handleVisibilityChange() {
+      this.isPageVisible = !document.hidden;
+      if (this.isPageVisible) {
+        this.updatePosts();
+      }
+    },
     resetUser() {
       localStorage.removeItem("name");
       localStorage.removeItem("keaId");
@@ -91,25 +111,26 @@ export default {
       }
     },
     // Fetch existing posts, comments, and replies from your server
-    // Fetch existing posts, comments, and replies from your server
     async fetchposts() {
-      try {
-        const response = await fetch(this.apiUrl_POSTSDB);
+      if (this.isPageVisible) {
+        try {
+          const response = await fetch(this.apiUrl_POSTSDB);
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const data = await response.json();
+
+          // Sort the fetched posts by the created_at timestamp in descending order
+          this.posts = data.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
+          // console.log(data);
+          this.loading = false;
+        } catch (error) {
+          console.error("Error fetching posts:", error);
         }
-
-        const data = await response.json();
-
-        // Sort the fetched posts by the created_at timestamp in descending order
-        this.posts = data.sort(
-          (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        );
-        // console.log(data);
-        this.loading = false;
-      } catch (error) {
-        console.error("Error fetching posts:", error);
       }
     },
   },
