@@ -147,8 +147,9 @@ export default {
     },
     async getData(format) {
       // const apiUrl = process.env.VUE_APP_APIURL;
+      console.log("getting data");
       try {
-        const response = await fetch(this.apiUrl_CHATDB, {
+        const response = await fetch("VUE_APP_APIURL_POSTSDB", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -156,7 +157,7 @@ export default {
           },
         });
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
 
         if (format === "json") {
           // Convert the data to a nicely formatted JSON string
