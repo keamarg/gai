@@ -197,7 +197,7 @@ export default {
           });
 
           const data = await response.json();
-          // console.log(data);
+          console.log(data);
 
           const newMessage = data.choices[0].message.content;
           this.getMessages.push({
