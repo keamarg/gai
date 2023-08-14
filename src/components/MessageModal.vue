@@ -18,7 +18,7 @@
       </p>
       <div class="buttonContainer">
         <button type="button" @click="closeModal" class="askButton">
-          I må gerne gemme samtalen
+          Jeg er indforstået med at samtalen gemmes
         </button>
       </div>
     </div>

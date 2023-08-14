@@ -5,9 +5,17 @@
         <router-link to="/">
           <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" width="60" />
         </router-link>
-        <router-link to="/network">Survey</router-link>
+        <router-link to="/survey">Survey</router-link>
         <router-link to="/liveblog">Liveblog</router-link>
-        <router-link to="/">Netværk</router-link>
+        <!-- <router-link
+          :to="{
+            name: 'DynamicNetwork',
+            params: { propValue: 'network' },
+          }"
+          >Netværk</router-link
+        > -->
+        <router-link to="/network">Netværk</router-link>
+
         <router-link to="/chatgpt">GPT4</router-link>
       </div>
     </nav>

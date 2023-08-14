@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import NetworkView from "../views/NetworkView.vue";
+import SurveyView from "../views/SurveyView.vue";
 import ChatGptView from "../views/ChatGptView.vue";
+import NetworkView from "../views/NetworkView.vue";
 
 const routes = [
   {
@@ -9,10 +10,20 @@ const routes = [
     name: "home",
     component: HomeView,
   },
+  // {
+  //   path: "/:propValue",
+  //   name: "DynamicNetwork",
+  //   component: HomeView,
+  // },
   {
     path: "/network",
     name: "network",
     component: NetworkView,
+  },
+  {
+    path: "/survey",
+    name: "survey",
+    component: SurveyView,
   },
   {
     path: "/chatgpt",

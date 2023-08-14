@@ -5,6 +5,7 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     username: localStorage.getItem("username") || "",
     keaId: localStorage.getItem("keaId") || "",
+    showModal: false,
   }),
   actions: {
     setUsername(newUsername) {
@@ -18,6 +19,9 @@ export const useUserStore = defineStore("user", {
     setKeamail(newKeamail) {
       this.keamail = newKeamail;
       localStorage.setItem("keamail", newKeamail);
+    },
+    setShowModal(newShowModal) {
+      this.showModal = newShowModal;
     },
   },
 });

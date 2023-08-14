@@ -72,8 +72,15 @@
     "
     class="hiddenButtonContainer"
   >
-    <button @click="getData('json')" class="askButton">Hent data (json)</button>
-    <button @click="getData('xlsx')" class="askButton">Hent data (xlsx)</button>
+    <button @click="getData('json')" class="askButton">
+      Hent chatdata (json)
+    </button>
+    <button @click="getData('xlsx')" class="askButton">
+      Hent chatdata (xlsx)
+    </button>
+    <button @click="getNetworkData('json')" class="askButton">
+      Hent netværksdata (json)
+    </button>
   </div>
 </template>
 
@@ -108,6 +115,7 @@ export default {
       uniqueID: "",
       apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
       apiUrl_CHATDB: process.env.VUE_APP_APIURL_CHATDB,
+      apiUrl_POSTSDB: process.env.VUE_APP_APIURL_POSTSDB,
     };
   },
   computed: {
@@ -147,6 +155,7 @@ export default {
         localStorage.setItem("uniqueID", randomID);
       }
     },
+
     async getData(format) {
       // const apiUrl = process.env.VUE_APP_APIURL;
       try {
@@ -224,6 +233,46 @@ export default {
 
           XLSX.utils.book_append_sheet(wb, ws, "Chat Data");
           XLSX.writeFile(wb, "chatdata.xlsx");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getNetworkData(format) {
+      // const apiUrl = process.env.VUE_APP_APIURL;
+      try {
+        const response = await fetch(this.apiUrl_POSTSDB, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Authorization: `Bearer ${this.apiKey}`,
+          },
+        });
+        const data = await response.json();
+        // console.log(data);
+        console.log(data);
+        if (format === "json") {
+          // Convert the data to a nicely formatted JSON string
+          const dataAsString = JSON.stringify(data, null, 2);
+
+          // Create a Blob with the data as a JSON file
+          const blob = new Blob([dataAsString], { type: "application/json" });
+
+          // Create a temporary object URL for the Blob
+          const url = URL.createObjectURL(blob);
+
+          // Create a temporary link element to trigger the download
+          const downloadLink = document.createElement("a");
+          downloadLink.href = url;
+          downloadLink.download = "networkdata.json";
+
+          // Append the link to the body and click it to initiate the download
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+
+          // Clean up by revoking the object URL and removing the link element
+          URL.revokeObjectURL(url);
+          document.body.removeChild(downloadLink);
         }
       } catch (error) {
         console.error(error);

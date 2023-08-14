@@ -14,14 +14,19 @@
       betragtninger om, bekymringer for og ideer til AI udviklingen på KEA.
     </p>
     <div class="links">
+      <router-link to="/survey">
+        <button class="askButton">Deltag i undersøgelse</button>
+      </router-link>
+      <router-link to="/liveblog">
+        <button class="askButton">Kommenter på Liveblog</button>
+      </router-link>
+    </div>
+    <div class="links">
       <button class="askButton" @click="this.showModal = true">
         Deltag i netværket
       </button>
       <router-link to="/chatgpt">
-        <button class="askButton">Prøv GPT4</button>
-      </router-link>
-      <router-link to="/liveblog">
-        <button class="askButton">Kommenter på Liveblog</button>
+        <button class="askButton">Prøv Chat-GPT4</button>
       </router-link>
     </div>
     <img
@@ -173,7 +178,8 @@ h1 {
   cursor: pointer;
   border-radius: 1.5rem;
   transition: background-color 0.3s ease-in-out;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+  margin: 1rem;
 }
 
 /* Hover styles for both classes */
@@ -181,8 +187,6 @@ h1 {
   background-color: #145cb3;
 }
 .links {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
   display: flex;
   justify-content: space-around;
 }

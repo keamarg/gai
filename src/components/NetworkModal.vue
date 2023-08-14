@@ -33,6 +33,7 @@
             id="Ekspert"
             name="viden"
             value="Ekspert"
+            v-model="viden"
             required
           />
           <label for="html">Ekspert</label><br />
@@ -41,6 +42,7 @@
             id="Bruger"
             name="viden"
             value="Bruger"
+            v-model="viden"
             required
           />
           <label for="Bruger">Bruger</label><br />
@@ -49,6 +51,7 @@
             id="Nybegynder"
             name="viden"
             value="Nybegynder"
+            v-model="viden"
             required
           />
           <label for="Nybegynder">Nybegynder</label>
@@ -60,6 +63,7 @@
             id="deltage"
             name="deltagelse"
             value="deltage"
+            v-model="deltagelse"
             required
           />
           <label for="html">Vil gerne deltage</label><br />
@@ -68,10 +72,18 @@
             id="informeres"
             name="deltagelse"
             value="informeres"
+            v-model="deltagelse"
             required
           />
           <label for="informeres">Vil gerne informeres</label><br />
-          <input type="radio" id="nej" name="deltagelse" value="nej" required />
+          <input
+            type="radio"
+            id="nej"
+            name="deltagelse"
+            value="nej"
+            v-model="deltagelse"
+            required
+          />
           <label for="nej">ikke interesseret</label>
         </div>
         <div class="form-group">
@@ -95,6 +107,9 @@ export default {
       username: "",
       keaId: "",
       email: "",
+      viden: "",
+      deltagelse: "",
+      apiUrl_POSTSDB: process.env.VUE_APP_APIURL_POSTSDB,
     };
   },
   computed: {},
@@ -112,9 +127,32 @@ export default {
       if (this.isValidEmail(this.email)) {
         console.log("validation fulfilled");
         useUserStore().setKeamail(this.email);
+        this.submitComment(this.email, this.viden, this.deltagelse);
         this.closeModal();
       } else {
         console.log("validation failed");
+      }
+    },
+    async submitComment(email, viden, deltagelse) {
+      try {
+        const postData = {
+          email: email,
+          viden: viden,
+          deltagelse: deltagelse,
+        };
+        console.log(postData);
+        const response = await fetch(this.apiUrl_POSTSDB, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
+        });
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+      } catch (error) {
+        console.error("Error submitting comment:", error);
       }
     },
   },
