@@ -46,14 +46,18 @@
       </button>
     </div>
     <div class="buttonContainer">
-      <div>
-        <GptSelector
-          @option-selected="handleOptionSelected"
-          :options="options"
-          :selected="selected"
-          :label="label"
-        />
-      </div>
+      <GptSelector
+        @option-selected="handleOptionSelected"
+        :options="options"
+        :selected="selected"
+        :label="label"
+      />
+      <GptSelector
+        @option-selected="handleGptOptionSelected"
+        :options="gptOptions"
+        :selected="model"
+        :label="label"
+      />
       <button
         @click="newConversation()"
         :class="{
@@ -61,7 +65,7 @@
           loadingButton: loading,
         }"
       >
-        Ny samtale
+        <i class="bi bi-arrow-clockwise"></i>
       </button>
     </div>
   </div>
@@ -77,17 +81,19 @@ export default {
   name: "ChatGpt",
   components: { ChatLottie, GptSelector },
   props: {
-    model: {
-      type: String,
-      default: "gpt-3.5-turbo",
-    },
+    // model: {
+    //   type: String,
+    //   default: "gpt-3.5-turbo",
+    // },
   },
   data() {
     return {
       userInput: "",
       loading: false,
-      options: ["Standard", "Generativ AI"],
+      options: ["Emne", "Generativ AI"],
+      gptOptions: ["gpt-4", "gpt-35-turbo"],
       selected: null, // Initialize with null
+      model: null,
       label: "",
       messages: [],
       standardMessages: messages.standardMessages,
@@ -98,7 +104,7 @@ export default {
   },
   computed: {
     getMessages() {
-      if (this.selected == "Standard") {
+      if (this.selected == "Emne") {
         return this.standardMessages;
       } else if (this.selected == "Generativ AI") {
         return this.gaiMessages;
@@ -135,13 +141,6 @@ export default {
     },
     async sendMessage(message, maxRetries) {
       // console.log(this.apiUrl);
-
-      if (
-        this.selectedVersion == "gpt-4.0" ||
-        this.selectedVersion == "gpt-3.5-turbo-16k"
-      )
-        return;
-
       // const apiUrl = process.env.VUE_APP_APIURL;
       while (maxRetries >= 0) {
         try {
@@ -197,7 +196,7 @@ export default {
           });
 
           const data = await response.json();
-          console.log(data);
+          // console.log(data);
 
           const newMessage = data.choices[0].message.content;
           this.getMessages.push({
@@ -245,6 +244,9 @@ export default {
       this.messages = [];
       this.sendMessage("", 3);
     },
+    async handleGptOptionSelected(model) {
+      this.model = model;
+    },
   },
 
   mounted() {
@@ -255,6 +257,7 @@ export default {
   },
   created() {
     this.selected = this.options[0]; // Set selected option after options are available
+    this.model = this.gptOptions[0];
   },
 };
 </script>
@@ -384,6 +387,7 @@ h1 {
   cursor: pointer;
   border-radius: 1.5rem;
   transition: background-color 0.3s ease-in-out;
+  min-width: 4.5rem;
 }
 
 /* Specific styles for the loadingButton class */

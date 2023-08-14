@@ -61,13 +61,15 @@
           loadingButton: loading,
         }"
       >
-        Ny samtale
+        <i class="bi bi-arrow-clockwise"></i>
       </button>
     </div>
   </div>
   <!-- </div> -->
   <div
-    v-if="getUser.username == 'ping' && getUser.keaid == 'pong'"
+    v-if="
+      getUser.username == 'pingpong' //&& getUser.keaid == 'pong'
+    "
     class="hiddenButtonContainer"
   >
     <button @click="getData('json')" class="askButton">Hent data (json)</button>
@@ -269,11 +271,7 @@ export default {
     async sendMessage(message, maxRetries) {
       // console.log(this.apiUrl);
 
-      if (
-        this.selectedVersion == "gpt-4.0" ||
-        this.selectedVersion == "gpt-3.5-turbo-16k"
-      )
-        return;
+      if (this.selectedVersion == "gpt-3.5-turbo-16k") return;
 
       // const apiUrl = process.env.VUE_APP_APIURL;
       while (maxRetries >= 0) {
@@ -559,6 +557,7 @@ h1 {
   cursor: pointer;
   border-radius: 1.5rem;
   transition: background-color 0.3s ease-in-out;
+  min-width: 4.5rem;
 }
 
 /* Specific styles for the loadingButton class */
@@ -580,10 +579,11 @@ GptSelector {
 
 .buttonContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 8px; /* Adjust the margin as needed */
   align-items: center;
 }
+
 .hiddenButtonContainer {
   display: flex;
   /* justify-content: space-between; */

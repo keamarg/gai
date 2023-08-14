@@ -1,17 +1,19 @@
 <template>
   <div class="post">
     <div class="gptBar">
-      <div class="username">{{ post.username }} ({{ post.kea_id }})</div>
+      <div class="username">
+        {{ post.username }} ({{ this.getTime(post.created_at) }})
+      </div>
       <!-- <button type="submit" class="askButton gptButton">Spørg ChatGPT</button> -->
     </div>
     <div class="content">{{ post.content }}</div>
-
     <!-- Display comments -->
     <div v-if="post.comments && post.comments.length > 0">
       <CommentComponent
         v-for="comment in post.comments"
         :key="comment.id"
         :comment="comment"
+        :getTime="getTime"
       />
     </div>
 
@@ -65,6 +67,22 @@ export default {
     };
   },
   methods: {
+    getTime(created_at) {
+      const parsedTimestamp = new Date(created_at);
+      // Add two hours to the parsed timestamp while handling overflow and daylight saving time
+
+      const options = {
+        // year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      };
+
+      const formattedDate = parsedTimestamp.toLocaleString("en-US", options);
+      return formattedDate;
+    },
     async submitComment() {
       // Send new comment to the server
       this.sendingComment = true;

@@ -2,6 +2,7 @@
   <div class="modal" v-if="show">
     <!-- <div class="modal-overlay" @click="closeModal"></div> -->
     <div class="modal-content">
+      <div class="close-button" @click="closeModal">&times;</div>
       <h2>Generativ AI på KEA</h2>
       <p>
         Vi er i "forskning karriere og relationer" i gang med at indsamle viden
@@ -51,7 +52,9 @@
           <label for="nej">ikke interesseret</label>
         </div>
         <div class="form-group">
-          <button type="submit" class="askButton">Save and Close</button>
+          <div class="buttonContainer">
+            <button type="submit" class="askButton">Save and Close</button>
+          </div>
         </div>
       </form>
     </div>
@@ -79,6 +82,7 @@ export default {
       return emailPattern.test(email);
     },
     closeModal() {
+      console.log("close modal");
       this.$emit("update:show", false);
     },
     saveAndClose() {
@@ -95,8 +99,21 @@ export default {
 </script>
 
 <style scoped>
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  padding: 8px; /* Adjust the margin as needed */
+  align-items: center;
+}
 .radiobuttons {
   margin-bottom: 1rem;
+}
+.close-button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 .modal {
   position: fixed;
@@ -127,6 +144,7 @@ export default {
   z-index: -1; /* Place the overlay behind the modal content */
 }
 .modal-content {
+  position: relative;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -178,6 +196,7 @@ export default {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 1rem;
 }
 .error-message {
   color: red;

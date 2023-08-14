@@ -3,83 +3,42 @@
     <!-- <div class="modal-overlay" @click="closeModal"></div> -->
     <div class="modal-content">
       <div class="close-button" @click="closeModal">&times;</div>
-      <h2>Deltag i live bloggen</h2>
-      <form @submit.prevent="saveAndClose">
-        <div class="form-group">
-          <!-- <label for="username" class="label">Navn</label> -->
-          <input
-            type="text"
-            id="username"
-            v-model="username"
-            class="input-field"
-            placeholder="Fornavn"
-          />
-          <p v-if="!username && showNameError" class="error-message">
-            Udfyld navn
-          </p>
-        </div>
-        <!-- <div class="form-group">
-          <input
-            type="text"
-            id="keaId"
-            v-model="keaId"
-            class="input-field"
-            placeholder="KEA-ID"
-          />
-          <p v-if="!keaId && showKeaIdError" class="error-message">
-            Udfyld KEA-ID
-          </p>
-        </div> -->
-        <div class="form-group">
-          <div class="buttonContainer">
-            <button type="submit" class="askButton">Save and Close</button>
-          </div>
-        </div>
-      </form>
+      <h2>Survey om generativ AI</h2>
+      <p>Tekst om survey</p>
+      <div class="buttonContainer">
+        <button type="button" @click="closeModal" class="askButton">
+          Save and Close
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useUserStore } from "@/store";
 export default {
   props: {
     show: Boolean,
   },
   data() {
-    return {
-      username: "",
-      // keaId: "",
-      showNameError: false,
-      // showKeaIdError: false,
-    };
+    return {};
   },
-  computed: {
-    validationFulfilled() {
-      return this.username; //&& this.keaId;
-    },
-  },
+  computed: {},
   methods: {
     closeModal() {
+      console.log("emit");
       this.$emit("update:show", false);
-    },
-    saveAndClose() {
-      if (this.validationFulfilled) {
-        console.log("validation fulfilled");
-        useUserStore().setUsername(this.username);
-        //useUserStore().setKeaId(this.keaId);
-        this.closeModal();
-      } else {
-        console.log("validation failed");
-        this.showNameError = this.username === "";
-        //this.showKeaIdError = this.keaId === "";
-      }
     },
   },
 };
 </script>
 
 <style scoped>
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  padding: 8px; /* Adjust the margin as needed */
+  align-items: center;
+}
 .close-button {
   position: absolute;
   top: 0.6rem;
@@ -136,12 +95,6 @@ export default {
   .modal-content {
     max-width: 30%; /* Adjust the reduced width as needed */
   }
-}
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  padding: 8px; /* Adjust the margin as needed */
-  align-items: center;
 }
 .askButton {
   background-color: #1877f2;

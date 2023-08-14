@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      options: ["gpt-35-turbo", "gpt-3.5-turbo-16k", "gpt-4.0"],
+      options: ["gpt-35-turbo", "gpt-4"],
       selected: null, // Initialize with null
       showModal: false,
     };

@@ -1,22 +1,23 @@
 <template>
   <div class="container">
-    <h1>Indsæt kloge ting om G-AI på KEA her</h1>
+    <NetworkModal :show="showModal" @update:show="showModal = $event" />
+    <h1>Gailab</h1>
+    <p>Sidst opdateret 14/7-2023</p>
+
+    <h2>AI udviklingen på KEA - hvilken vej skal vi?</h2>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-      vestibulum dolor nec dolor vulputate, id tincidunt nibh tempus. Integer
-      nec ullamcorper urna. Integer facilisis tellus justo, in volutpat tellus
-      volutpat sollicitudin. Phasellus mi elit, semper eget laoreet sed, commodo
-      tincidunt mauris. Donec id nibh leo. Integer posuere quam ut dui ultrices,
-      sit amet cursus purus pulvinar. Aenean et laoreet orci, sed efficitur mi.
-      Mauris non sem sapien. Proin lacinia odio ipsum, a venenatis dolor
-      elementum sed. Praesent lacinia at nisi at vulputate.
+      Diskussionen om og afprøvningen af G-AI er allerede godt i gang på KEA,
+      men vi har behov for at få skabt en fælles dialog omkring hvad KEA vil og
+      skal med G-AI og hvad KEA i forlængelse heraf har behov for at vide.
+      Derfor vil vi gerne invitere alle medarbejder på KEA til at dele deres
+      betragtninger om, bekymringer for og ideer til AI udviklingen på KEA.
     </p>
     <div class="links">
-      <router-link to="/network">
-        <button class="askButton">Deltag i netværket</button>
-      </router-link>
+      <button class="askButton" @click="this.showModal = true">
+        Deltag i netværket
+      </button>
       <router-link to="/chatgpt">
-        <button class="askButton">Prøv ChatGPT</button>
+        <button class="askButton">Prøv GPT4</button>
       </router-link>
       <router-link to="/liveblog">
         <button class="askButton">Kommenter på Liveblog</button>
@@ -25,106 +26,107 @@
     <img
       src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg"
     />
+    <h3>Hvilken viden har vi?</h3>
     <p>
-      Maecenas vel maximuslectus, et consequat purus. Aliquam tincidunt, nulla
-      sed porttitor tempor, tortor nunc condimentum lectus, quis dignissim
-      turpis augue ut felis. Suspendisse laoreet ante vitae enim viverra, eu
-      bibendum sem mollis. Proin sit amet cursus nisl, ut pretium justo. Vivamus
-      at ligula facilisis, egestas eros eget, molestie leo. Duis faucibus, ante
-      eget dapibus ultrices, quam lacus porttitor sapien, vel bibendum ipsum
-      urna accumsan diam. Nunc vel congue est. Curabitur fermentum tempor sem in
-      suscipit. Nunc blandit lorem ut tellus congue laoreet. Suspendisse laoreet
-      nisl lorem, id efficitur orci auctor at. Etiam accumsan, nunc at euismod
-      iaculis, nisi ligula porttitor elit, a viverra purus dui ut lorem. Etiam
-      dui dui, aliquam vitae mattis vel, pellentesque non nisi. Suspendisse non
-      nunc vitae dolor gravida bibendum vitae eget lacus. Orci varius natoque
-      penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      Praesent vel mauris risus. Aenean pellentesque blandit mauris sed
-      pharetra. Suspendisse congue metus eget volutpat porttitor. Donec eget
-      consequat ipsum. Quisque commodo eget nisi eu tristique. Pellentesque
-      consectetur, urna mattis varius auctor, dolor turpis accumsan nisl, nec
-      tincidunt tortor nibh sit amet sem. Donec sagittis elementum quam et
-      semper. Pellentesque at leo sed risus vestibulum vestibulum in vel nisl.
-      Pellentesque pharetra quis velit id dapibus. Vestibulum accumsan arcu id
-      libero tincidunt, in gravida nisi sollicitudin. Ut venenatis lorem sit
-      amet libero vestibulum, in pellentesque lacus maximus. Praesent ut aliquet
-      massa, sed auctor erat. Suspendisse ac diam ac urna tincidunt volutpat
-      egestas vel dolor. Praesent interdum magna metus, pretium ornare erat
-      rutrum vel. Aliquam in elit neque. Praesent sagittis orci nec maximus
-      bibendum. Etiam mattis, nisi eget placerat congue, ligula ex eleifend leo,
-      sit amet consequat mi ex in turpis. Aliquam posuere lorem non ultrices
-      porta. In congue arcu id volutpat mollis. Quisque congue rutrum dolor.
-      Cras volutpat auctor arcu at volutpat. Curabitur sit amet aliquam nulla.
-      Sed dignissim volutpat lectus. Nam euismod ultricies pellentesque. Cras at
-      nisl turpis. Orci varius natoque penatibus et magnis dis parturient
-      montes, nascetur ridiculus mus. Etiam vestibulum tincidunt rutrum. Cras
-      ullamcorper mi nec odio lobortis ullamcorper. Duis sit amet purus elit.
-      Maecenas vehicula eu dui nec rutrum. Nam mollis, urna eget luctus commodo,
-      leo erat tristique diam, et mollis sem velit quis libero. Vivamus vehicula
-      leo vel eleifend pretium. Curabitur aliquam ligula sit amet leo
-      consectetur, ut vulputate sapien vestibulum. Ut nisi odio, lacinia ut
-      fringilla vel, porta in velit. Lorem ipsum dolor sit amet, consectetur
-      adipiscing elit. Suspendisse vestibulum dolor nec dolor vulputate, id
-      tincidunt nibh tempus. Integer nec ullamcorper urna. Integer facilisis
-      tellus justo, in volutpat tellus volutpat sollicitudin. Phasellus mi elit,
-      semper eget laoreet sed, commodo tincidunt mauris. Donec id nibh leo.
-      Integer posuere quam ut dui ultrices, sit amet cursus purus pulvinar.
-      Aenean et laoreet orci, sed efficitur mi. Mauris non sem sapien. Proin
-      lacinia odio ipsum, a venenatis dolor elementum sed. Praesent lacinia at
-      nisi at vulputate. Maecenas vel maximus lectus, et consequat purus.
-      Aliquam tincidunt, nulla sed porttitor tempor, tortor nunc condimentum
-      lectus, quis dignissim turpis augue ut felis. Suspendisse laoreet ante
-      vitae enim viverra, eu bibendum sem mollis. Proin sit amet cursus nisl, ut
-      pretium justo. Vivamus at ligula facilisis, egestas eros eget, molestie
-      leo. Duis faucibus, ante eget dapibus ultrices, quam lacus porttitor
-      sapien, vel bibendum ipsum urna accumsan diam. Nunc vel congue est.
-      Curabitur fermentum tempor sem in suscipit. Nunc blandit lorem ut tellus
-      congue laoreet. Suspendisse laoreet nisl lorem, id efficitur orci auctor
-      at. Etiam accumsan, nunc at euismod iaculis, nisi ligula porttitor elit, a
-      viverra purus dui ut lorem. Etiam dui dui, aliquam vitae mattis vel,
-      pellentesque non nisi. Suspendisse non nunc vitae dolor gravida bibendum
-      vitae eget lacus. Orci varius natoque penatibus et magnis dis parturient
-      montes, nascetur ridiculus mus. Praesent vel mauris risus. Aenean
-      pellentesque blandit mauris sed pharetra. Suspendisse congue metus eget
-      volutpat porttitor. Donec eget consequat ipsum. Quisque commodo eget nisi
-      eu tristique. Pellentesque consectetur, urna mattis varius auctor, dolor
-      turpis accumsan nisl, nec tincidunt tortor nibh sit amet sem. Donec
-      sagittis elementum quam et semper. Pellentesque at leo sed risus
-      vestibulum vestibulum in vel nisl. Pellentesque pharetra quis velit id
-      dapibus. Vestibulum accumsan arcu id libero tincidunt, in gravida nisi
-      sollicitudin. Ut venenatis lorem sit amet libero vestibulum, in
-      pellentesque lacus maximus. Praesent ut aliquet massa, sed auctor erat.
-      Suspendisse ac diam ac urna tincidunt volutpat egestas vel dolor. Praesent
-      interdum magna metus, pretium ornare erat rutrum vel. Aliquam in elit
-      neque. Praesent sagittis orci nec maximus bibendum. Etiam mattis, nisi
-      eget placerat congue, ligula ex eleifend leo, sit amet consequat mi ex in
-      turpis. Aliquam posuere lorem non ultrices porta. In congue arcu id
-      volutpat mollis. Quisque congue rutrum dolor. Cras volutpat auctor arcu at
-      volutpat. Curabitur sit amet aliquam nulla. Sed dignissim volutpat lectus.
-      Nam euismod ultricies pellentesque. Cras at nisl turpis. Orci varius
-      natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      Etiam vestibulum tincidunt rutrum. Cras ullamcorper mi nec odio lobortis
-      ullamcorper. Duis sit amet purus elit. Maecenas vehicula eu dui nec
-      rutrum. Nam mollis, urna eget luctus commodo, leo erat tristique diam, et
-      mollis sem velit quis libero. Vivamus vehicula leo vel eleifend pretium.
-      Curabitur aliquam ligula sit amet leo consectetur, ut vulputate sapien
-      vestibulum. Ut nisi odio, lacinia ut fringilla vel, porta in velit.
+      Hvad er Generativ AI og eksempler på værktøjer? Hvem står bag kendte
+      værktøjer? Hvordan virker det? Hvad er det ikke?
+    </p>
+    <h3>Hvilke erfaringer har vi allerede gjort os?</h3>
+    <p>
+      Har du anvendt Generativ AI i dit arbejde? JA- Til hvad? Gode erfaringer?
+      Problemer du er stødt på? Nej- Har du lyst JA- Har du ideer til hvilke af
+      dine opgaver du kunne Generativ AI til at løse? Hvilke? Vil du gerne vide
+      mere om hvordan du kunne anvende Generativ AI i dit arbejder?
+    </p>
+    <h3>Hvad har vi brug for at vide og prøve?</h3>
+    <p>
+      Hvilke AI kompetencer har underviser brug for? Hvilke AI kompetencer har
+      de studerende brug for? Hvilken indflydelse af G-AI på vores
+      studieordninger og læringsmål? Hvilken indflydelse har G-AI på vores
+      prøvning og opgaveformulering? Hvilken indflydelse har G-AI på vores måde
+      at lære på? Hvad er det vigtigt, at vi får talt om som organisation og
+      sektor? Hvad kan KEA bruge G-AI til?
+    </p>
+    <h3>Invitation til udviklingsnetværk</h3>
+    <p>
+      Netværket skal samle den viden, der er på KEA vedr generativ AI og som vi
+      forventer udvikler og rykker sig meget. Den samlede viden vil vi så
+      formidle og udvikle løbende på en platform tilgængelig for alle på KEA.
+      Det er vigtigt at udviklingsnetværket bliver sammensat på tværs af lag og
+      afdelinger og interesser i organisationen så vi kan møde den kompleksitet
+      som AI teknologierne skaber med et multifokalt blik. Vil du være med?
+    </p>
+
+    <div class="links">
+      <button class="askButton" @click="this.showModal = true">
+        Deltag i netværket
+      </button>
+    </div>
+    <img
+      src="https://assets.gatesnotes.com/8a5ac0b3-6095-00af-c50a-89056fbe4642/11eeb7f9-7512-49aa-abdc-a27001dd123e/AI_20230215_article-hero_1200x564.jpg"
+    />
+    <h3>AI Udviklingsrummet</h3>
+    <p>
+      Udviklingsrummet er KEA’s ressourcecenter for AI der skal styrke
+      bevidstheden om, og brugen af, AI på KEA og i erhvervslivet.
+      Udviklingsrummet skal løbende udvikles og opereres af KEA’s
+      AI-udviklingsnetværk. Med Udviklingsrummet som kundepunkt for KEA’s
+      indsamling og viderformidling viden, tiltag og processer vedrørende AI vil
+      vi overskueliggøre og tilgængeliggøre intern og ekstern G-AI viden og
+      muligheder. Ressourcecenteret skal desuden muliggøre samarbejder med
+      virksomheder og institutioner, der har en interesse for AI området og
+      tilbyde workshops til både interne og eksterne interesserede.
+    </p>
+    <h3>Aktuelle tilbud, indsatser og aktiviteter</h3>
+    <p>
+      Udvikling af retningslinjer (Louise) Udvikling af et AI tilvalgsfag
+      (Mikkel) Forskningsprojekt om erhvervslivets adoption af AI
+      programmerings-redskaber (Benjamin) Tilgængelig AI software (Frederick)
+      Aktuelle AI afprøvninger i organisationen (specificeres brug af AI som
+      partner i arbejdsprocesser, eksamensformer) Kurser og workshops
+    </p>
+    <h3>Retningslinjer</h3>
+    <p>
+      Louise skriv om løbende udvikling og opdatering på baggrund af
+      grundlæggende principper Vejledning til studerendes brug af G-AI
+      Vejledning til underviseres brug af G-AI Vejledning til medarbejder brug
+      af G-AI
+    </p>
+    <h3>Nyhedsoverblik</h3>
+    <p>Martin og Sarah?</p>
+    <h3>Pædagogiske og didaktiske perspektiver</h3>
+    <p>Mettes skriv?</p>
+    <h3>Forskningen</h3>
+    <p>
+      Morten skriv om forskning i og med AI? Projektbeskrivelser af igangværende
+      forsknings og udviklingsprojekter Vidensprodukter og afrapporteringer fra
+      afsluttede forsknings og udviklingsprojekter
+    </p>
+    <h3>Samarbejder</h3>
+    <p>
+      Erhvervssamarbejder (Signe) Forskning- og udviklingssamarbejder
+      Internationale og nationale institutionsamarbejder (Anne og ?)
     </p>
   </div>
 </template>
 
 <script>
+import NetworkModal from "@/components/NetworkModal.vue";
+
 export default {
   name: "HomeView",
   props: {},
   data() {
-    return {};
+    return {
+      showModal: false,
+    };
   },
   computed: {},
   methods: {},
   mounted() {},
   updated() {},
   created() {},
+  components: { NetworkModal },
 };
 </script>
 

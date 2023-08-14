@@ -1,6 +1,8 @@
 <template>
   <div class="comment">
-    <div class="username">{{ comment.username }} ({{ comment.kea_id }})</div>
+    <div class="username">
+      {{ comment.username }} ({{ this.getTime(comment.created_at) }})
+    </div>
     <div class="content">{{ comment.content }}</div>
   </div>
 </template>
@@ -11,6 +13,10 @@ export default {
   props: {
     comment: {
       type: Object,
+      required: true,
+    },
+    getTime: {
+      type: Function,
       required: true,
     },
   },

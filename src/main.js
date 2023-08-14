@@ -2,6 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import Vue3Lottie from "vue3-lottie";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 import "vue3-lottie/dist/style.css";
 import "./assets/css/global.css";
 import { createPinia } from "pinia"; // Import createPinia from Pinia

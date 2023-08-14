@@ -12,8 +12,8 @@
   </div>
   <div>
     <!-- <button @click="showModal = true">Open Modal</button> -->
-    <NetworkModal :show="showModal" @update:show="showModal = $event">
-    </NetworkModal>
+    <MessageModal :show="showModal" @update:show="showModal = $event">
+    </MessageModal>
   </div>
 </template>
 
@@ -21,7 +21,7 @@
 // @ is an alias to /src
 // import ChatLottie from "@/components/ChatLottie.vue";
 import ChatGptNetwork from "@/components/ChatGptNetwork.vue";
-import NetworkModal from "@/components/NetworkModal.vue";
+import MessageModal from "@/components/MessageModal.vue";
 // import GptSelector from "@/components/GptSelector.vue";
 
 export default {
@@ -29,14 +29,14 @@ export default {
   components: {
     // ChatLottie,
     ChatGptNetwork,
-    NetworkModal,
+    MessageModal,
     // GptSelector,
   },
   data() {
     return {
-      options: ["gpt-35-turbo", "gpt-3.5-turbo-16k", "gpt-4.0"],
+      options: ["gpt-4", "gpt-35-turbo"],
       selected: null, // Initialize with null
-      showModal: false,
+      showModal: true,
     };
   },
   methods: {
@@ -46,7 +46,7 @@ export default {
   },
   created() {
     this.selected = this.options[0]; // Set selected option after options are available
-    localStorage.getItem("keamail") ? true : (this.showModal = true);
+    // localStorage.getItem("keamail") ? true : (this.showModal = true);
   },
 };
 </script>
