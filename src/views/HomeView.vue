@@ -3,7 +3,7 @@
     <NetworkModal :show="showModal" @update:show="showModal = $event" />
     <!-- <h1>Gailab</h1> -->
     <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" class="headerLogo" />
-    <p class="last-updated"><em>Sidst opdateret 14/7-2023</em></p>
+    <p class="last-updated"><em>Sidst opdateret 14/8-2023</em></p>
 
     <h2>AI udviklingen på KEA - hvilken vej skal vi?</h2>
     <p>

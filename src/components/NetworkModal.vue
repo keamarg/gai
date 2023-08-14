@@ -17,11 +17,11 @@
         <div class="form-group">
           <!-- <label for="username" class="label">KEA mail</label> -->
           <input
-            type="text"
+            type="email"
             id="email"
             v-model="email"
             class="input-field"
-            pattern="[a-z0-9._%+-]+@kea\.dk"
+            pattern="^[a-zA-Z0-9._%+-]+@kea\.dk$"
             placeholder="Indtast din KEA mail"
           />
           <p v-if="email && !isValidEmail(email)" class="error-message">
@@ -30,25 +30,50 @@
         </div>
         <div class="radiobuttons">
           <p><b>Hvordan vurderer du din egen viden om generativ AI?:</b></p>
-          <input type="radio" id="Ekspert" name="viden" value="Ekspert" />
+          <input
+            type="radio"
+            id="Ekspert"
+            name="viden"
+            value="Ekspert"
+            required
+          />
           <label for="html">Ekspert</label><br />
-          <input type="radio" id="Bruger" name="viden" value="Bruger" />
+          <input
+            type="radio"
+            id="Bruger"
+            name="viden"
+            value="Bruger"
+            required
+          />
           <label for="Bruger">Bruger</label><br />
-          <input type="radio" id="Nybegynder" name="viden" value="Nybegynder" />
+          <input
+            type="radio"
+            id="Nybegynder"
+            name="viden"
+            value="Nybegynder"
+            required
+          />
           <label for="Nybegynder">Nybegynder</label>
         </div>
         <div class="radiobuttons">
           <p><b>Er du interesseret i et netværk om AI på KEA?:</b></p>
-          <input type="radio" id="deltage" name="deltagelse" value="deltage" />
+          <input
+            type="radio"
+            id="deltage"
+            name="deltagelse"
+            value="deltage"
+            required
+          />
           <label for="html">Vil gerne deltage</label><br />
           <input
             type="radio"
             id="informeres"
             name="deltagelse"
             value="informeres"
+            required
           />
           <label for="informeres">Vil gerne informeres</label><br />
-          <input type="radio" id="nej" name="deltagelse" value="nej" />
+          <input type="radio" id="nej" name="deltagelse" value="nej" required />
           <label for="nej">ikke interesseret</label>
         </div>
         <div class="form-group">
