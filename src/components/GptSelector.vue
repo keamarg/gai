@@ -47,6 +47,7 @@ select {
   background-color: #1877f2;
   color: white;
   display: flex;
-  padding: 8px; /* Adjust the margin as needed */
+  height: 2rem;
+  padding-left: 1rem;
 }
 </style>

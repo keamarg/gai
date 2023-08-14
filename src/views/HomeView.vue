@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <NetworkModal :show="showModal" @update:show="showModal = $event" />
-    <h1>Gailab</h1>
-    <p>Sidst opdateret 14/7-2023</p>
+    <!-- <h1>Gailab</h1> -->
+    <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" class="headerLogo" />
+    <p class="last-updated"><em>Sidst opdateret 14/7-2023</em></p>
 
     <h2>AI udviklingen på KEA - hvilken vej skal vi?</h2>
     <p>
@@ -133,6 +134,11 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
+.last-updated {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
 .container {
   /* width: 90vw;
   height: 90vh; */
