@@ -10,8 +10,6 @@
         meget gerne skabe et netværk af interesserede, så hvis du enten lægger
         inde med viden og kompetencer indenfor feltet, eller blot kunne tænke
         dig at vide mere, så udfyld venligst nedenstående formular.
-        Efterfølgende er der mulighed for en kort snak med en chatbot, der vil
-        spørge uddybende ind til dine svar.
       </p>
       <form @submit.prevent="saveAndClose">
         <div class="form-group">
