@@ -90,7 +90,7 @@ export default {
     return {
       userInput: "",
       loading: false,
-      options: ["Emne", "Generativ AI"],
+      options: ["Generel", "Generativ AI"],
       gptOptions: ["gpt-4", "gpt-35-turbo"],
       selected: null, // Initialize with null
       model: null,
@@ -104,7 +104,7 @@ export default {
   },
   computed: {
     getMessages() {
-      if (this.selected == "Emne") {
+      if (this.selected == "Generel") {
         return this.standardMessages;
       } else if (this.selected == "Generativ AI") {
         return this.gaiMessages;
