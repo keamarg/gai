@@ -10,7 +10,7 @@
         dig KEA’s udviklingsnetværk for G-AI! Med udviklingsnetværket vil vi
         gerne skabe et overblik over hvilken viden og ressourcer der allerede er
         på KEA vedr. Generativ AI og åbne en dialog på tværs af lag, afdelinger
-        og interesser om hvad vi kan og skal med G-AI, hvis du enten lægger inde
+        og interesser om hvad vi kan og skal med G-AI, hvis du enten ligger inde
         med viden og kompetencer indenfor feltet, eller blot kunne tænke dig at
         vide mere, så udfyld venligst nedenstående formular.
       </p>

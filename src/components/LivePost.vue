@@ -12,7 +12,7 @@
       Velkommen til GAI-LAB livebloggen! Her kan du dele refleksioner og ideer
       omkring G-AI i løbet af hele medarbejderdagen. Du kan stille spørgsmål
       omkring Generativ AI – generelt eller i forhold til KEA og hvis du kan
-      svaret til et spørgsmål, der er stille på Livbloggen, er du meget
+      svaret til et spørgsmål, der er stillet på Livbloggen, er du meget
       velkommen til at svare.
     </p>
     <!-- Add new post form -->

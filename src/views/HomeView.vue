@@ -16,26 +16,25 @@
       betragtninger om, bekymringer for og ideer til AI udviklingen for os her
       på KEA.
     </p>
-    <h3>På GAI-LAB kan du:</h3>
+    <h3>Hvad kan du på GAI-LAB?</h3>
 
     <router-link to="/survey" class="link"
       ><i class="bi bi-arrow-right"></i>
       <span class="link-text">
-        Deltage i vores survey om G-AI på KEA ved at chatte med vores chatbot
-        G-AI-A
+        Chat med vores nyudviklede survey-chatbot G-AI-A
       </span>
     </router-link>
     <router-link to="/liveblog" class="link">
       <i class="bi bi-arrow-right"></i>
       <span class="link-text">
-        Bidrage med ideer og erfaringer og refleksioner til G-AI på KEA på
+        Bidrag med ideer og erfaringer og refleksioner til G-AI på KEA på
         livebloggen
       </span>
     </router-link>
     <router-link to="/network" class="link"
       ><i class="bi bi-arrow-right"></i>
       <span class="link-text">
-        Tilmelde dig udviklingsnetværket for G-AI-brug og -bevidsthed på
+        Tilmeld dig udviklingsnetværket for G-AI-brug og -bevidsthed på
         KEA</span
       >
     </router-link>
