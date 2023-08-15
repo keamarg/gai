@@ -3,41 +3,72 @@
     <NetworkModal :show="showModal" @update:show="showModal = $event" />
     <!-- <h1>Gailab</h1> -->
     <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" class="headerLogo" />
-    <p class="last-updated"><em>Sidst opdateret 14/8-2023</em></p>
+    <!-- <p class="last-updated"><em>Sidst opdateret 17/8-2023</em></p> -->
 
-    <h2>AI udviklingen på KEA - hvilken vej skal vi?</h2>
+    <h2>Velkommen til GAI-LAB!</h2>
     <p>
-      Diskussionen om og afprøvningen af G-AI er allerede godt i gang på KEA,
-      men vi har behov for at få skabt en fælles dialog omkring hvad KEA vil og
-      skal med G-AI og hvad KEA i forlængelse heraf har behov for at vide.
-      Derfor vil vi gerne invitere alle medarbejder på KEA til at dele deres
-      betragtninger om, bekymringer for og ideer til AI udviklingen på KEA.
+      KEA’s online laboratorium om generativ artificial intelligence (GAI).<br /><br />
+      En portal for viden, ressourcer og spørgsmål om G-AI. GAI-LAB danner
+      rammer for fælles dialog om G-AI, så vi får et samlingssted for indsigt i
+      muligheder, men også begrænsninger med G-AI. Måske har du en erfaring, du
+      vil dele, eller du søger information om retningslinjer, nyeste viden eller
+      dygtige kolleger. Derfor inviterer GAI-LAB alle til at dele deres
+      betragtninger om, bekymringer for og ideer til AI udviklingen for os her
+      på KEA.
     </p>
-    <div class="links">
-      <router-link to="/survey">
-        <button class="askButton">Deltag i undersøgelse</button>
-      </router-link>
-      <router-link to="/liveblog">
-        <button class="askButton">Kommenter på Liveblog</button>
-      </router-link>
-    </div>
-    <div class="links">
-      <button class="askButton" @click="this.showModal = true">
-        Deltag i netværket
-      </button>
-      <router-link to="/chatgpt">
-        <button class="askButton">Prøv Chat-GPT4</button>
-      </router-link>
-    </div>
-    <img
-      src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg"
-    />
-    <h3>Hvilken viden har vi?</h3>
+    <h3>På GAI-LAB kan du:</h3>
+
+    <router-link to="/survey" class="link"
+      ><i class="bi bi-arrow-right"></i>
+      <span class="link-text">
+        Deltage i vores survey om G-AI på KEA ved at chatte med vores chatbot
+        G-AI-A
+      </span>
+    </router-link>
+    <router-link to="/liveblog" class="link">
+      <i class="bi bi-arrow-right"></i>
+      <span class="link-text">
+        Bidrage med ideer og erfaringer og refleksioner til G-AI på KEA på
+        livebloggen
+      </span>
+    </router-link>
+    <router-link to="/network" class="link"
+      ><i class="bi bi-arrow-right"></i>
+      <span class="link-text">
+        Tilmelde dig udviklingsnetværket for G-AI-brug og -bevidsthed på
+        KEA</span
+      >
+    </router-link>
+    <router-link to="/chatgpt" class="link"
+      ><i class="bi bi-arrow-right"></i>
+      <span class="link-text"> Prøv Chat-GPT4 uden at oprette en bruger </span>
+    </router-link>
     <p>
-      Hvad er Generativ AI og eksempler på værktøjer? Hvem står bag kendte
-      værktøjer? Hvordan virker det? Hvad er det ikke?
+      De perspektiver du eller din kollega bidrager med på GAI-LAB, er med til
+      at udvikle GAI-LAB til et online AI-ressourcecenter der kan styrke brugen
+      og bevidstheden om AI på KEA.
     </p>
-    <h3>Hvilke erfaringer har vi allerede gjort os?</h3>
+    <img src="@/assets/img/ai_frontpage2.jpeg" />
+    <h3>Aktuelle aktiviteter om G-AI på KEA</h3>
+    <ul>
+      <li>
+        Officielle retningslinjer for brug af G-AI Tilgængelig AI software og
+        vejledning i Tech og Story Lab
+      </li>
+      <li>
+        Pædagogiske og didaktiske perspektiver ved KEAs Teknologi Tænketank
+      </li>
+
+      <li>
+        Forskningsprojekt om erhvervslivets adoption af AI
+        programmerings-redskaber ved Benjamin Hughes
+      </li>
+      <li>Udvikling af et AI tilvalgsfag ved Mikkel Meldgaard</li>
+    </ul>
+    <p class="last-updated">
+      17.08.23 Martin Gundtoft, Sarah O’Neill, Forskning, Karriere og Relationer
+    </p>
+    <!-- <h3>Hvilke erfaringer har vi allerede gjort os?</h3>
     <p>
       Har du anvendt Generativ AI i dit arbejde? JA- Til hvad? Gode erfaringer?
       Problemer du er stødt på? Nej- Har du lyst JA- Har du ideer til hvilke af
@@ -112,7 +143,7 @@
     <p>
       Erhvervssamarbejder (Signe) Forskning- og udviklingssamarbejder
       Internationale og nationale institutionsamarbejder (Anne og ?)
-    </p>
+    </p> -->
   </div>
 </template>
 
@@ -138,6 +169,17 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+.link {
+  color: #1877f2;
+  margin-bottom: 0.5rem;
+}
+.link-text {
+  font-weight: 500;
+}
+.link:hover {
+  color: #145cb3;
+}
 
 .last-updated {
   font-size: 0.8rem;

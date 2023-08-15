@@ -10,12 +10,15 @@
       :label="'Select ChatGPT Version: '"
     /> -->
   </div>
+  <ChatGptModal :show="showModal" @update:show="showModal = $event">
+  </ChatGptModal>
 </template>
 
 <script>
 // @ is an alias to /src
 // import ChatLottie from "@/components/ChatLottie.vue";
 import ChatGpt from "@/components/ChatGpt.vue";
+import ChatGptModal from "@/components/ChatGptModal.vue";
 // import GptSelector from "@/components/GptSelector.vue";
 
 export default {
@@ -24,12 +27,13 @@ export default {
     // ChatLottie,
     ChatGpt,
     // GptSelector,
+    ChatGptModal,
   },
   data() {
     return {
       options: ["gpt-35-turbo", "gpt-4"],
       selected: null, // Initialize with null
-      showModal: false,
+      showModal: true,
     };
   },
   methods: {

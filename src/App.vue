@@ -36,4 +36,7 @@
   font-family: "Roboto", sans-serif;
   margin-bottom: 5rem;
 }
+#nav {
+  padding: 0.5rem;
+}
 </style>

@@ -3,22 +3,18 @@
     <!-- <div class="modal-overlay" @click="closeModal"></div> -->
     <div class="modal-content">
       <!-- <div class="close-button" @click="closeModal">&times;</div> -->
-      <h2>Undersøgelse om brug af generativ AI på KEA</h2>
+      <h2>Prøv ChatGPT4</h2>
       <p>
-        Vi er i "forskning karriere og relationer" i gang med at indsamle viden
-        om hvordan Generativ AI kan bruges i undervisningen. I den forbindelse
-        vil vi meget gerne høre om du har nogle erfaringer eller idéer. Måden
-        det foregår på er, at du kommmer til at tage en snak med en chatbot, der
-        er trænet i at spørge ind til netop dette emne. Hvis du har overvejelser
-        eller idéer som chatbotten ikke umiddelbart spørger ind til, skal du
-        bare dreje samtalen ind på det, så burde den være i stand til at følge
-        med. <b>Vær opmærksom på, at vi gemmer samtalen</b>, så vi forhåbentigt
-        kan få nogle gode idéer ud af det. Vi vil derfor gerne have dit
-        samtykke.
+        Velkommen til KEA’s egen GPT4-chatbot! <br /><br />Her kan du prøve at
+        chatte med ChatGPT4 uden at skulle oprette en bruger eller dele data med
+        OpenAI. I venstre hjørne kan du vælge om du vil chatte med den generelle
+        GPT4-chatbot eller om du vil chatte med en GPT4 version der er trænet
+        til at svare på spørgsmål om Generativ AI. Data fra samtalerne gemmes
+        ikke til træning. <br /><br />
       </p>
       <div class="buttonContainer">
         <button type="button" @click="closeModal" class="askButton">
-          Jeg er indforstået med at samtalen gemmes
+          Prøv ChatGPT4
         </button>
       </div>
     </div>

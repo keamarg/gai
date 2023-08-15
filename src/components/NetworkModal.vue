@@ -3,13 +3,16 @@
     <!-- <div class="modal-overlay" @click="closeModal"></div> -->
     <div class="modal-content">
       <div class="close-button" @click="closeModal">&times;</div>
-      <h2>Generativ AI på KEA</h2>
+      <h2>Udviklingsnetværket</h2>
       <p>
-        Vi er i "forskning karriere og relationer" i gang med at indsamle viden
-        om hvilke resurser vi har på KEA indenfor Generativ AI. Desuden vil vi
-        meget gerne skabe et netværk af interesserede, så hvis du enten lægger
-        inde med viden og kompetencer indenfor feltet, eller blot kunne tænke
-        dig at vide mere, så udfyld venligst nedenstående formular.
+        Har du erfaringer med eller viden om brugen af Generativ AI? Og er du
+        interesseret i hvilken rolle Generativ AI skal spille på KEA? Så tilmeld
+        dig KEA’s udviklingsnetværk for G-AI! Med udviklingsnetværket vil vi
+        gerne skabe et overblik over hvilken viden og ressourcer der allerede er
+        på KEA vedr. Generativ AI og åbne en dialog på tværs af lag, afdelinger
+        og interesser om hvad vi kan og skal med G-AI, hvis du enten lægger inde
+        med viden og kompetencer indenfor feltet, eller blot kunne tænke dig at
+        vide mere, så udfyld venligst nedenstående formular.
       </p>
       <form @submit.prevent="saveAndClose">
         <div class="form-group">
@@ -84,11 +87,11 @@
             v-model="deltagelse"
             required
           />
-          <label for="nej">ikke interesseret</label>
+          <label for="nej">Ikke interesseret</label>
         </div>
         <div class="form-group">
           <div class="buttonContainer">
-            <button type="submit" class="askButton">Save and Close</button>
+            <button type="submit" class="askButton">Send</button>
           </div>
         </div>
       </form>

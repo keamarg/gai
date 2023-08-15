@@ -3,10 +3,18 @@
     Henter liveblog...
     <ChatLottieWhite width="2rem" height="2rem" margin="1rem" />
   </div>
+
   <div v-else>
     <button @click="resetUser()" class="askButton newUserButton">
       Ny bruger
     </button>
+    <p class="text">
+      Velkommen til GAI-LAB livebloggen! Her kan du dele refleksioner og ideer
+      omkring G-AI i løbet af hele medarbejderdagen. Du kan stille spørgsmål
+      omkring Generativ AI – generelt eller i forhold til KEA og hvis du kan
+      svaret til et spørgsmål, der er stille på Livbloggen, er du meget
+      velkommen til at svare.
+    </p>
     <!-- Add new post form -->
     <form @submit.prevent="submitpost">
       <div class="blogHeader">

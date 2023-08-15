@@ -12,8 +12,8 @@
   </div>
   <div>
     <!-- <button @click="showModal = true">Open Modal</button> -->
-    <MessageModal :show="showModal" @update:show="showModal = $event">
-    </MessageModal>
+    <SurveyModal :show="showModal" @update:show="showModal = $event">
+    </SurveyModal>
   </div>
 </template>
 
@@ -21,7 +21,7 @@
 // @ is an alias to /src
 // import ChatLottie from "@/components/ChatLottie.vue";
 import ChatGptNetwork from "@/components/ChatGptNetwork.vue";
-import MessageModal from "@/components/MessageModal.vue";
+import SurveyModal from "@/components/SurveyModal.vue";
 // import GptSelector from "@/components/GptSelector.vue";
 
 export default {
@@ -29,7 +29,7 @@ export default {
   components: {
     // ChatLottie,
     ChatGptNetwork,
-    MessageModal,
+    SurveyModal,
     // GptSelector,
   },
   data() {
