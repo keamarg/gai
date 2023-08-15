@@ -51,13 +51,12 @@
     <img src="@/assets/img/ai_frontpage2.jpeg" />
     <h3>Aktuelle aktiviteter om G-AI på KEA</h3>
     <ul>
+      <li>Officielle retningslinjer for brug af G-AI</li>
       <li>
-        Officielle retningslinjer for brug af G-AI Tilgængelig AI software og
-        vejledning i Tech og Story Lab
+        Tilgængelige AI software og vejledning i Tech og Story Lab ved Frederick
+        Lehmann Rosling
       </li>
-      <li>
-        Pædagogiske og didaktiske perspektiver ved KEAs Teknologi Tænketank
-      </li>
+      <li>Videndeling med Dania om AI og eksamen ved Jonas Milo Plum</li>
 
       <li>
         Forskningsprojekt om erhvervslivets adoption af AI
