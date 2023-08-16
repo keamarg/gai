@@ -5,14 +5,14 @@
       <!-- <div class="close-button" @click="closeModal">&times;</div> -->
       <h2>Survey</h2>
       <p>
-        Velkommen til SurveyChatten med SurveyBotten G-AI-A! G-AI-A er en
-        Generativ AI chatbot, der indsamler viden om kompetencerne på KEA.
-        Igennem en 3-5 minutter lang chat vil G-AI-A spørge ind til dine
+        Velkommen til SurveyChatten! Her kan du chatte med vores SurveyBot GAIA,
+        som vi har udviklet til at indsamle viden om generativ AI på KEA.
+        Igennem en 3-5 minutter lang chat vil GAIA spørge ind til dine
         erfaringer, betragtninger og ideer omkring Generativ AI på KEA. Hvis du
-        ikke oplyser dit navn, er dine data er anonyme. Data bruges kun af KEA
-        og til at kvalificere, hvilke aktiviteter, der er relevante om G-AI på
-        KEA. <br /><br />Fortæl G-AI-A hvis du har et emne du gerne vil chatte
-        om, som du ikke er blevet spurgt til.
+        ikke oplyser dit navn, er samtalen anonym. Data bruges kun af KEA og til
+        at kvalificere, hvilke aktiviteter, der er relevante om G-AI på KEA.
+        <br /><br />Fortæl GAIA hvis du har et emne du gerne vil chatte om, som
+        du ikke er blevet spurgt til.
       </p>
       <div class="buttonContainer">
         <button type="button" @click="closeModal" class="askButton">
