@@ -50,7 +50,10 @@
     <img src="@/assets/img/ai_frontpage2.jpeg" />
     <h3>Aktuelle aktiviteter om G-AI på KEA</h3>
     <ul>
-      <li>Officielle retningslinjer for brug af G-AI</li>
+      <li>
+        Udvikling af officielle retningslinjer for brug af G-AI ved Louise
+        Kehler
+      </li>
       <li>
         Tilgængelige AI software og vejledning i Tech og Story Lab ved Frederick
         Lehmann Rosling
@@ -61,8 +64,16 @@
         Forskningsprojekt om erhvervslivets adoption af AI
         programmerings-redskaber ved Benjamin Hughes
       </li>
-      <li>Udvikling af et AI tilvalgsfag ved Mikkel Meldgaard</li>
+      <li>
+        <a href="@/assets/review.pdf" target="_blank">Review</a> om AI og risici
+        set fra et governance perspektiv ved Jesper Balslev
+      </li>
+      <li>AI-tilvalgsfag på Digital Konceptudvikling ved Mikkel Meldgaard</li>
     </ul>
+    <p>
+      Er der AI-aktiviteter på KEA vi ikke endnu ikke kender til? Så giv os
+      gerne besked på saro@kea.dk eller marg@kea.dk
+    </p>
     <p class="last-updated">
       17.08.23 Martin Gundtoft, Sarah O’Neill, Forskning, Karriere og Relationer
     </p>
