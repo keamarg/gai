@@ -7,7 +7,7 @@
 
     <h2>Velkommen til GAI-LAB!</h2>
     <p>
-      KEA’s online laboratorium om generativ artificial intelligence (GAI).<br /><br />
+      KEA’s online laboratorium om generative artificial intelligence (GAI).<br /><br />
       En portal for viden, ressourcer og spørgsmål om G-AI. GAI-LAB danner
       rammer for fælles dialog om G-AI, så vi får et samlingssted for indsigt i
       muligheder, men også begrænsninger med G-AI. Måske har du en erfaring, du
@@ -65,8 +65,10 @@
         programmerings-redskaber ved Benjamin Hughes
       </li>
       <li>
-        <a href="@/assets/review.pdf" target="_blank">Review</a> om AI og risici
-        set fra et governance perspektiv ved Jesper Balslev
+        <a href="http://projekter.kea.dk/assets/gai/review.pdf" target="_blank"
+          >Review</a
+        >
+        om AI og risici set fra et governance perspektiv ved Jesper Balslev
       </li>
       <li>AI-tilvalgsfag på Digital Konceptudvikling ved Mikkel Meldgaard</li>
     </ul>
