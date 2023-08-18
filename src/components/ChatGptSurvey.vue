@@ -256,7 +256,7 @@ export default {
         });
         const data = await response.json();
         // console.log(data);
-        console.log(data);
+        // console.log(data);
         if (format === "json") {
           // Convert the data to a nicely formatted JSON string
           const dataAsString = JSON.stringify(data, null, 2);

@@ -65,12 +65,12 @@ export default {
     },
     saveAndClose() {
       if (this.validationFulfilled) {
-        console.log("validation fulfilled");
+        // console.log("validation fulfilled");
         useUserStore().setUsername(this.username);
         //useUserStore().setKeaId(this.keaId);
         this.closeModal();
       } else {
-        console.log("validation failed");
+        // console.log("validation failed");
         this.showNameError = this.username === "";
         //this.showKeaIdError = this.keaId === "";
       }

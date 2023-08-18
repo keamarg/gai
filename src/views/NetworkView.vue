@@ -17,7 +17,6 @@ export default {
   methods: {
     handleModalUpdate(newValue) {
       if (!newValue) {
-        console.log("pushing");
         // Modal has been closed
         this.$router.push("/"); // Change this to the route you want to navigate to
       }

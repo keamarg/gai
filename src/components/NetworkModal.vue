@@ -119,21 +119,21 @@ export default {
   methods: {
     isValidEmail(email) {
       const emailPattern = /[a-z0-9._%+-]+@kea\.dk/;
-      console.log(emailPattern.test(email));
+      // console.log(emailPattern.test(email));
       return emailPattern.test(email);
     },
     closeModal() {
-      console.log("close modal");
+      // console.log("close modal");
       this.$emit("update:show", false);
     },
     saveAndClose() {
       if (this.isValidEmail(this.email)) {
-        console.log("validation fulfilled");
+        // console.log("validation fulfilled");
         useUserStore().setKeamail(this.email);
         this.submitComment(this.email, this.viden, this.deltagelse);
         this.closeModal();
       } else {
-        console.log("validation failed");
+        // console.log("validation failed");
       }
     },
     async submitComment(email, viden, deltagelse) {
@@ -143,7 +143,7 @@ export default {
           viden: viden,
           deltagelse: deltagelse,
         };
-        console.log(postData);
+        // console.log(postData);
         const response = await fetch(this.apiUrl_POSTSDB, {
           method: "POST",
           headers: {
