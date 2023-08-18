@@ -21,14 +21,8 @@
     <router-link to="/survey" class="link"
       ><i class="bi bi-arrow-right"></i>
       <span class="link-text">
-        Chat med vores nyudviklede survey-chatbot G-AI-A
-      </span>
-    </router-link>
-    <router-link to="/liveblog" class="link">
-      <i class="bi bi-arrow-right"></i>
-      <span class="link-text">
-        Bidrag med ideer og erfaringer og refleksioner til G-AI på KEA på
-        livebloggen
+        Chat med vores nyudviklede survey-chatbot GAIA om dine erfaringer med
+        generativ AI
       </span>
     </router-link>
     <router-link to="/network" class="link"
@@ -37,6 +31,13 @@
         Tilmeld dig udviklingsnetværket for G-AI-brug og -bevidsthed på
         KEA</span
       >
+    </router-link>
+    <router-link to="/liveblog" class="link">
+      <i class="bi bi-arrow-right"></i>
+      <span class="link-text">
+        Bidrag med ideer og erfaringer og refleksioner til G-AI på KEA på Q&A
+        bloggen
+      </span>
     </router-link>
     <router-link to="/chatgpt" class="link"
       ><i class="bi bi-arrow-right"></i>

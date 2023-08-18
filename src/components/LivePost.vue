@@ -9,16 +9,15 @@
       Ny bruger
     </button>
     <p class="text">
-      Velkommen til GAI-LAB livebloggen! Her kan du dele refleksioner og ideer
-      omkring G-AI i løbet af hele medarbejderdagen. Du kan stille spørgsmål
-      omkring Generativ AI – generelt eller i forhold til KEA og hvis du kan
-      svaret til et spørgsmål, der er stillet på Livbloggen, er du meget
-      velkommen til at svare.
+      Velkommen til GAI-LAB Q&A bloggen! Her kan du dele refleksioner og ideer
+      omkring G-AI. Du kan stille spørgsmål omkring Generativ AI – generelt
+      eller i forhold til KEA og hvis du kan svaret til et spørgsmål, der er
+      stillet på bloggen, er du meget velkommen til at svare.
     </p>
     <!-- Add new post form -->
     <form @submit.prevent="submitpost">
       <div class="blogHeader">
-        <h2 class="text">Live blog...</h2>
+        <h2 class="text">Q&A blog...</h2>
       </div>
       <!-- <input v-model="newpost.username" type="text" placeholder="Dit navn" /> -->
       <div v-if="sendingPost">

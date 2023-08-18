@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <ChatLottie width="90vw" height="90vw" /> -->
-    <ChatGptNetwork :model="selected" />
+    <ChatGptSurvey :model="selected" :blockGpt="showModal" />
     <!-- <h1>Velkommen til G-AI på KEA</h1> -->
     <!-- <GptSelector
       @option-selected="handleOptionSelected"
@@ -20,7 +20,7 @@
 <script>
 // @ is an alias to /src
 // import ChatLottie from "@/components/ChatLottie.vue";
-import ChatGptNetwork from "@/components/ChatGptNetwork.vue";
+import ChatGptSurvey from "@/components/ChatGptSurvey.vue";
 import SurveyModal from "@/components/SurveyModal.vue";
 // import GptSelector from "@/components/GptSelector.vue";
 
@@ -28,7 +28,7 @@ export default {
   name: "SurveyView",
   components: {
     // ChatLottie,
-    ChatGptNetwork,
+    ChatGptSurvey,
     SurveyModal,
     // GptSelector,
   },

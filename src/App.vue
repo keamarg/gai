@@ -5,8 +5,9 @@
         <router-link to="/">
           <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" width="60" />
         </router-link>
-        <router-link to="/survey">Survey</router-link>
-        <router-link to="/liveblog">Liveblog</router-link>
+        <router-link to="/survey">Deltag i survey</router-link>
+        <router-link to="/network">Tilmeld netværk</router-link>
+        <router-link to="/liveblog">Q&A blog</router-link>
         <!-- <router-link
           :to="{
             name: 'DynamicNetwork',
@@ -14,9 +15,8 @@
           }"
           >Netværk</router-link
         > -->
-        <router-link to="/network">Netværk</router-link>
 
-        <router-link to="/chatgpt">GPT4</router-link>
+        <router-link to="/chatgpt">Prøv GPT4</router-link>
       </div>
     </nav>
     <!-- <div class="wave"></div>

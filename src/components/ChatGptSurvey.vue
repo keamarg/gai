@@ -1,9 +1,12 @@
 <template>
   <!-- <div class="chatbox-container"> -->
   <div class="container">
-    <div class="kealogo">
+    <div class="botlogo">
       <!-- <img src="../assets/img/KEA_logo_DK_Web_gai.jpg" /> -->
       <ChatLottie width="5rem" height="5rem" margin="" />
+    </div>
+    <div class="welcometext">
+      <p>Del dine erfaringer omkring Generativ AI!</p>
     </div>
     <div class="messageBox mt-8" ref="messageBox">
       <template v-for="(message, index) in messages" :key="index">
@@ -98,6 +101,9 @@ export default {
     model: {
       type: String,
       default: "gpt-3.5-turbo",
+    },
+    blockGpt: {
+      type: Boolean,
     },
   },
   data() {
@@ -467,10 +473,14 @@ export default {
       this.sendMessage("", 3);
     },
   },
+  watch: {
+    blockGpt() {
+      this.sendMessage("", 3);
+    },
+  },
 
   mounted() {
     this.generateUniqueID();
-    this.sendMessage("", 3);
   },
   updated() {
     this.scrollToBottom();
@@ -649,13 +659,28 @@ GptSelector {
     border-radius: 0;
   }
 } */
-.kealogo {
+.botlogo {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0 0 0;
 }
-.kealogo img {
+.botlogo img {
   height: 5rem;
+}
+.welcometext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcometext p {
+  font-size: 18px; /* Adjust the font size as needed */
+  font-weight: bold;
+  font-family: "Roboto", sans-serif; /* Use your preferred font family */
+  color: #1e90ff; /* Use your preferred color */
+  text-transform: uppercase; /* Convert text to uppercase */
+  padding: 0 1rem 0 1rem;
+  text-align: center;
 }
 </style>

@@ -1,12 +1,15 @@
 <template>
   <div class="post">
     <div class="gptBar">
-      <div class="username">
-        {{ post.username }} ({{ this.getTime(post.created_at) }})
+      <div>
+        <div class="username">
+          {{ post.username }} ({{ this.getTime(post.created_at) }})
+        </div>
+        <div class="content" v-linkify v-html="post.content"></div>
       </div>
+
       <!-- <button type="submit" class="askButton gptButton">Spørg ChatGPT</button> -->
     </div>
-    <div class="content">{{ post.content }}</div>
     <!-- Display comments -->
     <div v-if="post.comments && post.comments.length > 0">
       <CommentComponent
@@ -44,7 +47,6 @@
 import CommentComponent from "./CommentComponent.vue";
 import { useUserStore } from "@/store";
 import ChatLottie from "@/components/ChatLottie.vue";
-
 export default {
   components: {
     CommentComponent,
@@ -137,6 +139,7 @@ export default {
 .username {
   font-size: 1.2rem;
   font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 .content {
   margin-bottom: 1rem;
@@ -177,11 +180,13 @@ export default {
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+  margin-top: 1rem;
 }
 .gptBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* margin: 2rem; */
 }
 .gptButton {
   color: #f9f5f5;
