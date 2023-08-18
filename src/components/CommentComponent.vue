@@ -43,7 +43,7 @@ export default {
   line-height: 1.4rem;
 }
 /* Default link styles */
-content a {
+.content a {
   text-decoration: underline;
   font-weight: 100;
   color: blue;
