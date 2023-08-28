@@ -90,7 +90,7 @@ export default {
     return {
       userInput: "",
       loading: false,
-      options: ["Generel", "Generativ AI"],
+      options: ["Generel", "Generativ AI", "Tutor"],
       gptOptions: ["gpt-4", "gpt-35-turbo"],
       selected: null, // Initialize with null
       model: null,
@@ -98,6 +98,7 @@ export default {
       messages: [],
       standardMessages: messages.standardMessages,
       gaiMessages: messages.gaiMessages,
+      tutorMessages: messages.tutorMessages,
       apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
       apiUrl_CHATDB: process.env.VUE_APP_APIURL_CHATDB,
     };
@@ -108,6 +109,8 @@ export default {
         return this.standardMessages;
       } else if (this.selected == "Generativ AI") {
         return this.gaiMessages;
+      } else if (this.selected == "Tutor") {
+        return this.tutorMessages;
       }
       return this.messages;
     },
@@ -172,7 +175,8 @@ export default {
                           }, //First question/message for the model to actually respond to
                     ],
                   }
-                : {
+                : this.selected == this.options[1]
+                ? {
                     engine: this.model,
                     temperature: 1,
                     max_tokens: 800,
@@ -182,6 +186,26 @@ export default {
                     stop: null,
                     messages: [
                       ...this.gaiMessages,
+
+                      message !== undefined && message !== ""
+                        ? { role: "user", content: message }
+                        : {
+                            role: "user",
+                            content:
+                              "Giv en velkomst som om samtalen lige er startet",
+                          }, //First question/message for the model to actually respond to
+                    ],
+                  }
+                : {
+                    engine: this.model,
+                    temperature: 1,
+                    max_tokens: 800,
+                    top_p: 0.95,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                    stop: null,
+                    messages: [
+                      ...this.tutorMessages,
 
                       message !== undefined && message !== ""
                         ? { role: "user", content: message }

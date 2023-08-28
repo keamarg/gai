@@ -142,7 +142,7 @@ export default {
           }
 
           const data = await response.json();
-          console.log(data);
+          // console.log(data);
 
           // Sort the fetched posts by the created_at timestamp in descending order
           this.posts = data.sort(
