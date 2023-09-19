@@ -1,7 +1,8 @@
 <template>
   <!-- <div class="chatbox-container"> -->
+
   <div class="container">
-    <div class="kealogo">
+    <div class="kealogo" style="">
       <!-- <img src="../assets/img/KEA_logo_DK_Web_gai.jpg" /> -->
       <ChatLottie width="5rem" height="5rem" margin="" />
     </div>
@@ -21,7 +22,33 @@
                 : 'chatGptMessageContent'
             "
           >
-            {{ message.content }}
+            <!-- Version hvis man vil have lidt margen til overskriften (gråspurve med kanoner?)
+               <template
+              v-for="(part, partIndex) in splitContent(message.content)"
+              :key="`part-${partIndex}`"
+              ><span
+                v-if="isCode(partIndex)"
+                :class="{
+                  code: isCode(partIndex),
+                }"
+              >
+                <span class="programming-language"
+                  >{{ part.split("\n")[0] }} </span
+                ><span>{{ part.substring(part.indexOf("\n")) }}</span>
+              </span>
+              <span v-else>{{ part }}</span>
+            </template> -->
+            <template
+              v-for="(part, partIndex) in splitContent(message.content)"
+              :key="`part-${partIndex}`"
+            >
+              <span
+                :class="{
+                  code: isCode(partIndex),
+                }"
+                >{{ part }}</span
+              >
+            </template>
           </div>
         </div>
       </template>
@@ -116,6 +143,12 @@ export default {
     },
   },
   methods: {
+    splitContent(content) {
+      return content.split("```");
+    },
+    isCode(index) {
+      return index % 2 !== 0;
+    },
     newConversation() {
       if (!this.loading) {
         this.messages = [];
@@ -235,6 +268,7 @@ export default {
           // if (this.selected == this.options[1]) {
           //   this.postData("chatbot", newMessage);
           // }
+          console.log(data);
           return; // Success, exit the loop
         } catch (error) {
           console.error(error);
@@ -298,6 +332,21 @@ export default {
   height: 100vh;
   font-family: "Roboto", sans-serif;
 } */
+
+.code {
+  background-color: black;
+  color: white;
+  display: block;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.code::first-line {
+  color: green;
+}
+/* .programming-language {
+  display: block;
+  margin-bottom: 1rem;
+} */
 .dropDownSelect {
   background-color: #1877f2;
   color: white;
@@ -348,6 +397,7 @@ h1 {
 .chatGptMessageWrapper {
   display: flex;
   margin-bottom: 0.5rem;
+  white-space: pre-wrap;
 }
 
 .userMessageWrapper {
