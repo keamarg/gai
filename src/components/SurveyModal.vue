@@ -34,7 +34,7 @@ export default {
   computed: {},
   methods: {
     closeModal() {
-      console.log("emit");
+      // console.log("emit");
       this.$emit("update:show", false);
     },
   },

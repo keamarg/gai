@@ -2,11 +2,45 @@
   <!-- <div class="chatbox-container"> -->
 
   <div class="container">
-    <div class="kealogo" style="">
-      <!-- <img src="../assets/img/KEA_logo_DK_Web_gai.jpg" /> -->
-      <ChatLottie width="5rem" height="5rem" margin="" />
+    <div class="kealogo">
+      <div class="center-logo">
+        <ChatLottie width="5rem" height="5rem" margin="" />
+      </div>
+      <div class="dropdown-wrapper">
+        <button @click.stop="showMenu = !showMenu" class="askButton">
+          <i v-if="!showMenu" class="bi bi-list"></i>
+          <i v-else class="bi bi-x-lg"></i>
+        </button>
+        <transition name="fade">
+          <div
+            v-bind:class="{ dropdown: true, show: showMenu }"
+            v-show="showMenu"
+          >
+            <span v-if="localStorageData.length > 0">
+              <p
+                @click="deleteLocalStorage"
+                style="text-decoration: underline; color: red"
+              >
+                Slet alle
+              </p>
+              <p
+                v-for="(item, index) in localStorageData"
+                :key="index"
+                @click="createSessionData(index)"
+              >
+                {{ getSessionDate(item) }}
+              </p>
+            </span>
+            <span v-else><p>Ingen gemt</p></span>
+          </div>
+        </transition>
+      </div>
     </div>
     <div class="messageBox mt-8" ref="messageBox">
+      <span class="chatGptMessageContent chatGptMessageWrapper">{{
+        introMessage[0].content
+      }}</span>
+
       <template v-for="(message, index) in messages" :key="index">
         <div
           :class="
@@ -38,6 +72,7 @@
               </span>
               <span v-else>{{ part }}</span>
             </template> -->
+
             <template
               v-for="(part, partIndex) in splitContent(message.content)"
               :key="`part-${partIndex}`"
@@ -79,12 +114,24 @@
         :selected="selected"
         :label="label"
       />
+      <div class="slidecontainer large-screen">
+        <i style="font-size: 1.5rem" class="bi bi-thermometer-half"></i>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          v-model="temperature"
+          :disabled="!sliderActive"
+        />
+        <p style="width: 1rem">{{ temperature / 100 }}</p>
+      </div>
       <GptSelector
         @option-selected="handleGptOptionSelected"
         :options="gptOptions"
         :selected="model"
         :label="label"
       />
+
       <button
         @click="newConversation()"
         :class="{
@@ -95,14 +142,26 @@
         <i class="bi bi-arrow-clockwise"></i>
       </button>
     </div>
+    <div class="slidecontainer small-screen">
+      <i style="font-size: 1.5rem" class="bi bi-thermometer-half"></i>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        v-model="temperature"
+        :disabled="!sliderActive"
+      />
+      <p style="width: 1rem">{{ temperature / 100 }}</p>
+    </div>
   </div>
   <!-- </div> -->
 </template>
 
 <script>
-import messages from "@/data/messages.json";
+import systemMessages from "@/data/messages.json";
 import ChatLottie from "./ChatLottie.vue";
 import GptSelector from "./GptSelector.vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "ChatGpt",
@@ -115,22 +174,32 @@ export default {
   },
   data() {
     return {
+      localStorageData: [], //needed for the dropdown to keep it reactive
+      sliderActive: true,
+      sessionId: "",
       userInput: "",
       loading: false,
+      showMenu: false,
       options: ["Generel", "Generativ AI", "Tutor"],
       gptOptions: ["gpt-4", "gpt-35-turbo"],
       selected: null, // Initialize with null
       model: null,
+      temperature: 50,
       label: "",
       messages: [],
-      standardMessages: messages.standardMessages,
-      gaiMessages: messages.gaiMessages,
-      tutorMessages: messages.tutorMessages,
+      standardMessages: systemMessages.standardMessages,
+      gaiMessages: systemMessages.gaiMessages,
+      tutorMessages: systemMessages.tutorMessages,
+      introMessage: systemMessages.introMessage,
       apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
       apiUrl_CHATDB: process.env.VUE_APP_APIURL_CHATDB,
     };
   },
   computed: {
+    // getLocalStorage() {
+    //   // console.log(JSON.parse(localStorage.getItem("conversations")));
+    //   return JSON.parse(localStorage.getItem("conversations"));
+    // },
     getMessages() {
       if (this.selected == "Generel") {
         return this.standardMessages;
@@ -143,6 +212,51 @@ export default {
     },
   },
   methods: {
+    getDateString() {
+      let date = new Date();
+      let dateString =
+        ("0" + date.getDate()).slice(-2) +
+        "/" +
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        "/" +
+        date.getFullYear() +
+        " " +
+        ("0" + date.getHours()).slice(-2) +
+        ":" +
+        ("0" + date.getMinutes()).slice(-2);
+      return dateString.toString();
+    },
+    updateLocalStorageData() {
+      // console.log(JSON.parse(localStorage.getItem("conversations")));
+      this.localStorageData = JSON.parse(localStorage.getItem("conversations"));
+    },
+    deleteLocalStorage() {
+      localStorage.setItem("conversations", JSON.stringify([]));
+      this.updateLocalStorageData();
+    },
+    getSessionDate(item) {
+      return Object.keys(item)[0].split("_").pop();
+    },
+    createSessionData(index) {
+      let conversations = this.localStorageData[index];
+      for (let key in conversations) {
+        if (Array.isArray(conversations[key])) {
+          this.messages = [...conversations[key]];
+          if (this.selected == "Generel") {
+            this.standardMessages = [
+              ...this.standardMessages,
+              ...conversations[key],
+            ];
+          } else if (this.selected == "Generativ AI") {
+            this.gaiMessages = [...this.gaiMessages, ...conversations[key]];
+          } else if (this.selected == "Tutor") {
+            this.tutorMessages = [...this.tutorMessages, ...conversations[key]];
+          }
+          break;
+        }
+      }
+      // return this.messages;
+    },
     splitContent(content) {
       return content.split("```");
     },
@@ -151,8 +265,20 @@ export default {
     },
     newConversation() {
       if (!this.loading) {
+        this.updateLocalStorageData();
         this.messages = [];
-        this.sendMessage(this.message, 3);
+        this.sliderActive = true;
+        this.standardMessages = JSON.parse(
+          JSON.stringify(systemMessages.standardMessages)
+        );
+        this.gaiMessages = JSON.parse(
+          JSON.stringify(systemMessages.gaiMessages)
+        );
+        this.tutorMessages = JSON.parse(
+          JSON.stringify(systemMessages.tutorMessages)
+        );
+        // this.sendMessage(this.message, 3);
+        this.sessionId = uuidv4();
       }
     },
     async userMessage(message) {
@@ -173,11 +299,39 @@ export default {
         // }
 
         await this.sendMessage(message, 3); // No retries here
+
+        // Hent samtale-arrayet, eller opret et tomt array hvis det ikke eksisterer.
+        let conversations =
+          JSON.parse(localStorage.getItem("conversations")) || [];
+
+        // Opret et objekt for denne samtale.
+        let session = {};
+        session["session_" + this.sessionId + "_" + this.getDateString()] =
+          this.messages;
+
+        // Tjek om samtalen allerede eksisterer i samtale-arrayet.
+        let existingSessionIndex = conversations.findIndex((conversation) =>
+          Object.keys(conversation)[0].includes("session_" + this.sessionId)
+        );
+
+        if (existingSessionIndex !== -1) {
+          // Hvis samtalen eksisterer, opdater den.
+          conversations[existingSessionIndex] = session;
+        } else {
+          // Hvis samtalen ikke eksisterer, tilføj den til samtale-arrayet.
+          conversations.push(session);
+        }
+
+        // Gem samtale-arrayet tilbage i localStorage.
+        localStorage.setItem("conversations", JSON.stringify(conversations));
+
+        this.updateLocalStorageData();
       }
     },
     async sendMessage(message, maxRetries) {
       // console.log(this.apiUrl);
       // const apiUrl = process.env.VUE_APP_APIURL;
+      this.sliderActive = false;
       while (maxRetries >= 0) {
         try {
           this.loading = true; // Show the loading animation
@@ -191,7 +345,7 @@ export default {
               this.selected == this.options[0]
                 ? {
                     engine: this.model, //"gpt-35-turbo",
-                    temperature: 1,
+                    temperature: this.temperature / 100,
                     max_tokens: 800,
                     top_p: 0.95,
                     frequency_penalty: 0,
@@ -211,7 +365,7 @@ export default {
                 : this.selected == this.options[1]
                 ? {
                     engine: this.model,
-                    temperature: 1,
+                    temperature: this.temperature / 100,
                     max_tokens: 800,
                     top_p: 0.95,
                     frequency_penalty: 0,
@@ -231,7 +385,7 @@ export default {
                   }
                 : {
                     engine: this.model,
-                    temperature: 1,
+                    temperature: this.temperature / 100,
                     max_tokens: 800,
                     top_p: 0.95,
                     frequency_penalty: 0,
@@ -268,7 +422,7 @@ export default {
           // if (this.selected == this.options[1]) {
           //   this.postData("chatbot", newMessage);
           // }
-          console.log(data);
+          // console.log(data);
           return; // Success, exit the loop
         } catch (error) {
           console.error(error);
@@ -299,16 +453,26 @@ export default {
         await new Promise((resolve) => setTimeout(resolve, 100)); // Wait for 100ms before checking again
       }
       //generisk messages så few-shot og system beskeder ikke bliver vist i chat
-      this.messages = [];
-      this.sendMessage("", 3);
+      // this.messages = [];
+      // this.sendMessage("", 3);
+      this.newConversation();
     },
     async handleGptOptionSelected(model) {
       this.model = model;
     },
   },
-
   mounted() {
-    this.sendMessage("", 3);
+    this.newConversation();
+    const self = this;
+    this.handleClickOutside = function (event) {
+      if (!self.$el.contains(event.target)) {
+        self.showMenu = false;
+      }
+    };
+    document.addEventListener("click", this.handleClickOutside);
+  },
+  unmounted() {
+    document.removeEventListener("click", this.handleClickOutside);
   },
   updated() {
     this.scrollToBottom();
@@ -462,6 +626,7 @@ h1 {
   border-radius: 1.5rem;
   transition: background-color 0.3s ease-in-out;
   min-width: 4.5rem;
+  position: relative;
 }
 
 /* Specific styles for the loadingButton class */
@@ -487,13 +652,86 @@ GptSelector {
   padding: 8px; /* Adjust the margin as needed */
   align-items: center;
 }
+.slidecontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .kealogo {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 8px;
 }
+
 .kealogo img {
   height: 5rem;
+}
+
+.kealogo button {
+  order: 3;
+}
+
+.center-logo {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.kealogo .dropdown {
+  order: 2;
+  flex-grow: 1;
+}
+.dropdown-wrapper {
+  position: relative;
+}
+.dropdown {
+  position: absolute;
+  /* transform: translateX(-50%); */
+  /* left: -10; */
+  transition: opacity 0.5s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin-top: 0.5rem;
+  width: 4.5rem;
+  padding: 0rem 0.5rem;
+  border-radius: 1rem;
+  z-index: 2;
+  cursor: pointer;
+  max-height: 20rem;
+  overflow: scroll;
+}
+.dropdown p {
+  display: block;
+  color: #cdcdcd;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 1rem;
+  font-size: 0.6rem;
+}
+.dropdown p:hover {
+  color: #ffffff;
+}
+.dropdown.show {
+  opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .small-screen {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .large-screen {
+    display: none;
+  }
 }
 </style>

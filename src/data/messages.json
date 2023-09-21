@@ -1,4 +1,10 @@
 {
+  "introMessage": [
+    {
+      "role": "hardcoded",
+      "content": "Velkommen til KEA chatGPT! Vælg mellem forskellige chatGPT udgaver og unikke personaer i nederste bjælke. Juster 'temperaturen' med slideren for at styre chatbottens præcision og kreativitet - denne indstilling låses, når en samtale starter. I øverste højre hjørne er en menu med dine tidligere samtaler, gemt lokalt i din browser. Brug genstart-knappen i nederste højre hjørne for at starte en ny samtale. God fornøjelse!"
+    }
+  ],
   "standardMessages": [
     {
       "role": "system",

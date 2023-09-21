@@ -7,6 +7,7 @@ import Vue3linkify from "vue-3-linkify";
 import "vue3-lottie/dist/style.css";
 import "./assets/css/global.css";
 import { createPinia } from "pinia"; // Import createPinia from Pinia
+
 const pinia = createPinia();
 
 createApp(App)

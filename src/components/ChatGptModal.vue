@@ -7,10 +7,7 @@
       <p>
         Velkommen til KEA’s egen GPT4-chatbot! <br /><br />Her kan du prøve at
         chatte med ChatGPT4 uden at skulle oprette en bruger eller dele data med
-        OpenAI. I venstre hjørne kan du vælge om du vil chatte med den generelle
-        GPT4-chatbot eller om du vil chatte med en GPT4 version der er trænet
-        til at svare på spørgsmål om Generativ AI. Data fra samtalerne gemmes
-        ikke til træning. <br /><br />
+        OpenAI. Data fra samtalerne gemmes ikke til træning. <br /><br />
       </p>
       <div class="buttonContainer">
         <button type="button" @click="closeModal" class="askButton">
@@ -32,7 +29,7 @@ export default {
   computed: {},
   methods: {
     closeModal() {
-      console.log("emit");
+      // console.log("emit");
       this.$emit("update:show", false);
     },
   },
