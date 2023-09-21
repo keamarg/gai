@@ -16,7 +16,13 @@
             v-bind:class="{ dropdown: true, show: showMenu }"
             v-show="showMenu"
           >
-            <span v-if="localStorageData.length > 0">
+            <span
+              v-if="
+                localStorageData &&
+                Array.isArray(localStorageData) &&
+                localStorageData.length > 0
+              "
+            >
               <p
                 @click="deleteLocalStorage"
                 style="text-decoration: underline; color: red"
