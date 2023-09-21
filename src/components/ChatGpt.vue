@@ -472,12 +472,12 @@ export default {
     const self = this;
     this.handleClickOutside = function (event) {
       console.log("ping");
-      console.log("self.$el");
-      console.log("event.target");
+      console.log(self.$el);
+      console.log(event.target);
       if (!self.$el.contains(event.target)) {
         console.log("ping inside");
-        console.log("self.$el");
-        console.log("event.target");
+        console.log(self.$el);
+        console.log(event.target);
 
         self.showMenu = false;
       }
