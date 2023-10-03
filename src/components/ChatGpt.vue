@@ -125,7 +125,7 @@
         <input
           type="range"
           min="0"
-          max="100"
+          max="200"
           v-model="temperature"
           :disabled="!sliderActive"
         />
@@ -153,7 +153,7 @@
       <input
         type="range"
         min="0"
-        max="100"
+        max="200"
         v-model="temperature"
         :disabled="!sliderActive"
       />
@@ -190,7 +190,7 @@ export default {
       gptOptions: ["gpt-4", "gpt-35-turbo"],
       selected: null, // Initialize with null
       model: null,
-      temperature: 50,
+      temperature: 100,
       label: "",
       messages: [],
       standardMessages: systemMessages.standardMessages,
