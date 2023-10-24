@@ -10,8 +10,10 @@
       "State of AI" - en årlig tilstandsrapport der de sidste seks år har
       kortlagt og vurderet feltet inden for kunstig intelligens, er netop
       udkommet for 2023. G-AI LAB er dykket ned i rapporten og har her lavet et
-      kort overblik over dens mest interessante emner og tendenser:
+      kort overblik over dens mest interessante emner og tendenser.
     </p>
+    <img src="@/assets/img/hal.jpeg" class="newsImg" />
+
     <ol>
       <li>
         <strong>Hvordan GPT-4 dominerer AI-landskabet.</strong>OpenAI's GPT-4
@@ -140,5 +142,9 @@ a:visited {
 }
 a:hover {
   color: darkgray;
+}
+.newsImg {
+  width: 50%;
+  padding: 1rem;
 }
 </style>
