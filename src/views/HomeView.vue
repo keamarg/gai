@@ -18,6 +18,12 @@
     </p>
     <h3>Hvad kan du på GAI-LAB?</h3>
 
+    <router-link to="/nyheder" class="link"
+      ><i class="bi bi-arrow-right"></i>
+      <span class="link-text">
+        Læs om de nyeste tendenser indenfor generativ AI.
+      </span>
+    </router-link>
     <router-link to="/survey" class="link"
       ><i class="bi bi-arrow-right"></i>
       <span class="link-text">

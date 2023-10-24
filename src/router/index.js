@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import SurveyView from "../views/SurveyView.vue";
 import ChatGptView from "../views/ChatGptView.vue";
 import NetworkView from "../views/NetworkView.vue";
+import NewsView from "../views/NewsView.vue";
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: "/chatgpt",
     name: "chatgpt",
     component: ChatGptView,
+  },
+  {
+    path: "/nyheder",
+    name: "nyheder",
+    component: NewsView,
   },
   {
     path: "/liveblog",
