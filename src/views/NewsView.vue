@@ -12,7 +12,15 @@
       udkommet for 2023. G-AI LAB er dykket ned i rapporten og har her lavet et
       kort overblik over dens mest interessante emner og tendenser.
     </p>
-    <img src="@/assets/img/hal.jpeg" class="newsImg" />
+    <div class="imgDiv">
+      <a href="https://www.stateof.ai">
+        <img
+          src="@/assets/img/hal.jpeg"
+          class="newsImg"
+          alt="https://www.stateof.ai"
+        />
+      </a>
+    </div>
 
     <ol>
       <li>
@@ -143,8 +151,21 @@ a:visited {
 a:hover {
   color: darkgray;
 }
-.newsImg {
-  width: 50%;
-  padding: 1rem;
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .newsImg {
+    padding: 1rem;
+    width: 50%;
+  }
+  .imgDiv {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .newsImg {
+    width: 100%;
+    padding: 1rem;
+  }
 }
 </style>
