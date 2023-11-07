@@ -25,16 +25,20 @@
           kunstig intelligens. Det nye tiltag skal beskytte forbrugere og
           arbejdstagere og samtidig styrke USA’s konkurrenceevne på området.
         </p>
-        <a
-          href="https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/"
-          target="_blank"
-          >Læs dekretet her
-        </a>
-        <a
-          href="https://www.computerworld.dk/art/284890/usa-indfoerer-omfattende-lov-om-kunstig-intelligens-nyt-dekret-skal-regulere-disse-otte-omraader"
-          target="_blank"
-          >Kort sammenfatning fra Computerworld
-        </a>
+        <div>
+          <a
+            href="https://www.whitehouse.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/"
+            target="_blank"
+            >Læs dekretet her
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.computerworld.dk/art/284890/usa-indfoerer-omfattende-lov-om-kunstig-intelligens-nyt-dekret-skal-regulere-disse-otte-omraader"
+            target="_blank"
+            >Kort sammenfatning fra Computerworld
+          </a>
+        </div>
         <h3><i>7/11 2023</i></h3>
         <h2>AI Denmark Summit 2023</h2>
         <p>
@@ -101,12 +105,18 @@
 
         <br />
 
-        <a href="https://aidenmark.dk/" target="_blank">Link til AI Denmark</a>
-        <a
-          href="https://atv.dk/temaer-projekter/projekt/atvs-faglige-dataetiske-raad"
-          target="_blank"
-          >Link til ATVs faglige dataetiske råd</a
-        >
+        <div>
+          <a href="https://aidenmark.dk/" target="_blank"
+            >Link til AI Denmark</a
+          >
+        </div>
+        <div>
+          <a
+            href="https://atv.dk/temaer-projekter/projekt/atvs-faglige-dataetiske-raad"
+            target="_blank"
+            >Link til ATVs faglige dataetiske råd</a
+          >
+        </div>
         <h3><i>24/10 2023</i></h3>
         <h2>Ny "State of AI" rapport</h2>
         <p>
@@ -202,55 +212,72 @@
             eksperter på området.
           </li>
         </ol>
-        <a href="https://www.stateof.ai" target="_blank"
-          >Hele rapporten kan findes her: https://www.stateof.ai</a
-        >
-      </div>
-      <div class="infobox">
-        <h2>Podcasts</h2>
-        <p>Gode podcasts, der altid eller ofte har AI som tema...</p>
-        <div class="podImgDiv">
-          <a href="https://aidenmark.dk/podcast" target="_blank">
-            <img
-              src="https://i.scdn.co/image/ab6765630000ba8a6f97c5ef1a41472db5de46eb"
-              class="podcastImg"
-              alt="https://aidenmark.dk/podcast"
-            />
-            AI Denmark
-          </a>
-        </div>
-        <div class="podImgDiv">
-          <a
-            href="https://www.dr.dk/lyd/special-radio/prompt-4712131124000"
-            target="_blank"
+        <div>
+          <a href="https://www.stateof.ai" target="_blank"
+            >Hele rapporten kan findes her: https://www.stateof.ai</a
           >
-            <img
-              src="https://api.dr.dk/radio/v2/images/urn:dr:radio:image:64d489401f6c4a4637238f43?ratio=16%3A9"
-              class="podcastImg"
-              alt="https://www.dr.dk/lyd/special-radio/prompt-4712131124000"
-            />
-            Prompt
-          </a>
         </div>
-        <div class="podImgDiv">
-          <a href="https://lexfridman.com/podcast/" target="_blank">
-            <img
-              src="https://i.scdn.co/image/ab6765630000ba8a563ebb538d297875b10114b7"
-              class="podcastImg"
-              alt="https://lexfridman.com/podcast/"
-            />
-            Lex Fridman
-          </a>
-        </div>
-        <div class="podImgDiv">
-          <a href="https://www.humanetech.com/podcast" target="_blank">
-            <img
-              src="https://i.scdn.co/image/ab6765630000ba8a11849d1f22740968cb984b62"
-              class="podcastImg"
-              alt="https://www.humanetech.com/podcast"
-            />
-            Your undivided attention
-          </a>
+      </div>
+      <div>
+        <div class="infobox">
+          <h2>Podcasts</h2>
+          <p>Gode podcasts, der altid eller ofte har AI som tema...</p>
+          <div class="podImgDiv">
+            <a
+              href="https://aidenmark.dk/podcast"
+              target="_blank"
+              class="podImgLink"
+            >
+              <img
+                src="https://i.scdn.co/image/ab6765630000ba8a6f97c5ef1a41472db5de46eb"
+                class="podcastImg"
+                alt="https://aidenmark.dk/podcast"
+              />
+              AI Denmark
+            </a>
+          </div>
+          <div class="podImgDiv">
+            <a
+              href="https://www.dr.dk/lyd/special-radio/prompt-4712131124000"
+              target="_blank"
+              class="podImgLink"
+            >
+              <img
+                src="https://api.dr.dk/radio/v2/images/urn:dr:radio:image:64d489401f6c4a4637238f43?ratio=16%3A9"
+                class="podcastImg"
+                alt="https://www.dr.dk/lyd/special-radio/prompt-4712131124000"
+              />
+              Prompt
+            </a>
+          </div>
+          <div class="podImgDiv">
+            <a
+              href="https://lexfridman.com/podcast/"
+              target="_blank"
+              class="podImgLink"
+            >
+              <img
+                src="https://i.scdn.co/image/ab6765630000ba8a563ebb538d297875b10114b7"
+                class="podcastImg"
+                alt="https://lexfridman.com/podcast/"
+              />
+              Lex Fridman
+            </a>
+          </div>
+          <div class="podImgDiv">
+            <a
+              href="https://www.humanetech.com/podcast"
+              target="_blank"
+              class="podImgLink"
+            >
+              <img
+                src="https://i.scdn.co/image/ab6765630000ba8a11849d1f22740968cb984b62"
+                class="podcastImg"
+                alt="https://www.humanetech.com/podcast"
+              />
+              Your undivided attention
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -292,36 +319,57 @@ export default {
   /* align-items: center; */
   margin-bottom: 2rem;
   margin-top: 3rem;
-  border: 1px solid gray;
-  height: 22rem;
-  /* width: 25%; */
+  /* border: 1px solid gray; */
+  /* height: 22rem; */
   margin-left: auto;
   /* float: right; */
   padding: 1rem;
+  background-color: #1877f2;
+  color: white;
 }
 .contentbox {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
+  margin-right: 1rem;
   /* width: 70%; */
 }
 .headerLogo {
   width: 4rem;
   margin-right: 1rem;
 }
+
+.newsImg {
+  /* padding: 1rem 0rem 1rem 0rem; */
+  width: 100%;
+}
 .podcastImg {
   height: 1rem;
   width: 1rem;
   margin-right: 1rem;
 }
-.imgDiv a {
+/* .imgDiv a {
   display: flex;
   align-items: center;
-  width: 50%;
+} */
+.imgDiv {
+  padding: 1rem 2rem 1rem 1rem;
 }
 .podImgDiv a {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   overflow: hidden;
+}
+
+.podImgLink {
+  color: white;
+  margin-top: 1rem;
+  display: inline-block;
+}
+.podImgLink:visited {
+  color: white;
+}
+.podImgLink:hover {
+  color: darkgray;
 }
 
 li {
@@ -337,6 +385,7 @@ h3 {
 a {
   color: gray;
   margin-top: 1rem;
+  display: inline-block;
 }
 a:visited {
   color: gray;
@@ -350,13 +399,6 @@ ol {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .newsImg {
-    padding: 1rem 0rem 1rem 0rem;
-    width: 100%;
-  }
-  .infobox {
-    width: 25%;
-  }
   .contentbox {
     width: 70%;
   }
@@ -365,18 +407,12 @@ ol {
   } */
 }
 @media only screen and (max-width: 768px) {
-  .newsImg {
+  /* .imgDiv {
     width: 100%;
     padding: 1rem;
-  }
-  .infobox {
-    width: 100%;
-  }
-  .contentbox {
-    width: 100%;
-  }
+  } */
+
   .innercontainer {
-    display: flex;
     flex-direction: column;
     margin-top: 3rem;
   }
