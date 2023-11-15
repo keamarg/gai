@@ -6,6 +6,91 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>15/11 2023</i></h3>
+        <h2>Digital Tech Summit 2023</h2>
+        <p>
+          Den 8-9 november var vi (Martin og Sarah) til endnu en konference om
+          brug af AI, og om hvordan Danmark skal agere i de transformative
+          strømninger det medfører. Denne gang foregik det i Øksnehallen, og var
+          arrangeret af danske universiteter samt Teknologiens mediehus. Der var
+          en række inspirerende foredrag og paneldebatter med stærke
+          oplægsholdere, og selvom vi ikke kunne nå at deltage i dem alle, er
+          her lidt inspiration fra nogle af dem vi nåede.
+        </p>
+        <div class="imgDiv">
+          <a href="https://event.ing.dk/digitaltechsummit" target="_blank">
+            <img
+              src="@/assets/img/DTS2023_1.jpeg"
+              class="newsImg"
+              alt="paneldebat"
+            />
+          </a>
+        </div>
+        <p>
+          <strong>Paneldebat</strong> mellem ledere af startup hubs på
+          universiteterne. Fokus var på netværksskabelse mellem universiteterne
+          til at udøve politisk indflydelse, hvordan man øger diversitet og
+          tiltrækker forskelligartede grupper gennem målrettede spaces og
+          kommunikation, og på hvordan man skaber bedre vilkår og højere
+          incitament hos forskere til at deltage i startup projekter
+          (EA-sektoren var desværre ikke repræsenteret).
+          <strong>Oplæg</strong> af Lea Schick, om ”Data Spaces” og decentral
+          udveksling af data mellem dem der har, og de der skal bruge data. Der
+          er ny EU-lovgivning og store projekter som Horizon og DigitalEurope på
+          vej. <strong>Paneldebat</strong> mellem Anna Rogers (ITU), Morten
+          Misfeldt (KU) og Camilla Ley Valentin (DI) om didaktiske udfordringer
+          og potentialer i brugen af AI. <strong>Oplæg</strong> af Miguel Sicart
+          (ITU), om at vi er startet den gale vej rundt, og at vi i stedet for
+          at forsøge at få vores LLM’er til at opføre sig etisk når de er
+          udviklede, skulle vende bøtten og lade etisk adfærd være grundlaget.
+          <strong>Oplæg</strong> af Andrea G. Rodriguez (European Policy Centre)
+          om hvordan EU måske er ved at tabe bolden i forhold til lovgivning og
+          regulering, og i samme boldgade et <strong>oplæg</strong> af Hanne
+          Marie Motzfeldt (KU) om den europæiske AI Act, og om hvordan det er en
+          harmoniserende lovgivning, der ikke kommer til at regulere yderligere
+          på nationalt plan. Lovgivningen handler om sikkerhed, og vil kun blive
+          relevant for ”high risk” områder; ikke for ”limited risk”, som f.eks.
+          dark patterns, profilering af ledige etc. Hendes pointe var, at næsten
+          ingen vil blive påvirket af det i praksis. Lukasz Kaiser fra OpenAI
+          var med på videostream fra USA, og fortalte i sit
+          <strong>oplæg</strong> om den historiske udvikling af generativ AI,
+          transformerarkitektur og hans tanker om den videre udvikling i den
+          nære fremtid. Mere tæt på hjemmet blev det i
+          <strong>paneldebat</strong> mellem Anders Søgaard (KU), Christina
+          Blaagaard (Teknologiens Mediehus), Kasper Lindskow (JP/Politikens
+          hus), og Benjamin Kille (NTNU), hvor diskussionen gik på hvorvidt om
+          vi i Danmark skal udvikle vores egne LLM’er, som de f.eks. har gjort i
+          Norge.
+        </p>
+        <div class="imgDiv">
+          <a href="https://event.ing.dk/digitaltechsummit" target="_blank">
+            <img
+              src="@/assets/img/DTS2023_2.jpeg"
+              class="newsImg"
+              alt="paneldebat"
+            />
+          </a>
+        </div>
+        <p>
+          En af de mest spændende <strong>debatter</strong> var mellem Thomas
+          Bolander (DTU), Sine Nørholm Just (RUC), Anders Søgaard (KU) og
+          Michael Munck (2021.AI), og handlede om AI og transparens. Oplægget
+          startede med, at en AI integreret i den fysiske robot ”Pepper”, holdt
+          et kort foredrag om problematikken, hvor alt fra indhold og slides til
+          retoriske kneb og stemmeføring var skabt af AI’en selv. Oplægget førte
+          over i en debat om transparens og explainability, og om i hvor stor
+          grad vi har behov for det. Der blev også plads til
+          <strong>oplæg</strong> af Vili Lehdonvirta (University of Oxford) om
+          hvorvidt vi er ved at skabe et nyt feudalsamfund med et Tech-tocracy,
+          og endnu et etik <strong>oplæg</strong> af Ioannis Caragiannis (AU) i
+          forhold til ”on the fly” etiske beslutninger baseret på teori om
+          voting systemer, og virtuelt demokrati styret af algoritmer i runtime.
+        </p>
+        <div>
+          <a href="https://event.ing.dk/digitaltechsummit" target="_blank"
+            >Læs mere om Digital Tech Summit her
+          </a>
+        </div>
         <h3><i>7/11 2023</i></h3>
         <h2>USA indfører omfattende lov om kunstig intelligens</h2>
         <div class="imgDiv">
@@ -276,6 +361,20 @@
                 alt="https://www.humanetech.com/podcast"
               />
               Your undivided attention
+            </a>
+          </div>
+          <div class="podImgDiv">
+            <a
+              href="https://www.nytimes.com/column/hard-fork"
+              target="_blank"
+              class="podImgLink"
+            >
+              <img
+                src="https://static01.nyt.com/images/2022/09/28/podcasts/hard-fork-album-art/hard-fork-album-art-thumbLarge-v2.png"
+                class="podcastImg"
+                alt="https://www.nytimes.com/column/hard-fork"
+              />
+              Hard Fork
             </a>
           </div>
         </div>
