@@ -191,6 +191,7 @@ export default {
       selected: null, // Initialize with null
       model: null,
       temperature: 100,
+      max_tokens: 4096,
       label: "",
       messages: [],
       standardMessages: systemMessages.standardMessages,
@@ -352,7 +353,7 @@ export default {
                 ? {
                     engine: this.model, //"gpt-35-turbo",
                     temperature: this.temperature / 100,
-                    max_tokens: 800,
+                    max_tokens: this.max_tokens,
                     top_p: 0.95,
                     frequency_penalty: 0,
                     presence_penalty: 0,
@@ -372,7 +373,7 @@ export default {
                 ? {
                     engine: this.model,
                     temperature: this.temperature / 100,
-                    max_tokens: 800,
+                    max_tokens: this.max_tokens,
                     top_p: 0.95,
                     frequency_penalty: 0,
                     presence_penalty: 0,
@@ -392,7 +393,7 @@ export default {
                 : {
                     engine: this.model,
                     temperature: this.temperature / 100,
-                    max_tokens: 800,
+                    max_tokens: this.max_tokens,
                     top_p: 0.95,
                     frequency_penalty: 0,
                     presence_penalty: 0,
