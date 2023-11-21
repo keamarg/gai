@@ -1,14 +1,12 @@
 // dropdown where you can select different versions of ChatGpt
 
 <template>
-  <div>
-    <label for="option">{{ label }}</label>
-    <select v-model="selectedOption" @change="handleChange">
-      <option v-for="option in options" :value="option" :key="option">
-        {{ option }}
-      </option>
-    </select>
-  </div>
+  <!-- <label for="option">{{ label }}</label> -->
+  <select v-model="selectedOption" @change="handleChange">
+    <option v-for="option in options" :value="option" :key="option">
+      {{ option }}
+    </option>
+  </select>
 </template>
 
 <script>

@@ -95,7 +95,7 @@
       </template>
       <ChatLottie v-if="loading" width="2rem" height="2rem" margin="1rem" />
     </div>
-    <div class="inputContainer">
+    <!-- <div class="inputContainer">
       <input
         v-model="userInput"
         type="text"
@@ -112,7 +112,24 @@
       >
         Send
       </button>
+    </div> -->
+    <div class="inputContainer">
+      <textarea
+        v-model="userInput"
+        class="messageInput"
+        placeholder="Sig noget..."
+      ></textarea>
+      <button
+        @click="userMessage(userInput)"
+        :class="{
+          askButton: !loading && userInput,
+          loadingButton: loading || !userInput,
+        }"
+      >
+        Send
+      </button>
     </div>
+
     <div class="buttonContainer">
       <GptSelector
         @option-selected="handleOptionSelected"
@@ -610,7 +627,7 @@ h1 {
   background-color: #f0f0f0;
 }
 
-.messageInput {
+/* .messageInput {
   flex-grow: 1;
   border: none;
   outline: none;
@@ -619,6 +636,19 @@ h1 {
   background-color: white;
   border-radius: 1.5rem;
   margin-right: 0.5rem;
+} */
+.messageInput {
+  flex-grow: 1; /* Ensures the textarea takes up available space */
+  border: none;
+  outline: none;
+  padding: 0.75rem; /* Padding inside the textarea */
+  font-size: 1rem; /* Font size of the text */
+  background-color: white;
+  border-radius: 1rem; /* Rounded corners */
+  margin-right: 0.5rem;
+  resize: none; /* Disables resizing */
+  overflow: auto; /* Ensures proper scrolling */
+  line-height: 1.5; /* Adjust line height for better readability */
 }
 
 .askButton,

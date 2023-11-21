@@ -6,7 +6,7 @@
           <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" width="60" />
         </router-link>
         <router-link to="/nyheder">Nyheder</router-link>
-        <router-link to="/network">Tilmeld netværk</router-link>
+        <router-link to="/events">Events</router-link>
         <router-link to="/liveblog">Q&A blog</router-link>
         <!-- <router-link
           :to="{
