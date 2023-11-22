@@ -6,6 +6,30 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>22/11 2023</i></h3>
+        <h2>Sam is back!</h2>
+        <p>
+          Den sidste uges kaotiske begivenheder i OpenAI kulminerede i går med
+          at Sam Altman nu er tilbage som CEO!
+        </p>
+        <div class="imgDiv">
+          <a
+            href="https://www.nytimes.com/2023/11/22/technology/openai-sam-altman-returns.html"
+            target="_blank"
+          >
+            <img
+              src="https://static01.nyt.com/images/2023/11/19/multimedia/19openai-altman-lgtq/19openai-altman-lgtq-superJumbo.jpg?quality=75&auto=webp"
+              class="newsImg"
+              alt="openAI"
+            />
+          </a>
+          <a
+            href="https://www.nytimes.com/2023/11/22/technology/openai-sam-altman-returns.html"
+            target="_blank"
+            >Link til artikel på New York Times</a
+          >
+        </div>
+        <p></p>
         <h3><i>15/11 2023</i></h3>
         <h2>Digital Tech Summit 2023</h2>
         <p>
