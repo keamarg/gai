@@ -5,9 +5,11 @@
       <!-- <div class="close-button" @click="closeModal">&times;</div> -->
       <h2>Prøv ChatGPT4</h2>
       <p>
-        Velkommen til KEA’s egen GPT4-chatbot! <br /><br />Her kan du prøve at
-        chatte med ChatGPT4 uden at skulle oprette en bruger eller dele data med
-        OpenAI. Data fra samtalerne gemmes ikke til træning. <br /><br />
+        NYT! Opdateret med større tekstfelt til chat, samt ChatGPT 4 Turbo
+        (preview version, kontakt os hvis det volder problemer) <br /><br />Her
+        kan du prøve at chatte med ChatGPT4 uden at skulle oprette en bruger
+        eller dele data med OpenAI. Data fra samtalerne gemmes ikke til træning.
+        <br /><br />
       </p>
       <div class="buttonContainer">
         <button type="button" @click="closeModal" class="askButton">
