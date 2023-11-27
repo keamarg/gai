@@ -7,7 +7,7 @@
         v-for="event in sortedEvents"
         :key="event.id"
       >
-        <div class="card h-100">
+        <div class="card h-100" :class="{ past: isPast(event.date) }">
           <a :href="event.url" target="_blank">
             <img :src="event.imageUrl" class="card-img-top" alt="Event Image" />
             <div class="card-body">
@@ -46,6 +46,11 @@ export default {
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(dateString).toLocaleDateString(undefined, options);
+    },
+    isPast(eventDate) {
+      const today = new Date();
+      const eDate = new Date(eventDate);
+      return eDate < today;
     },
   },
 };
@@ -92,6 +97,10 @@ export default {
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.past {
+  opacity: 0.5;
+  /* filter: brightness(50%); */
 }
 
 @media (max-width: 992px) {
