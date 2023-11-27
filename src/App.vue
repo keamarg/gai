@@ -7,7 +7,8 @@
         </router-link>
         <router-link to="/nyheder">Nyheder</router-link>
         <router-link to="/events">Events</router-link>
-        <router-link to="/liveblog">Q&A blog</router-link>
+        <router-link to="/network">Tilmeld netværk</router-link>
+        <!-- <router-link to="/liveblog">Q&A blog</router-link> -->
         <!-- <router-link
           :to="{
             name: 'DynamicNetwork',

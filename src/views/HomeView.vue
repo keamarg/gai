@@ -24,13 +24,17 @@
         Læs om de nyeste tendenser indenfor generativ AI.
       </span>
     </router-link>
-    <router-link to="/survey" class="link"
+    <router-link to="/events" class="link"
+      ><i class="bi bi-arrow-right"></i>
+      <span class="link-text"> Se relevante events om AI. </span>
+    </router-link>
+    <!-- <router-link to="/survey" class="link"
       ><i class="bi bi-arrow-right"></i>
       <span class="link-text">
         Chat med vores nyudviklede survey-chatbot GAIA om dine erfaringer med
         generativ AI
       </span>
-    </router-link>
+    </router-link> -->
     <router-link to="/network" class="link"
       ><i class="bi bi-arrow-right"></i>
       <span class="link-text">
@@ -84,7 +88,7 @@
       gerne besked på saro@kea.dk eller marg@kea.dk
     </p>
     <p class="last-updated">
-      24.10.23 Martin Gundtoft, Sarah O’Neill, Forskning, Karriere og Relationer
+      27.11.23 Martin Gundtoft, Sarah O’Neill, Forskning, Karriere og Relationer
     </p>
     <!-- <h3>Hvilke erfaringer har vi allerede gjort os?</h3>
     <p>

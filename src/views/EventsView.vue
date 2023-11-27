@@ -2,8 +2,14 @@
   <div class="container">
     <div class="header">
       <img src="@/assets/img/KEA_logo_DK_Web_gai.jpg" class="headerLogo" />
-      <h1>GAI eventkalender (not actual events)</h1>
+      <h1>GAI eventkalender</h1>
     </div>
+    <p>
+      Her kan du finde relevante events om AI. Skriv til
+      <a href="mailto:saro@kea.dk?subject=GAI event">Sarah</a> eller
+      <a href="mailto:marg@kea.dk?subject=GAI event">Martin</a> hvis du vil høre
+      mere, eller er interesseret i at deltage...
+    </p>
     <div class="innercontainer">
       <CardGroup />
     </div>
@@ -124,7 +130,9 @@ a:hover {
 ol {
   padding-inline-start: 1rem;
 }
-
+p {
+  margin-top: 1rem;
+}
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .contentbox {

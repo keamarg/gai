@@ -4,11 +4,11 @@
       <!-- Each card takes up 4 columns in a 12-column grid, allowing 3 cards per row -->
       <div
         class="col-lg-4 col-md-6 mb-4"
-        v-for="event in events"
+        v-for="event in sortedEvents"
         :key="event.id"
       >
         <div class="card h-100">
-          <a href="https://www.google.com" target="_blank">
+          <a :href="event.url" target="_blank">
             <img :src="event.imageUrl" class="card-img-top" alt="Event Image" />
             <div class="card-body">
               <h6 class="card-date">{{ formatDate(event.date) }}</h6>
@@ -31,6 +31,17 @@ export default {
       events: events.events,
     };
   },
+  computed: {
+    // take events and sort them by date property in the events.json file
+    sortedEvents() {
+      return this.events
+        .slice()
+        .sort((a, b) => {
+          return new Date(a.date) - new Date(b.date);
+        })
+        .reverse();
+    },
+  },
   methods: {
     formatDate(dateString) {
       const options = { year: "numeric", month: "long", day: "numeric" };
@@ -49,6 +60,12 @@ export default {
 }
 .card-text {
   font-weight: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines you want */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 5rem;
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

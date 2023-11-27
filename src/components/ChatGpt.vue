@@ -113,7 +113,7 @@
         Send
       </button>
     </div> -->
-    <div class="inputContainer">
+    <div v-if="!limitError" class="inputContainer">
       <textarea
         v-model="userInput"
         class="messageInput"
@@ -204,11 +204,11 @@ export default {
       loading: false,
       showMenu: false,
       options: ["Generel", "Generativ AI", "Tutor"],
-      gptOptions: ["gpt-4", "gpt-35-turbo"],
+      gptOptions: ["gpt-4-turbo", "gpt-35-turbo"],
       selected: null, // Initialize with null
       model: null,
       temperature: 100,
-      max_tokens: 4096,
+      max_tokens: 600,
       label: "",
       messages: [],
       standardMessages: systemMessages.standardMessages,
@@ -217,6 +217,8 @@ export default {
       introMessage: systemMessages.introMessage,
       apiUrl: process.env.VUE_APP_APIURL, //"https://gaichatbot.azurewebsites.net/database", //"http://127.0.0.1:5000/database" //"https://gaichatbot.azurewebsites.net/database"
       apiUrl_CHATDB: process.env.VUE_APP_APIURL_CHATDB,
+      MAX_MESSAGES_HISTORY: 10,
+      limitError: false,
     };
   },
   computed: {
@@ -236,6 +238,11 @@ export default {
     },
   },
   methods: {
+    limitMessagesHistory() {
+      if (this.messages.length > this.MAX_MESSAGES_HISTORY) {
+        this.messages = this.messages.slice(-this.MAX_MESSAGES_HISTORY);
+      }
+    },
     getDateString() {
       let date = new Date();
       let dateString =
@@ -355,6 +362,8 @@ export default {
     async sendMessage(message, maxRetries) {
       // console.log(this.apiUrl);
       // const apiUrl = process.env.VUE_APP_APIURL;
+      this.limitMessagesHistory();
+
       this.sliderActive = false;
       while (maxRetries >= 0) {
         try {
@@ -457,6 +466,17 @@ export default {
             console.error(
               "Max retries reached. Unable to process the request."
             );
+            this.limitError = true;
+            this.messages.push({
+              role: "assistant",
+              content:
+                "Desværre er jeg blevet overbelastet lidt. Når inputfeltet dukker op igen kan vi starte en ny samtale, beklager ulejligheden",
+            });
+            console.log(`Restarting in 60 seconds...`);
+            this.loading = false; // Hide the loading animation
+            await new Promise((resolve) => setTimeout(resolve, 60000)); // Wait for 60 seconds before retrying
+            this.limitError = false;
+            this.newConversation();
             // Handle the error in a way suitable for your application
             // For example, you can display a user-friendly error message to the user
           }
