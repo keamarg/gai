@@ -474,6 +474,20 @@
               Learn Prompting
             </a>
           </div>
+          <div class="podImgDiv">
+            <a
+              href="https://pro.ing.dk/datatech"
+              target="_blank"
+              class="podImgLink"
+            >
+              <img
+                src="https://pro.ing.dk/themes/mi/mu/images/subsite-logos/datatech.svg"
+                class="podcastImg"
+                alt="https://pro.ing.dk/datatech"
+              />
+              Datatech
+            </a>
+          </div>
         </div>
       </div>
     </div>
