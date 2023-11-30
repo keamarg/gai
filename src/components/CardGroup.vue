@@ -49,7 +49,11 @@ export default {
     },
     isPast(eventDate) {
       const today = new Date();
+      today.setHours(0, 0, 0, 0); // Set time to midnight
+
       const eDate = new Date(eventDate);
+      eDate.setHours(0, 0, 0, 0); // Set time to midnight
+
       return eDate < today;
     },
   },

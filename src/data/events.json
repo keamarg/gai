@@ -39,6 +39,110 @@
       "description": "Digital Tech Summit – AI Transforming Business 2023 is the largest deep tech conference in the Nordic countries and the annual meeting place for researchers from the country's universities, their partners in Danish industry, startups and students from all danish universities.",
       "url": "https://event.ing.dk/digitaltechsummit",
       "imageUrl": "https://assets.swoogo.com/uploads/medium/2442930-6411873189262.jpg"
+    },
+    {
+      "id": 6,
+      "title": "The Future of Digital Technology Education",
+      "date": "2023-11-28",
+      "description": "The Future of Digital Technology Education is a public event which addresses the present and future status of digital technology education in Danish higher education system.",
+      "url": "https://www.itu.dk/om-itu/events/events/2023/the-future-of-digital-technology-education",
+      "imageUrl": "https://www.itu.dk/-/media/Shared/Calendar/2023/conference11-2023-09-25--12-01-49-16.jpg?jq=70&w=862"
+    },
+    {
+      "id": 7,
+      "title": "AI og data - hvordan får du styr på det?",
+      "date": "2023-11-28",
+      "description": "Kom med når TechDialog denne gang gør dig klogere på, hvordan du får styr på AI og data.",
+      "url": "https://www.danskindustri.dk/brancher/di-digital/events-og-netvark/arrangementer/2023/ai-og-data/",
+      "imageUrl": "https://www.danskindustri.dk/contentassets/4a05fee040db494ab86a3bd2cfc88aac/aiogdata1600x900.png"
+    },
+    {
+      "id": 8,
+      "title": "Workshop: Byg din egen digitale tvilling",
+      "date": "2023-11-30",
+      "description": "Byg en digital tvilling for ét af dine produkter og kom med på bølgen!",
+      "url": "https://digitallead.dk/kalender/2023/workshop-byg-din-egen-digitale-tvilling/",
+      "imageUrl": "https://digitallead.dk/media/5448/Detalje%20digital%20tvilling.png"
+    },
+    {
+      "id": 9,
+      "title": "Åbningskonference for det nye Videnscenter for Digital Teknologiforståelse",
+      "date": "2023-12-04",
+      "description": "Københavns Professionshøjskole inviterer til åbningen af det nye Videnscenter for Digital Teknologiforståelse.",
+      "url": "https://www.kp.dk/arrangementer/aabningskonference-for-det-nye-videnscenter-for-digital-teknologiforstaaelse/",
+      "imageUrl": "https://www.kp.dk/wp-content/uploads/2023/10/videnscenter-for-digital-teknologiforstaaelse.jpg"
+    },
+    {
+      "id": 10,
+      "title": "Danmarks Digitale Kompetencer 2023",
+      "date": "2023-12-06",
+      "description": "Er de danske virksomheder klar til AI?",
+      "url": "https://www.danskindustri.dk/brancher/di-digital/events-og-netvark/arrangementer/2023/danmarks-digitale-kompetencer-2023/",
+      "imageUrl": "https://www.danskindustri.dk/globalassets/danmarks-digitale-kompetencer-2023.png"
+    },
+    {
+      "id": 11,
+      "title": "Generative Methods",
+      "date": "2023-12-06",
+      "description": "AI as Collaborator and Companion in the Social Sciences and Humanities.",
+      "url": "https://www.aicentre.dk/events/generative-methods-ai-as-collaborator-and-companion-in-the-social-sciences-and-humanities",
+      "imageUrl": "https://d1g6r5s1lx5q3e.cloudfront.net/wp-content/uploads/2023/08/02090317/ad1c80b66daa93784aa068154d95d2cbe48dc352.webp"
+    },
+    {
+      "id": 12,
+      "title": "Common sense for humans and machines: Making decisions in the absence of information",
+      "date": "2023-12-07",
+      "description": "Artificial intelligence, deep neural networks, and machine learning systems all make use of data, lots of data. But what about the data or information that is not present? The absent?",
+      "url": "https://comm.ku.dk/calendar/2023/common-sense-for-humans-and-machines/",
+      "imageUrl": "https://comm.ku.dk/calendar/2023/common-sense-for-humans-and-machines/Design_uden_navn_-_2023-11-23T101233.051.png"
+    },
+    {
+      "id": 13,
+      "title": "APPLIED AI LUNCH TALKS - FORCE TECHNOLOGY AND THE EUROPEAN TESTING AND EXPERIMENTATION FACILITY (TEF)",
+      "date": "2023-12-07",
+      "description": "This talk is for SMEs, investors, lab responsibles, and buyers of AI and Robotics as well as others with an interest in how tests can provide trust, validation, and market potential of specific solutions.",
+      "url": "https://stream.aidenmark.dk/applied-ai-lunch-talks-force-1",
+      "imageUrl": "https://aidenmark.dk/wp-content/uploads/2020/12/subpage-2048x578.jpg"
+    },
+    {
+      "id": 14,
+      "title": "AI: ChatGPT - Fra Hype til Realitet: Næstved",
+      "date": "2023-12-14",
+      "description": "Bliv opdateret med den nyeste viden og få praktiske tips og tricks til at udnytte AI's potentiale til at drive din virksomheds succes. Du vil høre om: Introduktion til Kunstig intelligens og hvad fremtiden bringer, hvilke AI værktøjer er der og hands-on med ChatGPT og generative AI - hvordan holder du styr på de juridiske risici, når du tager det i brug i forretningen?",
+      "url": "https://digitallead.dk/kalender/2023/ai-chatgpt-fra-hype-til-realitet-naestved/",
+      "imageUrl": "https://digitallead.dk/media/5587/AI_ChatGPT_event_robot1-arrangement-detalje.png"
+    },
+    {
+      "id": 15,
+      "title": "Deltag i workshop med AI-kunstner Cecilie Waagner Falkenstrøm",
+      "date": "2024-01-16",
+      "description": "Vær med til at sætte dit præg på et nyt kunstværk, hvor kunstig intelligens møder menneskelige værdier",
+      "url": "https://www.kp.dk/arrangementer/deltag-i-workshop-med-ai-kunstner-cecilie-waagner-falkenstroem/",
+      "imageUrl": "https://www.kp.dk/wp-content/uploads/2023/10/cecilie-waagner-falkenstroem.jpg"
+    },
+    {
+      "id": 16,
+      "title": "Nordic AI & Metaverse Summit",
+      "date": "2024-02-02",
+      "description": "Danish Industry (DI) and the Copenhagen Institute for Futures Studies (CIFS) have once again joined forces to let Nordic stakeholders investigate AI, and the immersive internet will develop across industries. This allows you to be prepared for what is to come and become aware of the impact it might have on your business - whether your organisation is a private entity or a governmental institution.",
+      "url": "https://www.danskindustri.dk/arrangementer/soeg/arrangementer/salg-og-marketing/nordic-ai--metaverse-summit-2024/",
+      "imageUrl": "https://www.danskindustri.dk/siteassets/di-ecommerce/opdateret-logo-og-nyt-site/events/nordic-ai--metaverse-2024/hero_nordic_metaverse_summit_2024.png"
+    },
+    {
+      "id": 17,
+      "title": "FORMIDDAGSBRIEFING VERSION2: Generativ AI",
+      "date": "2024-02-27",
+      "description": "Version2 inviterer til en formiddag, hvor vi ser nærmere på generativ AI. Potentiale og implikationer sættes til debat.",
+      "url": "https://event.ing.dk/generativai",
+      "imageUrl": "https://www.version2.dk/sites/mi/files/styles/image_of_list/public/2017-12/v21280x1024.jpg?itok=qVZ9ApNu"
+    },
+    {
+      "id": 18,
+      "title": "FORMIDDAGSBRIEFING VERSION2: AI i sundhedssektoren",
+      "date": "2024-09-12",
+      "description": "Join the briefing to explore the role and impact of AI in the healthcare sector.",
+      "url": "https://event.ing.dk/aisundhed",
+      "imageUrl": "https://www.version2.dk/sites/mi/files/styles/image_of_list/public/2017-12/v21280x1024.jpg?itok=qVZ9ApNu"
     }
   ]
 }
