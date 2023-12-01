@@ -6,6 +6,54 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>1/12 2023</i></h3>
+        <h2>Ny digitaliseringsstrategi med stort AI aftryk</h2>
+        <div class="imgDiv">
+          <a
+            href="https://digmin.dk/Media/638357207253210400/SVM%20regeringen_Danmarks%20digitaliseringsstrategi_2023_V9_Online_Final%20(1)-a.pdf"
+            target="_blank"
+          >
+            <img
+              src="https://www.computerworld.dk/fil/216439?width=400&height=200"
+              class="newsImg"
+              alt="digitaliseringsstrategi"
+            />
+          </a>
+        </div>
+        <p>
+          Regeringen investerer ca. 800 mio. kroner i udviklingen mod en bedre
+          digital fremtid for danske borgere og virksomheder. Strategien
+          indeholder 25 konkrete initiativer, som sætter retningen for de
+          kommende års digitale udvikling blandt andet inden for kunstig
+          intelligens, grøn omstilling og digital dannelse blandt børn og unge.
+          10-årsplanen for ny teknologi og automatisering i den offentlige
+          sektor skal udbrede gode, teknologiske løsninger på tværs af den
+          offentlige sektor, der afhjælper manglen på arbejdskraft og frigør
+          ressourcer til den borgernære velfærd.
+        </p>
+        <strong>Udvalgte indsatser</strong>
+        <ul>
+          <li>
+            Digitaliseringsrådet udgav i juni 2023 sit oplæg om anbefaling til
+            den nationale udvikling og anvendelse af kunstig intelligens i
+            Danmark og rådgiver løbende regeringen om dagsordenen.
+          </li>
+          <li>
+            Ekspertgruppe om ChatGPT og andre digitale hjælpemidler skal
+            undersøge, hvordan de digitale hjælpemidler påvirker muligheden for
+            snyd ved prøverne på landets skoler og institutioner.
+          </li>
+          <li>
+            Der er afsat 100 mio. kr. i 2024 til forskning i og udvikling af
+            kunstig intelligens i forbindelse med aftale om fordeling af
+            forskningsreserven for 2024.
+          </li>
+        </ul>
+        <a
+          href="https://digmin.dk/Media/638357207253210400/SVM%20regeringen_Danmarks%20digitaliseringsstrategi_2023_V9_Online_Final%20(1)-a.pdf"
+          target="_blank"
+          >Link til digitaliseringsstrategi 2024-2027</a
+        >
         <h3><i>22/11 2023</i></h3>
         <h2>Sam is back!</h2>
         <p>
@@ -29,7 +77,6 @@
             >Link til artikel på New York Times</a
           >
         </div>
-        <p></p>
         <h3><i>15/11 2023</i></h3>
         <h2>Digital Tech Summit 2023</h2>
         <p>
