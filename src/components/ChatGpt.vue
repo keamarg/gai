@@ -208,7 +208,7 @@ export default {
       selected: null, // Initialize with null
       model: null,
       temperature: 100,
-      max_tokens: 600,
+      max_tokens: 1000,
       label: "",
       messages: [],
       standardMessages: systemMessages.standardMessages,
