@@ -6,6 +6,49 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>7/12 2023</i></h3>
+        <h2>SAIOC: Online Konference om Generativ AI og Uddannelse</h2>
+        <div class="imgDiv">
+          <a
+            href="https://www.academic-conferences.org/symposia/symposium-on-ai-challenges-and-opportunities-saico/"
+            target="_blank"
+          >
+            <img
+              src="https://www.academic-conferences.org/wp-content/uploads/2020/08/cropped-aci-square-2-e1598087960225.jpg"
+              class="newsImg"
+              alt="SAIOC"
+            />
+          </a>
+        </div>
+        <p>
+          På en nyligt afholdt international online konference ved navn
+          ”Symposium on AI Opportunities and Challenges”, blev generativ AI og
+          dens rolle i uddannelsessektoren diskuteret. Mette og Martin fra FKR
+          EPV deltog det meste af dagen, og selvom konferencen ikke frembragte
+          revolutionerende nye tanker, var det tydeligt, at alle aktører
+          arbejder på at finde den rette balance i anvendelsen af AI i
+          uddannelse. Konferencens talere adresserede forskellige aspekter af AI
+          og læring, herunder udfordringerne ved at definere klare mål og
+          integrere AI på en måde, der styrker snarere end erstatter traditionel
+          læring. Et gennemgående tema var betydningen af at balancere
+          teknologiske fremskridt med menneskelige aspekter. Et andet vigtigt
+          emne var den potentielle risiko for "fake learning" samt vigtigheden
+          af at bruge AI til at forbedre, snarere end reducere, dybdegående
+          læring. Der blev også diskuteret, hvordan undervisere kan spille en
+          central rolle i at brobygge mellem AI-værktøjer og studerende, og
+          vigtigheden af at vælge med omhu, hvilke opgaver der delegeres til AI.
+          Det fælles gennemgående tema var fokuseret på at finde hybride
+          tilgange og metoder, som essentielt integrerer AI på en måde, der
+          fremmer dyb og meningsfuld læring frem for blot at automatisere
+          uddannelsesprocesser.<br /><br />
+          Hvis du er interesseret i at høre mere om konferencen, så tag fat i
+          Mette eller Martin.
+        </p>
+        <a
+          href="https://www.academic-conferences.org/symposia/symposium-on-ai-challenges-and-opportunities-saico/"
+          target="_blank"
+          >Link til konferencesite</a
+        >
         <h3><i>1/12 2023</i></h3>
         <h2>Ny digitaliseringsstrategi med stort AI aftryk</h2>
         <div class="imgDiv">

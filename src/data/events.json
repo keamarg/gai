@@ -143,6 +143,38 @@
       "description": "Join the briefing to explore the role and impact of AI in the healthcare sector.",
       "url": "https://event.ing.dk/aisundhed",
       "imageUrl": "https://www.version2.dk/sites/mi/files/styles/image_of_list/public/2017-12/v21280x1024.jpg?itok=qVZ9ApNu"
+    },
+    {
+      "id": 19,
+      "title": "Symposium on AI Opportunities and Challenges",
+      "date": "2023-12-05",
+      "description": "This one-day online Symposium will bring together a range of thought leaders in the field of Artificial Intelligence who will collectively explore the current state of AI as it is applied in education.",
+      "url": "https://www.academic-conferences.org/symposia/symposium-on-ai-challenges-and-opportunities-saico/",
+      "imageUrl": "https://www.academic-conferences.org/wp-content/uploads/2020/08/cropped-aci-square-2-e1598087960225.jpg"
+    },
+    {
+      "id": 20,
+      "title": "DFiR debate meeting I",
+      "date": "2023-12-12",
+      "description": "The Danish ecosystem for Artificial Intelligence - balances and barriers",
+      "url": "https://ufm.dk/aktuelt/arrangementer/2023/dfir-debate-meeting-i-the-danish-ecosystem-for-artificial-intelligence-balances-and-barriers",
+      "imageUrl": "https://studerendeonline.dk/images/dynamic/company/logo/custom/29349/"
+    },
+    {
+      "id": 21,
+      "title": "Debate II: Artificial Intelligence and Risks",
+      "date": "2024-01-22",
+      "description": "From plagiarism to geopolitics",
+      "url": "https://ufm.dk/aktuelt/arrangementer/2024/dfir-debatmode-ii-kunstig-intelligens-og-risici-2013-fra-plagiat-til-geopolitik",
+      "imageUrl": "https://studerendeonline.dk/images/dynamic/company/logo/custom/29349/"
+    },
+    {
+      "id": 22,
+      "title": "Debate III",
+      "date": "2024-02-28",
+      "description": "Artificial Intelligence and new conditions for research and innovation",
+      "url": "https://ufm.dk/aktuelt/arrangementer/2024/dfir-debatmode-iii-kunstig-intelligens-og-nye-rammer-for-forskning-og-innovation",
+      "imageUrl": "https://studerendeonline.dk/images/dynamic/company/logo/custom/29349/"
     }
   ]
 }
