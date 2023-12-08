@@ -88,7 +88,7 @@
       gerne besked på saro@kea.dk eller marg@kea.dk
     </p>
     <p class="last-updated">
-      27.11.23 Martin Gundtoft, Sarah O’Neill, Forskning, Karriere og Relationer
+      8.12.23 Martin Gundtoft, Sarah O’Neill, Forskning, Karriere og Relationer
     </p>
     <!-- <h3>Hvilke erfaringer har vi allerede gjort os?</h3>
     <p>

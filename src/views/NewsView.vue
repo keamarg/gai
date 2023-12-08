@@ -6,6 +6,42 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>8/12 2023</i></h3>
+        <h2>Ny AI model fra Google er nu frigivet: Gemini</h2>
+        <div class="imgDiv">
+          <a
+            href="https://www.wired.com/story/google-gemini-generative-ai-boom/"
+            target="_blank"
+          >
+            <img
+              src="https://media.wired.com/photos/6570fa9c24772bae860336a9/master/w_2240,c_limit/bard-biz-gemini_mm_03.jpg"
+              class="newsImg"
+              alt="Gemini"
+            />
+          </a>
+        </div>
+        <p>
+          Google har netop frigivet deres nyeste bud på en konkurrent til
+          OpenAI's GPT model, nemlig deres nye LLM, Gemini. Den lille model af
+          Gemini har allerede udskiftet den Palm2 model der indtil nu har drevet
+          deres chatbot, Bard. En af de helt store nyskabelser er ifølge Google
+          selv, at den nye model er født til at være multimodal, det vil sige,
+          at den fra begyndelsen er udviklet til at bruge ikke kun tekst, men
+          også billeder, lyd og video som datagrundlag. Desværre har vi endnu
+          ikke adgang til Bard i Europa, så vi må væbne os med tålmodighed lidt
+          endnu. I artiklerne nedenfor kan du læse mere om den nye Gemini model.
+        </p>
+        <a
+          href="https://www.wired.com/story/google-gemini-generative-ai-boom/"
+          target="_blank"
+          >Link til artikel på Wired</a
+        >
+        <a
+          href="https://blog.google/technology/ai/google-gemini-ai/"
+          target="_blank"
+          >Link til artikel af Sundar Pichai og Demis Hassabis om Gemini (med
+          video demoer)</a
+        >
         <h3><i>7/12 2023</i></h3>
         <h2>SAIOC: Online Konference om Generativ AI og Uddannelse</h2>
         <div class="imgDiv">
