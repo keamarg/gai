@@ -6,6 +6,32 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>11/12 2023</i></h3>
+        <h2>AI-Act: Foreløbig aftale på plads om EU regulering af AI</h2>
+        <div class="imgDiv">
+          <a
+            href="https://www.dr.dk/nyheder/udland/eu/eu-landene-er-enige-om-toejle-kunstig-intelligens"
+            target="_blank"
+          >
+            <img
+              src="https://asset.dr.dk/imagescaler/?protocol=https&server=www.dr.dk&file=%2Fimages%2Fother%2F2023%2F12%2F09%2F000_33jk8kl-6192x3486ma.jpg&scaleAfter=crop&quality=40&w=1700&h=956"
+              class="newsImg"
+              alt="AI-act"
+            />
+          </a>
+        </div>
+        <p>
+          Aftalen indeholder i sin foreløbige form forbud mod brug af AI til
+          f.eks. ansigtskendelse og social scoring systemer, samt mere
+          transparens af de underliggende modeller i chatbots. Loven bliver
+          førstebehandlet i det nye år, men det forventes ikke at det udmønter
+          sig i konkret lovgiving før om nogle år.
+        </p>
+        <a
+          href="https://www.dr.dk/nyheder/udland/eu/eu-landene-er-enige-om-toejle-kunstig-intelligens"
+          target="_blank"
+          >Link til artikel på DR</a
+        >
         <h3><i>8/12 2023</i></h3>
         <h2>Ny AI model fra Google er nu frigivet: Gemini</h2>
         <div class="imgDiv">
@@ -42,7 +68,7 @@
           >Link til artikel af Sundar Pichai og Demis Hassabis om Gemini (med
           video demoer)</a
         >
-        <h3><i>7/12 2023</i></h3>
+        <h3 id="SAIOC"><i>7/12 2023</i></h3>
         <h2>SAIOC: Online Konference om Generativ AI og Uddannelse</h2>
         <div class="imgDiv">
           <a
