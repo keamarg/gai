@@ -6,6 +6,118 @@
     </div>
     <div class="innercontainer">
       <div class="contentbox">
+        <h3><i>12/12 2023</i></h3>
+        <h2>
+          DFIR Debatrække (1): Balance og barrierer i brugen af kunstig
+          intelligens i det danske økosystem
+        </h2>
+        <div class="imgDiv">
+          <a
+            href="https://ufm.dk/aktuelt/nyheder/2023/dfir-debatraekke-kunstig-intelligens-i-forskning-og-innovation"
+            target="_blank"
+          >
+            <img
+              src="@/assets/img/dfir2.jpeg"
+              class="newsImg"
+              alt="DFIR logo"
+            />
+          </a>
+        </div>
+        <p>
+          GAILAB var med som deltager i den første begivenhed i debatrækken:
+          <strong>"Kunstig Intelligens i Forskning og Innovation"</strong>,
+          organiseret af Danmarks Forsknings- og Innovationspolitiske Råd
+          (DFIR). En række eksperter fra forskellige felter deltog i denne
+          første debat af tre, der repræsenterede en bred vifte af perspektiver
+          på, hvordan AI former fremtidens forskning og udvikling. Fokus var
+          denne gang på
+          <strong
+            >"Balance og barrierer i brugen af kunstig intelligens i det danske
+            økosystem"</strong
+          >
+        </p>
+        <p>
+          Blandt talerne var, bl.a.
+          <strong>Serge Belongie</strong>, leder af The Pioneer Centre for AI,
+          der fremhævede Silicon Valley's "move fast, break things"-mentalitet
+          og udfordringerne ved EU's reguleringer. Han påpegede vigtigheden af
+          at udvikle færdigheder for at integrere AI i alle opdagelsesaspekter
+          og udfordringerne ved finansiering og computing, som bidrager til
+          hjerneflugt til Californien. <strong>Sine Zambach</strong> fra CBS
+          talte om vigtigheden af både at skabe og anvende AI, og understregede
+          behovet for nyt talent og forbedring af tekniske kompetencer inden for
+          AI. Og <strong>Aasa Feragen</strong> fra DTU pegede på specifikke
+          udfordringer inden for medicinsk billedbehandling, herunder mangel på
+          computing ressourcer og behovet for bedre infrastruktur og ekspertise
+          til at anvende udviklede AI-værktøjer.
+        </p>
+        <p>
+          Debatten belyste et behov for yderligere talentudvikling, tekniske
+          forbedringer, og en stærkere infrastruktur for at fremme Danmarks
+          position inden for AI i forskning og innovation, og satte scenen for
+          de kommende diskussioner i debatrækken.
+        </p>
+        <a
+          href="https://ufm.dk/aktuelt/nyheder/2023/dfir-debatraekke-kunstig-intelligens-i-forskning-og-innovation"
+          target="_blank"
+          >Link til debatrækken</a
+        >
+        <h3><i>12/12 2023</i></h3>
+        <h2>
+          DFIR Debatrække (1): Balance og barrierer i brugen af kunstig
+          intelligens i det danske økosystem
+        </h2>
+        <div class="imgDiv">
+          <a
+            href="https://ufm.dk/aktuelt/nyheder/2023/dfir-debatraekke-kunstig-intelligens-i-forskning-og-innovation"
+            target="_blank"
+          >
+            <img
+              src="https://studerendeonline.dk/images/dynamic/company/logo/custom/29349/"
+              class="newsImg"
+              alt="DFIR logo"
+            />
+          </a>
+        </div>
+        <p>
+          GAILAB var med som deltager i den første begivenhed i debatrækken:
+          <strong>"Kunstig Intelligens i Forskning og Innovation"</strong>,
+          organiseret af Danmarks Forsknings- og Innovationspolitiske Råd
+          (DFIR). En række eksperter fra forskellige felter deltog i denne
+          første debat af tre, der repræsenterede en bred vifte af perspektiver
+          på, hvordan AI former fremtidens forskning og udvikling. Fokus var
+          denne gang på
+          <strong
+            >"Balance og barrierer i brugen af kunstig intelligens i det danske
+            økosystem"</strong
+          >
+        </p>
+        <p>
+          Blandt talerne var, bl.a.
+          <strong>Serge Belongie</strong>, leder af The Pioneer Centre for AI,
+          der fremhævede Silicon Valley's "move fast, break things"-mentalitet
+          og udfordringerne ved EU's reguleringer. Han påpegede vigtigheden af
+          at udvikle færdigheder for at integrere AI i alle opdagelsesaspekter
+          og udfordringerne ved finansiering og computing, som bidrager til
+          hjerneflugt til Californien. <strong>Sine Zambach</strong> fra CBS
+          talte om vigtigheden af både at skabe og anvende AI, og understregede
+          behovet for nyt talent og forbedring af tekniske kompetencer inden for
+          AI. Og <strong>Aasa Feragen</strong> fra DTU pegede på specifikke
+          udfordringer inden for medicinsk billedbehandling, herunder mangel på
+          computing ressourcer og behovet for bedre infrastruktur og ekspertise
+          til at anvende udviklede AI-værktøjer.
+        </p>
+        <p>
+          Debatten belyste et behov for yderligere talentudvikling, tekniske
+          forbedringer, og en stærkere infrastruktur for at fremme Danmarks
+          position inden for AI i forskning og innovation, og satte scenen for
+          de kommende diskussioner i debatrækken.
+        </p>
+        <a
+          href="https://ufm.dk/aktuelt/nyheder/2023/dfir-debatraekke-kunstig-intelligens-i-forskning-og-innovation"
+          target="_blank"
+          >Link til debatrækken</a
+        >
         <h3><i>11/12 2023</i></h3>
         <h2>AI-Act: Foreløbig aftale på plads om EU regulering af AI</h2>
         <div class="imgDiv">

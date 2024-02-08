@@ -175,6 +175,38 @@
       "description": "Artificial Intelligence and new conditions for research and innovation",
       "url": "https://ufm.dk/aktuelt/arrangementer/2024/dfir-debatmode-iii-kunstig-intelligens-og-nye-rammer-for-forskning-og-innovation",
       "imageUrl": "https://studerendeonline.dk/images/dynamic/company/logo/custom/29349/"
+    },
+    {
+      "id": 23,
+      "title": "Danish Digitalization, Data Science and AI",
+      "date": "2024-2-1",
+      "description": "Danish Digitalization, Data Science and AI (D3A) is a new national conference hosted by Pioneer Centre for AI (P1), Danish Data Science Academy (DDSA), and Digital Research Centre Denmark (DIREC). D3A is a scientific conference where the newest research and insights will be discussed.",
+      "url": "https://d3aconference.dk/",
+      "imageUrl": "https://d3aconference.dk/wp-content/uploads/2023/03/D3A_logo.png"
+    },
+    {
+      "id": 24,
+      "title": "Danish Digitalization, Data Science and AI 2.0",
+      "date": "2024-10-22",
+      "description": "Danish Digitalization, Data Science and AI (D3A) is a new national conference hosted by Pioneer Centre for AI (P1), Danish Data Science Academy (DDSA), and Digital Research Centre Denmark (DIREC). D3A is a scientific conference where the newest research and insights will be discussed.",
+      "url": "https://d3aconference.dk/",
+      "imageUrl": "https://d3aconference.dk/wp-content/uploads/2023/03/D3A_logo.png"
+    },
+    {
+      "id": 25,
+      "title": "Danish Digitalization, Data Science and AI 3.0",
+      "date": "2025-8-26",
+      "description": "Danish Digitalization, Data Science and AI (D3A) is a new national conference hosted by Pioneer Centre for AI (P1), Danish Data Science Academy (DDSA), and Digital Research Centre Denmark (DIREC). D3A is a scientific conference where the newest research and insights will be discussed.",
+      "url": "https://d3aconference.dk/",
+      "imageUrl": "https://d3aconference.dk/wp-content/uploads/2023/03/D3A_logo.png"
+    },
+    {
+      "id": 26,
+      "title": "Danish Digitalization, Data Science and AI 4.0",
+      "date": "2025-10-8",
+      "description": "Danish Digitalization, Data Science and AI (D3A) is a new national conference hosted by Pioneer Centre for AI (P1), Danish Data Science Academy (DDSA), and Digital Research Centre Denmark (DIREC). D3A is a scientific conference where the newest research and insights will be discussed.",
+      "url": "https://d3aconference.dk/",
+      "imageUrl": "https://d3aconference.dk/wp-content/uploads/2023/03/D3A_logo.png"
     }
   ]
 }
